@@ -69,6 +69,29 @@ class SettingStore {
     this._settings = this.getSettingsFromStorage();
   }
 
+  get settings(): ISettings {
+    return this._settings;
+  }
+
+  set settings(value: Partial<ISettings>) {
+    this._settings = {...this._settings, ...value};
+
+    this.saveSettingsToStorage();
+  }
+
+  removeMessageById(id: UUID): void {
+    const shortBreakMessages = this._settings.shortBreakMessages;
+    delete shortBreakMessages[id];
+
+    const longBreakMessages = this._settings.longBreakMessages;
+    delete longBreakMessages[id];
+
+    this.settings = {
+      shortBreakMessages: shortBreakMessages,
+      longBreakMessages: longBreakMessages,
+    };
+  }
+
   private getSettingsFromStorage(): ISettings {
     const localData = localStorage.getItem(this._storageKey);
 
@@ -89,16 +112,6 @@ class SettingStore {
     } catch {
       return {...this._defaultSettings};
     }
-  }
-
-  get settings(): ISettings {
-    return this._settings;
-  }
-
-  set settings(value: Partial<ISettings>) {
-    this._settings = {...this._settings, ...value};
-
-    this.saveSettingsToStorage();
   }
 
   private saveSettingsToStorage(): void {
