@@ -1,9 +1,11 @@
 import { TrayIcon, TrayIconEvent } from '@tauri-apps/api/tray';
+import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { currentWindow } from '@/core/window';
 import trayMenu from '@/core/tray/menu';
 
 const tray = await TrayIcon.new({
   id: 'break-reminder-tray',
+  icon: await defaultWindowIcon() || undefined,
   menu: trayMenu,
   tooltip: 'Break reminder',
   menuOnLeftClick: false,

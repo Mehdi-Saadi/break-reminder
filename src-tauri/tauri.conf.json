@@ -28,6 +28,7 @@
           "description": "Application capabilities used for all windows",
           "windows": ["*"],
           "permissions": [
+            "core:app:allow-default-window-icon",
             "core:default",
             "core:window:allow-hide",
             "core:window:allow-show",
