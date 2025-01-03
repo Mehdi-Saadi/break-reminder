@@ -7,7 +7,10 @@ class SidebarSettingButton extends SidebarNavigationButton {
       'settings',
       icon('gear', 'size-5 me-1.5'),
       'Settings'
-    )
+    );
+
+    // active default page
+    this.setActive();
   }
 }
 
