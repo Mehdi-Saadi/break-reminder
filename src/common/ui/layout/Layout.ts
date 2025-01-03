@@ -1,10 +1,10 @@
 import Component from '@/common/ui/base/Component.ts';
 import Sidebar from '@/common/ui/layout/Sidebar.ts';
 
-class Layout extends Component {
+abstract class Layout extends Component {
   protected pageContainer: HTMLDivElement;
 
-  constructor() {
+  protected constructor() {
     super('div', 'size-full min-h-screen grid grid-cols-3 bg-[#f3f3f3] text-gray-800 dark:bg-[#202020] dark:text-white select-none');
 
     const sidebarContainer = document.createElement('div');
