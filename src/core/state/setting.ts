@@ -31,7 +31,7 @@ interface ISettings {
   longBreakMessages: BreakMessages;
 }
 
-class SettingStore {
+class SettingState {
   private _storageKey = 'settings';
   private _settings: ISettings;
   private _defaultSettings = Object.freeze<ISettings>({
@@ -119,6 +119,6 @@ class SettingStore {
   }
 }
 
-const settingStore = new SettingStore();
+const settingState = new SettingState();
 
-export default settingStore;
+export default settingState;
