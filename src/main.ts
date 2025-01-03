@@ -1,6 +1,12 @@
-const app = document.getElementById('app')
+import PageManager from '@/features/PageManager.ts';
 
-app!.innerHTML = '<span class="text-red-700 text-2xl">Hello World!</span>'
+const app = document.getElementById('app');
+
+if (app) {
+
+  new PageManager().mount(app);
+
+}
 
 // core scripts
-import '@/core'
+import '@/core';
