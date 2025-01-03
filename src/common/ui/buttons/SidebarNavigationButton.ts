@@ -35,6 +35,7 @@ abstract class SidebarNavigationButton extends Component {
 
     this.element.appendChild(wrapper);
 
+    this.setNotActive();
     this.activeListener();
   }
 
