@@ -1,33 +1,45 @@
 import { NAVIGATION_EVENTS, pageNavEventBus } from '@/common/events.ts';
+import AdvancedPage from '@/features/setting/pages/AdvancedPage.ts'
+import BreakMessagesPage from '@/features/setting/pages/BreakMessagesPage.ts'
 import SettingsPage from '@/features/setting/pages/SettingsPage.ts';
 import Layout from '@/common/ui/layout/Layout.ts';
 
 class PageManager extends Layout {
   private settingsPage: SettingsPage;
+  private breakMessagesPage: BreakMessagesPage;
+  private advancedPage: AdvancedPage;
 
   constructor() {
     super();
 
     this.settingsPage = new SettingsPage();
+    this.breakMessagesPage = new BreakMessagesPage();
+    this.advancedPage = new AdvancedPage();
 
-    // default page
+    // default active page
     this.settingsPage.mount(this.pageContainer);
 
     pageNavEventBus.on(NAVIGATION_EVENTS.SETTINGS, () => {
-
+      this.unmountPages();
 
       this.settingsPage.mount(this.pageContainer);
     });
     pageNavEventBus.on(NAVIGATION_EVENTS.BREAK_MESSAGES, () => {
-      this.settingsPage.unmount();
+      this.unmountPages();
 
-
+      this.breakMessagesPage.mount(this.pageContainer);
     });
     pageNavEventBus.on(NAVIGATION_EVENTS.ADVANCED, () => {
-      this.settingsPage.unmount();
+      this.unmountPages();
 
-
+      this.advancedPage.mount(this.pageContainer);
     });
+  }
+
+  private unmountPages(): void {
+    this.settingsPage.unmount();
+    this.breakMessagesPage.unmount();
+    this.advancedPage.unmount();
   }
 }
 
