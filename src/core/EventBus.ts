@@ -11,7 +11,7 @@ class EventBus {
     this.events[event].push(handler);
   }
 
-  emit(event: string, payload: any): void {
+  emit(event: string, payload?: any): void {
     if (this.events[event]) {
       this.events[event].forEach(handler => handler(payload));
     }
