@@ -24,8 +24,13 @@ abstract class Component {
     // Default implementation (can be overridden)
   }
 
-  mount(parent: Component): void {
-    parent.element.appendChild(this.element);
+  mount(parent: Component | HTMLElement): void {
+    if (parent instanceof Component) {
+      parent.element.appendChild(this.element);
+    } else {
+      parent.appendChild(this.element);
+    }
+
     this.onMounted();
   }
 
