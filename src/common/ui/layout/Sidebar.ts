@@ -1,4 +1,4 @@
-import Component from '@/common/ui/base/component.ts'
+import Component from '@/common/ui/base/Component.ts'
 
 class Sidebar extends Component {
   constructor() {

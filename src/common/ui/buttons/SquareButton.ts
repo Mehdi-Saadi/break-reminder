@@ -1,4 +1,4 @@
-import Component from '@/common/ui/base/component.ts'
+import Component from '@/common/ui/base/Component.ts'
 
 class SquareButton extends Component {
   constructor() {
