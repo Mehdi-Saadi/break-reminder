@@ -1,7 +1,12 @@
 abstract class Component {
-  private _element: HTMLElement | null = null;
+  protected element: HTMLElement;
 
-  protected constructor() {}
+  protected constructor(tagName: keyof HTMLElementTagNameMap, classes?: string) {
+    this.element = document.createElement(tagName);
+    if (classes) {
+      this.element.setAttribute('class', classes);
+    }
+  }
 
   /**
    * Called when the component is mounted to the DOM.
@@ -20,20 +25,16 @@ abstract class Component {
   }
 
   mount(parent: HTMLElement): void {
-    this._element = this.render()
-    parent.appendChild(this._element);
+    parent.appendChild(this.element);
     this.onMounted();
   }
 
   unmount(): void {
-    if (this._element && this._element.parentElement) {
+    if (this.element.parentElement) {
+      this.element.parentElement.removeChild(this.element);
       this.onUnmounted();
-      this._element.parentElement.removeChild(this._element);
-      this._element = null;
     }
   }
-
-  abstract render(): HTMLElement;
 }
 
 export default Component;
