@@ -1,7 +1,7 @@
 import Component from '@/common/ui/base/Component.ts';
 
-class SidebarNavigationButton extends Component {
-  constructor(htmlIcon: string, label: string) {
+abstract class SidebarNavigationButton extends Component {
+  protected constructor(htmlIcon: string, label: string) {
     super('button', 'flex items-center pe-4 py-2 rounded-md text-sm');
 
     this.element.setAttribute('type', 'button');
@@ -16,6 +16,16 @@ class SidebarNavigationButton extends Component {
 
     this.element.appendChild(span);
   }
+
+  protected onMounted(): void {
+    this.element.addEventListener('click', this.clickHandler);
+  }
+
+  protected onUnmounted(): void {
+    this.element.removeEventListener('click', this.clickHandler);
+  }
+
+  protected abstract clickHandler(): void
 }
 
 export default SidebarNavigationButton;

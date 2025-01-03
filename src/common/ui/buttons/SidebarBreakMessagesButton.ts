@@ -10,16 +10,8 @@ class SidebarBreakMessagesButton extends SidebarNavigationButton {
     )
   }
 
-  private clickHandler(): void {
+  protected clickHandler(): void {
     pageNavEventBus.emit(NAVIGATION_EVENTS.BREAK_MESSAGES);
-  }
-
-  protected onMounted(): void {
-    this.element.addEventListener('click', this.clickHandler)
-  }
-
-  protected onUnmounted(): void {
-    this.element.removeEventListener('click', this.clickHandler)
   }
 }
 

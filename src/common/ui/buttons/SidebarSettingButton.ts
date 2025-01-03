@@ -10,16 +10,8 @@ class SidebarSettingButton extends SidebarNavigationButton {
     )
   }
 
-  private clickHandler(): void {
+  protected clickHandler(): void {
     pageNavEventBus.emit(NAVIGATION_EVENTS.SETTINGS);
-  }
-
-  protected onMounted(): void {
-    this.element.addEventListener('click', this.clickHandler)
-  }
-
-  protected onUnmounted(): void {
-    this.element.removeEventListener('click', this.clickHandler)
   }
 }
 
