@@ -1,17 +1,7 @@
 abstract class Component {
   private _element: HTMLElement | null = null;
-  private _children: Component[] = [];
 
-  protected constructor(public props: Record<string, any> = {}) {}
-
-  addChild(child: Component): void {
-    this._children.push(child);
-  }
-
-  removeChild(child: Component): void {
-    this._children = this._children.filter(item => item !== child);
-    child.unmount();
-  }
+  protected constructor() {}
 
   /**
    * Called when the component is mounted to the DOM.
