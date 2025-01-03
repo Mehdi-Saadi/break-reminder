@@ -1,9 +1,7 @@
 import EventBus from '@/core/EventBus.ts'
 
 export const NAVIGATION_EVENTS = Object.freeze({
-  SETTINGS: 'settings',
-  BREAK_MESSAGES: 'break_messages',
-  ADVANCED: 'advanced',
   NAVIGATE: 'navigate',
 });
+export type NavigationPage = 'settings' | 'break_messages' | 'advanced';
 export const pageNavEventBus = new EventBus();
