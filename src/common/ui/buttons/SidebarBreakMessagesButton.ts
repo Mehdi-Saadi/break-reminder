@@ -7,7 +7,7 @@ class SidebarBreakMessagesButton extends SidebarNavigationButton {
       'break_messages',
       icon('chatBubble', 'size-5 me-1.5'),
       'Break Messages'
-    )
+    );
   }
 }
 

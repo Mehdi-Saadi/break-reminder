@@ -7,7 +7,7 @@ class SidebarAdvancedButton extends SidebarNavigationButton {
       'advanced',
       icon('doubleArrowRight', 'size-5 me-1.5'),
       'Advanced'
-    )
+    );
   }
 }
 
