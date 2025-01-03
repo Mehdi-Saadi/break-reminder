@@ -1,6 +1,6 @@
 type EventHandler = (payload: any) => void;
 
-export class EventBus {
+class EventBus {
   private events: Record<string, EventHandler[]> = {};
 
   on(event: string, handler: EventHandler): void {
@@ -17,3 +17,5 @@ export class EventBus {
     }
   }
 }
+
+export default EventBus;
