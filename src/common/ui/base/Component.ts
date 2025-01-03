@@ -10,17 +10,19 @@ abstract class Component {
 
   /**
    * Called when the component is mounted to the DOM.
+   *
    * Override this method in derived classes.
    */
-  onMounted(): void {
+  protected onMounted(): void {
     // Default implementation (can be overridden)
   }
 
   /**
    * Called when the component is unmounted from the DOM.
+   *
    * Override this method in derived classes.
    */
-  onUnmounted(): void {
+  protected onUnmounted(): void {
     // Default implementation (can be overridden)
   }
 
