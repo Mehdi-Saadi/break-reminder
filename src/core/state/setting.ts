@@ -32,7 +32,7 @@ interface ISettings {
 }
 
 class SettingState {
-  private _storageKey = 'settings';
+  private readonly _storageKey = 'settings';
   private _settings: ISettings;
   private _defaultSettings = Object.freeze<ISettings>({
     shortBreakDuration: 20,
