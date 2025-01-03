@@ -1,3 +1,4 @@
+import { NAVIGATION_EVENTS, NavigationPage, pageNavEventBus } from '@/common/events.ts';
 import Component from '@/common/ui/base/Component.ts';
 
 abstract class SidebarNavigationButton extends Component {
@@ -5,7 +6,11 @@ abstract class SidebarNavigationButton extends Component {
   private notActiveClasses: string[] = ['hover:bg-[#eaeaea]', 'hover:dark:bg-[#2d2d2d]'];
   protected activeIcon: HTMLDivElement;
 
-  protected constructor(htmlIcon: string, label: string) {
+  protected constructor(
+    private page: NavigationPage,
+    htmlIcon: string,
+    label: string
+  ) {
     super('button', 'flex items-center pe-4 py-2 rounded-md text-sm w-full');
 
     this.element.setAttribute('type', 'button');
@@ -24,11 +29,13 @@ abstract class SidebarNavigationButton extends Component {
     // button label
     const span = document.createElement('span');
     span.setAttribute('class', 'pb-0.5');
-    span.innerText = label
+    span.innerText = label;
 
     wrapper.appendChild(span);
 
     this.element.appendChild(wrapper);
+
+    this.activeListener();
   }
 
   protected onMounted(): void {
@@ -39,7 +46,19 @@ abstract class SidebarNavigationButton extends Component {
     this.element.removeEventListener('click', this.clickHandler);
   }
 
-  protected abstract clickHandler(): void
+  protected clickHandler(): void {
+    pageNavEventBus.emit(NAVIGATION_EVENTS.NAVIGATE, this.page);
+  }
+
+  protected activeListener(): void {
+    pageNavEventBus.on(NAVIGATION_EVENTS.NAVIGATE, (selectedPage: NavigationPage) => {
+      if (selectedPage === this.page) {
+        this.setActive();
+      } else {
+        this.setNotActive();
+      }
+    });
+  }
 
   protected setActive(): void {
     this.element.classList.remove(...this.notActiveClasses);
