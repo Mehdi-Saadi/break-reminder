@@ -1,10 +1,9 @@
-class SquareButton {
-  element: HTMLButtonElement;
+import Component from '@/common/ui/base/component.ts'
 
+class SquareButton extends Component {
   constructor() {
-    this.element = document.createElement('button');
+    super('button', 'flex items-center justify-center size-6 active:bg-[#eaeaea] hover:bg-[#ededed] active:dark:bg-[#2d2d2d] hover:dark:bg-[#292929]');
 
-    this.element.setAttribute('class', 'flex items-center justify-center size-6 active:bg-[#eaeaea] hover:bg-[#ededed] active:dark:bg-[#2d2d2d] hover:dark:bg-[#292929]');
     this.element.setAttribute('type', 'button');
   }
 }
