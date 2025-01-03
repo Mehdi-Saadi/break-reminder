@@ -1,6 +1,6 @@
-import { NAVIGATION_EVENTS, pageNavEventBus } from '@/common/events.ts';
-import AdvancedPage from '@/features/setting/pages/AdvancedPage.ts'
-import BreakMessagesPage from '@/features/setting/pages/BreakMessagesPage.ts'
+import { NAVIGATION_EVENTS, NavigationPage, pageNavEventBus } from '@/common/events.ts';
+import AdvancedPage from '@/features/setting/pages/AdvancedPage.ts';
+import BreakMessagesPage from '@/features/setting/pages/BreakMessagesPage.ts';
 import SettingsPage from '@/features/setting/pages/SettingsPage.ts';
 import Layout from '@/common/ui/layout/Layout.ts';
 
@@ -19,20 +19,20 @@ class PageManager extends Layout {
     // default active page
     this.settingsPage.mount(this.pageContainer);
 
-    pageNavEventBus.on(NAVIGATION_EVENTS.SETTINGS, () => {
+    pageNavEventBus.on(NAVIGATION_EVENTS.NAVIGATE, (payload: NavigationPage) => {
       this.unmountPages();
 
-      this.settingsPage.mount(this.pageContainer);
-    });
-    pageNavEventBus.on(NAVIGATION_EVENTS.BREAK_MESSAGES, () => {
-      this.unmountPages();
-
-      this.breakMessagesPage.mount(this.pageContainer);
-    });
-    pageNavEventBus.on(NAVIGATION_EVENTS.ADVANCED, () => {
-      this.unmountPages();
-
-      this.advancedPage.mount(this.pageContainer);
+      switch (payload) {
+        case 'settings':
+          this.settingsPage.mount(this.pageContainer);
+          break;
+        case 'break_messages':
+          this.breakMessagesPage.mount(this.pageContainer);
+          break;
+        case 'advanced':
+          this.advancedPage.mount(this.pageContainer);
+          break;
+      }
     });
   }
 
