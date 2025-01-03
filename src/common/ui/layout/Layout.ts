@@ -1,5 +1,5 @@
-import Component from '@/common/ui/base/Component.ts'
-import Sidebar from '@/common/ui/layout/Sidebar.ts'
+import Component from '@/common/ui/base/Component.ts';
+import Sidebar from '@/common/ui/layout/Sidebar.ts';
 
 class Layout extends Component {
   protected pageContainer: HTMLDivElement;
