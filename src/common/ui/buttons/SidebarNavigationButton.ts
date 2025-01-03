@@ -1,4 +1,4 @@
-import Component from '@/common/ui/base/Component.ts'
+import Component from '@/common/ui/base/Component.ts';
 
 class SidebarNavigationButton extends Component {
   constructor(htmlIcon: string, label: string) {

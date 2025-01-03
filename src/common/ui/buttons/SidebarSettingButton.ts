@@ -1,5 +1,5 @@
-import SidebarNavigationButton from '@/common/ui/buttons/SidebarNavigationButton.ts'
-import icon from '@/common/ui/icons.ts'
+import SidebarNavigationButton from '@/common/ui/buttons/SidebarNavigationButton.ts';
+import icon from '@/common/ui/icons.ts';
 
 class SidebarSettingButton extends SidebarNavigationButton {
   constructor() {
