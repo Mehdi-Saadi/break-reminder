@@ -19,10 +19,10 @@ class PageManager extends Layout {
     // default active page
     this.settingsPage.mount(this.pageContainer);
 
-    pageNavEventBus.on(NAVIGATION_EVENTS.NAVIGATE, (payload: NavigationPage) => {
+    pageNavEventBus.on(NAVIGATION_EVENTS.NAVIGATE, (selectedPage: NavigationPage) => {
       this.unmountPages();
 
-      switch (payload) {
+      switch (selectedPage) {
         case 'settings':
           this.settingsPage.mount(this.pageContainer);
           break;
