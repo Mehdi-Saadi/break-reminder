@@ -15,7 +15,7 @@ class NumberField extends Component {
     super('div', 'flex items-center border border-gray-300 rounded-md overflow-hidden relative');
 
     this.disableLayer = document.createElement('div');
-    this.disableLayer.setAttribute('class', 'absolute size-full z-10 bg-transparent opacity-50');
+    this.disableLayer.setAttribute('class', 'absolute size-full z-10');
     this.element.appendChild(this.disableLayer);
 
     this.inputField = document.createElement('input');
@@ -34,10 +34,12 @@ class NumberField extends Component {
 
   enable(): void {
     this.disableLayer.style.display = 'none';
+    this.element.classList.remove('opacity-50');
   }
 
   disable(): void {
     this.disableLayer.style.display = 'block';
+    this.element.classList.add('opacity-50');
   }
 
   private increase = (): void => {
