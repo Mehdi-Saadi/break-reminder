@@ -16,9 +16,16 @@ class PageManager extends Layout {
     this.breakMessagesPage = new BreakMessagesPage();
     this.advancedPage = new AdvancedPage();
 
-    // default active page
-    this.settingsPage.mount(this.pageContainer);
+    this.setDefaultPageActive();
 
+    this.initNavigationEvents();
+  }
+
+  private setDefaultPageActive(): void {
+    this.settingsPage.mount(this.pageContainer);
+  }
+
+  private initNavigationEvents(): void {
     pageNavEventBus.on('navigate', (selectedPage: NavigationPage) => {
       this.unmountPages();
 
