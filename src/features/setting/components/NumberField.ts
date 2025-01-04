@@ -40,21 +40,21 @@ class NumberField extends Component {
     this.disableLayer.style.display = 'block';
   }
 
-  private increase(): void {
+  private increase = (): void => {
     const newValue = Number(this.inputField.value) + this.step;
 
     if (newValue <= this.max) {
       this.inputField.value = String(newValue);
     }
-  }
+  };
 
-  private decrease(): void {
+  private decrease = (): void => {
     const newValue = Number(this.inputField.value) - this.step;
 
     this.inputField.value = String(newValue < 0 ? 0 : newValue);
-  }
+  };
 
-  private onInput(): void {
+  private onInput = (): void => {
     this.inputField.value = this.inputField.value.replace(/\D/g, '');
 
     if (!this.inputField.value) {
@@ -62,7 +62,7 @@ class NumberField extends Component {
     } else if (Number(this.inputField.value) > this.max) {
       this.inputField.value = this.inputField.value.slice(0, this.inputField.value.length - 1);
     }
-  }
+  };
 
   protected onMounted(): void {
     this.inputField.addEventListener('input', this.onInput);
