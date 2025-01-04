@@ -55,13 +55,15 @@ class NumberField extends Component {
   };
 
   private onInput = (): void => {
-    this.inputField.value = this.inputField.value.replace(/\D/g, '');
+    let newValue = this.inputField.value.replace(/\D/g, '');
 
-    if (!this.inputField.value) {
-      this.inputField.value = '0';
-    } else if (Number(this.inputField.value) > this.max) {
-      this.inputField.value = this.inputField.value.slice(0, this.inputField.value.length - 1);
+    if (!newValue) {
+      newValue = '0';
+    } else if (Number(newValue) > this.max) {
+      newValue = newValue.slice(0, -1);
     }
+
+    this.inputField.value = String(Number(newValue));
   };
 
   protected onMounted(): void {
