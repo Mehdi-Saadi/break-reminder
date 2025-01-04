@@ -1,15 +1,15 @@
 import Component from '@/common/ui/base/Component.ts'
 
 class SettingItem extends Component {
-  protected textContainer: HTMLDivElement;
-  protected buttonContainer: HTMLDivElement;
+  buttonContainer: HTMLDivElement;
 
-  constructor() {
+  constructor(label: string) {
     super('div', 'flex items-center');
 
-    this.textContainer = document.createElement('div');
-    this.textContainer.setAttribute('class', 'grow pe-4 pb-0.5');
-    this.element.appendChild(this.textContainer);
+    const textContainer = document.createElement('div');
+    textContainer.setAttribute('class', 'grow pe-4 pb-0.5');
+    textContainer.innerText = label;
+    this.element.appendChild(textContainer);
 
     this.buttonContainer = document.createElement('div');
     this.element.appendChild(this.buttonContainer);

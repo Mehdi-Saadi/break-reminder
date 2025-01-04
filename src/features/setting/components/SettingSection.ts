@@ -1,7 +1,7 @@
 import Component from '@/common/ui/base/Component.ts'
 
 class SettingSection extends Component {
-  protected settingContainer: HTMLDivElement;
+  settingContainer: HTMLDivElement;
 
   constructor(label: string) {
     super('div', 'relative pt-2');
