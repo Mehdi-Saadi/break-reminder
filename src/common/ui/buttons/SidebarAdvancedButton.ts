@@ -1,4 +1,4 @@
-import { NAVIGATION_EVENTS, NAVIGATION_PAGES, NavigationPage, pageNavEventBus } from '@/common/events.ts';
+import { NAVIGATION_PAGES, NavigationPage, pageNavEventBus } from '@/common/events.ts';
 import SidebarNavigationButton from '@/common/ui/buttons/SidebarNavigationButton.ts';
 import icon from '@/common/ui/icons.ts';
 
@@ -8,11 +8,11 @@ class SidebarAdvancedButton extends SidebarNavigationButton {
   }
 
   protected clickHandler(): void {
-    pageNavEventBus.emit(NAVIGATION_EVENTS.NAVIGATE, NAVIGATION_PAGES.ADVANCED);
+    pageNavEventBus.emit('navigate', NAVIGATION_PAGES.ADVANCED);
   }
 
   protected activeListener(): void {
-    pageNavEventBus.on(NAVIGATION_EVENTS.NAVIGATE, (selectedPage: NavigationPage) => {
+    pageNavEventBus.on('navigate', (selectedPage: NavigationPage) => {
       if (selectedPage === NAVIGATION_PAGES.ADVANCED) {
         this.setActive();
       } else {

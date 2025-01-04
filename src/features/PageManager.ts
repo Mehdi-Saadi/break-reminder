@@ -1,4 +1,4 @@
-import { NAVIGATION_EVENTS, NavigationPage, pageNavEventBus } from '@/common/events.ts';
+import { NavigationPage, pageNavEventBus } from '@/common/events.ts';
 import AdvancedPage from '@/features/setting/pages/AdvancedPage.ts';
 import BreakMessagesPage from '@/features/setting/pages/BreakMessagesPage.ts';
 import SettingsPage from '@/features/setting/pages/SettingsPage.ts';
@@ -19,7 +19,7 @@ class PageManager extends Layout {
     // default active page
     this.settingsPage.mount(this.pageContainer);
 
-    pageNavEventBus.on(NAVIGATION_EVENTS.NAVIGATE, (selectedPage: NavigationPage) => {
+    pageNavEventBus.on('navigate', (selectedPage: NavigationPage) => {
       this.unmountPages();
 
       switch (selectedPage) {
