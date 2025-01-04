@@ -1,5 +1,5 @@
-import SquareButton from '@/common/ui/buttons/SquareButton.ts'
-import icon from '@/common/ui/icons.ts'
+import SquareButton from '@/common/ui/buttons/SquareButton.ts';
+import icon from '@/common/ui/icons.ts';
 
 class SquareAddButton extends SquareButton {
   constructor() {
