@@ -1,9 +1,9 @@
 type EventHandler = (payload: any) => void;
 
-class EventBus {
+class EventBus<T extends string> {
   private events: Record<string, EventHandler[]> = {};
 
-  on(event: string, handler: EventHandler): void {
+  on(event: T, handler: EventHandler): void {
     if (!this.events[event]) {
       this.events[event] = [];
     }
@@ -11,7 +11,7 @@ class EventBus {
     this.events[event].push(handler);
   }
 
-  emit(event: string, payload?: any): void {
+  emit(event: T, payload?: any): void {
     if (this.events[event]) {
       this.events[event].forEach(handler => handler(payload));
     }
