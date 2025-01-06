@@ -25,6 +25,20 @@ class SettingsPage extends Component {
         settingState.settings.shortBreakDuration,
       ),
     ]);
+
+    this.createSection('Long Breaks', [
+      this.createNumberItem(
+        'Count of short works for a long break',
+        (newValue) => { settingState.settings = { countOfShortWorksForLongBreak: newValue }; },
+        settingState.settings.countOfShortWorksForLongBreak,
+        1,
+      ),
+      this.createNumberItem(
+        'Break Duration (in seconds)',
+        (newValue) => { settingState.settings = { longBreakDuration: newValue }; },
+        settingState.settings.longBreakDuration,
+      ),
+    ]);
   }
 
   private createSection(label: string, settingItems: SettingItem[]): void {
@@ -48,41 +62,9 @@ class SettingsPage extends Component {
 
     const numberField = new NumberField(step, max, onChange, initialValue);
     settingItem.addChild(numberField);
-    numberField.mount(settingItem.buttonContainer)
+    numberField.mount(settingItem.buttonContainer);
 
     return settingItem;
-  }
-
-  private setupLongBreaks(): void {
-    const longBreaksSection = new SettingSection('Long Breaks');
-
-    // long work duration
-    const countOfShortWorksForLongBreakItem = new SettingItem('Count of short works for a long break');
-    const countOfShortWorksForLongBreakInput = new NumberField(
-      1,
-      120,
-      (newValue) => {
-        settingState.settings = { countOfShortWorksForLongBreak: newValue };
-      },
-      settingState.settings.countOfShortWorksForLongBreak,
-    );
-    countOfShortWorksForLongBreakInput.mount(countOfShortWorksForLongBreakItem.buttonContainer);
-    countOfShortWorksForLongBreakItem.mount(longBreaksSection.settingContainer);
-
-    // long break duration
-    const longBreakDurationItem = new SettingItem('Break Duration (in seconds)');
-    const longBreakDurationInput = new NumberField(
-      5,
-      120,
-      (newValue) => {
-        settingState.settings = { longBreakDuration: newValue };
-      },
-      settingState.settings.longBreakDuration,
-    );
-    longBreakDurationInput.mount(longBreakDurationItem.buttonContainer);
-    longBreakDurationItem.mount(longBreaksSection.settingContainer);
-
-    longBreaksSection.mount(this);
   }
 
   private setupOptions(): void {
