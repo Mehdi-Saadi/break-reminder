@@ -5,8 +5,6 @@ import SquareRemoveButton from '@/common/ui/buttons/SquareRemoveButton.ts';
 class NumberField extends Component {
   protected disableLayer: HTMLDivElement;
   protected inputField: HTMLInputElement;
-  protected addButton: SquareAddButton;
-  protected removeButton: SquareRemoveButton;
 
   constructor(
     public step: number,
@@ -26,11 +24,13 @@ class NumberField extends Component {
     this.inputField.value = String(initialValue);
     this.element.appendChild(this.inputField);
 
-    this.removeButton = new SquareRemoveButton(this.decrease);
-    this.removeButton.mount(this);
+    const removeButton = new SquareRemoveButton(this.decrease);
+    this.addChild(removeButton);
+    removeButton.mount(this);
 
-    this.addButton = new SquareAddButton(this.increase);
-    this.addButton.mount(this);
+    const addButton = new SquareAddButton(this.increase);
+    this.addChild(addButton);
+    addButton.mount(this);
 
     this.enable();
   }
@@ -80,8 +80,6 @@ class NumberField extends Component {
 
   protected onUnmounted(): void {
     this.inputField.removeEventListener('input', this.onInput);
-    this.removeButton.unmount();
-    this.addButton.unmount();
   }
 }
 
