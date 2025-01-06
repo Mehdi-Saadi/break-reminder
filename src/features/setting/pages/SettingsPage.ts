@@ -1,5 +1,6 @@
 import Component from '@/common/ui/base/Component.ts';
 import settingState from '@/core/state/SettingState.ts';
+import CheckboxField from '@/features/setting/components/CheckboxField.ts'
 import NumberField from '@/features/setting/components/NumberField.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SettingSection from '@/features/setting/components/SettingSection.ts';
@@ -95,12 +96,29 @@ class SettingsPage extends Component {
 
     // strict break
     const strictBreakItem  = new SettingItem('Strict break (No way to skip breaks)');
-    strictBreakItem.buttonContainer.innerText = 'checkbox';
+    const strictBreakInput = new CheckboxField(
+      (newValue) => {
+        settingState.settings = { strictBreak: newValue };
+      },
+      settingState.settings.strictBreak,
+    );
+    strictBreakInput.mount(strictBreakItem.buttonContainer);
     strictBreakItem.mount(optionsSection.settingContainer);
 
     // allow postponing
     const allowPostponingBreakItem = new SettingItem('Allow postponing breaks');
-    allowPostponingBreakItem.buttonContainer.innerText = 'checkbox';
+    const allowPostponingBreakInput = new CheckboxField(
+      (newValue) => {
+        settingState.settings = { allowPostponingBreaks: newValue };
+        if (settingState.settings.allowPostponingBreaks) {
+          postponeDurationInput.enable();
+        } else {
+          postponeDurationInput.disable();
+        }
+      },
+      settingState.settings.allowPostponingBreaks,
+    );
+    allowPostponingBreakInput.mount(allowPostponingBreakItem.buttonContainer);
     allowPostponingBreakItem.mount(optionsSection.settingContainer);
 
     // postpone duration
