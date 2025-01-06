@@ -1,52 +1,43 @@
-import { NavigationPage, pageNavEventBus } from '@/common/events.ts';
 import AdvancedPage from '@/features/setting/pages/AdvancedPage.ts';
 import BreakMessagesPage from '@/features/setting/pages/BreakMessagesPage.ts';
-import SettingsPage from '@/features/setting/pages/SettingsPage.ts';
+import Component from '@/common/ui/base/Component.ts';
 import Layout from '@/common/ui/layout/Layout.ts';
+import SettingsPage from '@/features/setting/pages/SettingsPage.ts';
+import { NavigationPage, pageNavEventBus } from '@/common/events.ts';
 
 class PageManager extends Layout {
-  private settingsPage: SettingsPage;
-  private breakMessagesPage: BreakMessagesPage;
-  private advancedPage: AdvancedPage;
+  private currentPage: Component;
 
   constructor() {
     super();
 
-    this.settingsPage = new SettingsPage();
-    this.breakMessagesPage = new BreakMessagesPage();
-    this.advancedPage = new AdvancedPage();
-
-    this.setDefaultPageActive();
-
+    this.currentPage = new SettingsPage();
+    this.displayPage();
     this.initNavigationEvents();
-  }
-
-  private setDefaultPageActive(): void {
-    this.settingsPage.mount(this.pageContainer);
   }
 
   private initNavigationEvents(): void {
     pageNavEventBus.on('navigate', (selectedPage: NavigationPage) => {
-      this.unmountPages();
+      this.currentPage.unmount();
 
       switch (selectedPage) {
         case 'settings':
-          this.settingsPage.mount(this.pageContainer);
+          this.currentPage = new SettingsPage();
           break;
         case 'break_messages':
-          this.breakMessagesPage.mount(this.pageContainer);
+          this.currentPage = new BreakMessagesPage()
           break;
         case 'advanced':
-          this.advancedPage.mount(this.pageContainer);
+          this.currentPage = new AdvancedPage();
           break;
       }
+
+      this.displayPage();
     });
   }
 
-  private unmountPages(): void {
-    this.settingsPage.unmount();
-    this.breakMessagesPage.unmount();
-    this.advancedPage.unmount();
+  private displayPage(): void {
+    this.currentPage.mount(this.pageContainer);
   }
 }
 
