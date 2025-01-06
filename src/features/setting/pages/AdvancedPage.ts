@@ -2,97 +2,94 @@ import CheckboxField from '@/features/setting/components/CheckboxField.ts';
 import Component from '@/common/ui/base/Component.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import settingState from '@/core/state/SettingState.ts';
-import icon from '@/common/ui/icons.ts';
+import icon, { IconName } from '@/common/ui/icons.ts';
 
-class SettingsPage extends Component {
+class AdvancedPage extends Component {
+  private settings: Record<string, {
+    item: SettingItem | null;
+    checkbox: CheckboxField | null;
+  }> = {
+    doNotDisturb: { item: null, checkbox: null },
+    notification: { item: null, checkbox: null },
+  };
+
   constructor() {
     super('div', 'flex flex-col space-y-5 p-4 text-sm');
-
-    this.setupDoNotDisturb();
-    this.setupNotification();
-  }
-
-  private setupDoNotDisturb(): void {
-    const settingItem = new SettingItem();
-
-    // label
-    const labelWrapper = document.createElement('div');
-    labelWrapper.setAttribute('class', 'flex items-center space-x-1');
-
-    // icon
-    labelWrapper.innerHTML = icon('doNotDisturbOn', 'size-5');
-
-    // text
-    const textWrapper = document.createElement('div');
-    textWrapper.setAttribute('class', 'flex flex-col');
-
-    const label = document.createElement('div');
-    label.setAttribute('class', 'font-semibold');
-    label.innerText = 'Do Not Disturb';
-
-    const caption = document.createElement('div');
-    caption.setAttribute('class', 'text-xs text-[#5c5c5c] dark:text-[#cccccc]');
-    caption.innerText = 'Skip the break if the active window is in fullscreen mode';
-
-    textWrapper.appendChild(label);
-    textWrapper.appendChild(caption);
-
-    labelWrapper.appendChild(textWrapper);
-    settingItem.labelContainer.appendChild(labelWrapper);
-
-    // checkbox
-    const checkboxField = new CheckboxField(
-      (newValue) => {
-        settingState.settings = { doNotDisturb: newValue };
-      },
+    this.setupSettingItem(
+      'doNotDisturb',
+      'Do Not Disturb',
+      'Skip the break if the active window is in fullscreen mode',
+      'doNotDisturbOn',
       settingState.settings.doNotDisturb,
+      (newValue) => (settingState.settings = { doNotDisturb: newValue })
     );
-
-    checkboxField.mount(settingItem.buttonContainer);
-
-    settingItem.mount(this);
+    this.setupSettingItem(
+      'notification',
+      'Notification',
+      'Show a system notification before breaks',
+      'notifications',
+      settingState.settings.notification,
+      (newValue) => (settingState.settings = { notification: newValue })
+    );
   }
 
-  private setupNotification(): void {
-    const settingItem = new SettingItem();
+  private setupSettingItem(
+    key: string,
+    label: string,
+    caption: string,
+    iconName: IconName,
+    initialState: boolean,
+    onChange: (newValue: boolean) => void
+  ): void {
+    const item = new SettingItem();
 
-    // label
-    const labelWrapper = document.createElement('div');
-    labelWrapper.setAttribute('class', 'flex items-center space-x-1');
+    // create and append label content
+    const labelWrapper = this.createLabelContent(label, caption, iconName);
+    item.labelContainer.appendChild(labelWrapper);
+
+    // Create and append checkbox
+    const checkbox = new CheckboxField(onChange, initialState);
+    checkbox.mount(item.buttonContainer);
+
+    // Mount setting item to the page
+    item.mount(this);
+
+    // Store references for cleanup
+    this.settings[key] = { item, checkbox };
+  }
+
+  private createLabelContent(label: string, caption: string, iconName: IconName): HTMLElement {
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('class', 'flex items-center space-x-1');
 
     // icon
-    labelWrapper.innerHTML = icon('notifications', 'size-5');
+    wrapper.innerHTML = icon(iconName, 'size-5');
 
     // text
     const textWrapper = document.createElement('div');
     textWrapper.setAttribute('class', 'flex flex-col');
 
-    const label = document.createElement('div');
-    label.setAttribute('class', 'font-semibold');
-    label.innerText = 'Notification';
+    const labelElement = document.createElement('div');
+    labelElement.setAttribute('class', 'font-semibold');
+    labelElement.innerText = label;
 
-    const caption = document.createElement('div');
-    caption.setAttribute('class', 'text-xs text-[#5c5c5c] dark:text-[#cccccc]');
-    caption.innerText = 'Show a system notification before breaks';
+    const captionElement = document.createElement('div');
+    captionElement.setAttribute('class', 'text-xs text-[#5c5c5c] dark:text-[#cccccc]');
+    captionElement.innerText = caption;
 
-    textWrapper.appendChild(label);
-    textWrapper.appendChild(caption);
+    textWrapper.appendChild(labelElement);
+    textWrapper.appendChild(captionElement);
 
-    labelWrapper.appendChild(textWrapper);
-    settingItem.labelContainer.appendChild(labelWrapper);
+    wrapper.appendChild(textWrapper);
+    return wrapper;
+  }
 
-    // checkbox
-    const checkboxField = new CheckboxField(
-      (newValue) => {
-        settingState.settings = { notification: newValue };
-      },
-      settingState.settings.notification,
-    );
-
-    checkboxField.mount(settingItem.buttonContainer);
-
-    settingItem.mount(this);
+  protected onUnmounted(): void {
+    Object.values(this.settings).forEach(({ item, checkbox }) => {
+      checkbox?.unmount();
+      item?.unmount();
+    });
   }
 }
 
-export default SettingsPage;
+export default AdvancedPage;
