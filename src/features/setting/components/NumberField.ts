@@ -11,6 +11,8 @@ class NumberField extends Component {
   constructor(
     public step: number,
     public max: number,
+    private onChange?: (newValue: number) => void,
+    initialValue: number = 0,
   ) {
     super('div', 'flex items-center border border-gray-300 rounded-md overflow-hidden relative');
 
@@ -21,6 +23,7 @@ class NumberField extends Component {
     this.inputField = document.createElement('input');
     this.inputField.setAttribute('type', 'text');
     this.inputField.setAttribute('class', 'h-6 w-9 focus:outline-0 px-1 bg-inherit border-e border-gray-300');
+    this.inputField.value = String(initialValue);
     this.element.appendChild(this.inputField);
 
     this.removeButton = new SquareRemoveButton(this.decrease);
@@ -47,6 +50,7 @@ class NumberField extends Component {
 
     if (newValue <= this.max) {
       this.inputField.value = String(newValue);
+      this.onChange?.(newValue);
     }
   };
 
@@ -54,6 +58,7 @@ class NumberField extends Component {
     const newValue = Number(this.inputField.value) - this.step;
 
     this.inputField.value = String(newValue < 0 ? 0 : newValue);
+    this.onChange?.(Number(this.inputField.value));
   };
 
   private onInput = (): void => {
@@ -66,6 +71,7 @@ class NumberField extends Component {
     }
 
     this.inputField.value = String(Number(newValue));
+    this.onChange?.(Number(this.inputField.value));
   };
 
   protected onMounted(): void {
