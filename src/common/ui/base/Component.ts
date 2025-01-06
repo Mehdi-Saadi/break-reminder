@@ -48,7 +48,7 @@ abstract class Component {
     }
   }
 
-  protected addChild(child: Component): void {
+  addChild(child: Component): void {
     this.children.push(child);
   }
 }
