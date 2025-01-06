@@ -13,7 +13,9 @@ const icons = Object.freeze({
   remove: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M200-440v-80h560v80H200Z"/></svg>`,
 });
 
-const icon = (name: keyof typeof icons, classes: string = ''): string => {
+export type IconName = keyof typeof icons;
+
+const icon = (name: IconName, classes: string = ''): string => {
   const item = icons[name];
   return item.replace('<svg', `<svg class="${classes}"`);
 };
