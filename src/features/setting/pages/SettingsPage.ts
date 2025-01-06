@@ -1,4 +1,5 @@
 import Component from '@/common/ui/base/Component.ts';
+import settingState from '@/core/state/SettingState.ts';
 import NumberField from '@/features/setting/components/NumberField.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SettingSection from '@/features/setting/components/SettingSection.ts';
@@ -11,7 +12,14 @@ class SettingsPage extends Component {
     const shortBreaksSection = new SettingSection('Short Breaks');
 
     const workDurationItem = new SettingItem('Work Duration (in minutes)');
-    const workDurationInput = new NumberField(5, 120);
+    const workDurationInput = new NumberField(
+      5,
+      120,
+      (newValue) => {
+        settingState.settings = { shortWorkDuration: newValue };
+      },
+      settingState.settings.shortWorkDuration,
+    );
     workDurationInput.mount(workDurationItem.buttonContainer);
     workDurationItem.mount(shortBreaksSection.settingContainer);
 
