@@ -21,6 +21,34 @@ class AdvancedPage extends Component {
       settingState.settings.notification,
       (newValue) => (settingState.settings = { notification: newValue })
     );
+    this.setupSettingItem(
+      'Audible Alert',
+      'Play an audible alert at the end of breaks',
+      'musicNote',
+      settingState.settings.audibleAlert,
+      (newValue) => (settingState.settings = { audibleAlert: newValue })
+    );
+    this.setupSettingItem(
+      'Smart Pause',
+      'Pause reminder if system is idle',
+      'networkIntelligence',
+      settingState.settings.smartPause,
+      (newValue) => (settingState.settings = { smartPause: newValue })
+    );
+    this.setupSettingItem(
+      'Screensaver',
+      'Lock the screen after long breaks by starting screensaver',
+      'lock',
+      settingState.settings.screensaver,
+      (newValue) => (settingState.settings = { screensaver: newValue })
+    );
+    this.setupSettingItem(
+      'Dark Mode',
+      '',
+      'darkMode',
+      settingState.settings.darkMode,
+      (newValue) => (settingState.settings = { darkMode: newValue })
+    );
   }
 
   private setupSettingItem(
