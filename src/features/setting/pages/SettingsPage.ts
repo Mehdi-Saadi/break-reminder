@@ -9,41 +9,48 @@ class SettingsPage extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-4');
 
-    this.setupShortBreaks();
-    this.setupLongBreaks();
-    this.setupOptions();
+    this.createSections();
   }
 
-  private setupShortBreaks(): void {
-    const shortBreaksSection = new SettingSection('Short Breaks');
+  private createSections(): void {
+    this.createSection('Short Breaks', [
+      this.createNumberItem(
+        'Work Duration (in minutes)',
+        (newValue) => { settingState.settings = { shortWorkDuration: newValue }; },
+        settingState.settings.shortWorkDuration,
+      ),
+      this.createNumberItem(
+        'Break Duration (in seconds)',
+        (newValue) => { settingState.settings = { shortBreakDuration: newValue }; },
+        settingState.settings.shortBreakDuration,
+      ),
+    ]);
+  }
 
-    // short work duration
-    const shortWorkDurationItem = new SettingItem('Work Duration (in minutes)');
-    const shortWorkDurationInput = new NumberField(
-      5,
-      120,
-      (newValue) => {
-        settingState.settings = { shortWorkDuration: newValue };
-      },
-      settingState.settings.shortWorkDuration,
-    );
-    shortWorkDurationInput.mount(shortWorkDurationItem.buttonContainer);
-    shortWorkDurationItem.mount(shortBreaksSection.settingContainer);
+  private createSection(label: string, settingItems: SettingItem[]): void {
+    const section = new SettingSection(label);
 
-    // short break duration
-    const shortBreakDurationItem = new SettingItem('Break Duration (in seconds)');
-    const shortBreakDurationInput = new NumberField(
-      5,
-      120,
-      (newValue) => {
-        settingState.settings = { shortBreakDuration: newValue };
-      },
-      settingState.settings.shortBreakDuration,
-    );
-    shortBreakDurationInput.mount(shortBreakDurationItem.buttonContainer);
-    shortBreakDurationItem.mount(shortBreaksSection.settingContainer);
+    for (const settingItem of settingItems) {
+      settingItem.mount(section.settingContainer);
+    }
 
-    shortBreaksSection.mount(this);
+    section.mount(this);
+  }
+
+  private createNumberItem(
+    label: string,
+    onChange: (newValue: number) => void,
+    initialValue: number,
+    step: number = 5,
+    max: number = 120,
+  ): SettingItem {
+    const settingItem = new SettingItem(label);
+
+    const numberField = new NumberField(step, max, onChange, initialValue);
+    settingItem.addChild(numberField);
+    numberField.mount(settingItem.buttonContainer)
+
+    return settingItem;
   }
 
   private setupLongBreaks(): void {
