@@ -46,6 +46,12 @@ class SettingsPage extends Component {
         (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue }; },
         settingState.settings.timeToPrepareForBreak,
       ),
+
+      this.createNumberItem(
+        'Postpone duration (in minutes)',
+        (newValue) => { settingState.settings = { postponeDuration: newValue }; },
+        settingState.settings.postponeDuration,
+      ),
     ]);
   }
 
@@ -94,33 +100,11 @@ class SettingsPage extends Component {
     const allowPostponingBreakInput = new CheckboxField(
       (newValue) => {
         settingState.settings = { allowPostponingBreaks: newValue };
-        if (settingState.settings.allowPostponingBreaks) {
-          postponeDurationInput.enable();
-        } else {
-          postponeDurationInput.disable();
-        }
       },
       settingState.settings.allowPostponingBreaks,
     );
     allowPostponingBreakInput.mount(allowPostponingBreakItem.buttonContainer);
     allowPostponingBreakItem.mount(optionsSection.settingContainer);
-
-    // postpone duration
-    const postponeDurationItem = new SettingItem('Postpone duration (in minutes)');
-    const postponeDurationInput = new NumberField(
-      5,
-      120,
-      (newValue) => {
-        settingState.settings = { postponeDuration: newValue };
-      },
-      settingState.settings.postponeDuration,
-    );
-    postponeDurationInput.mount(postponeDurationItem.buttonContainer);
-    postponeDurationItem.mount(optionsSection.settingContainer);
-
-    if (!settingState.settings.allowPostponingBreaks) {
-      postponeDurationInput.disable();
-    }
 
     optionsSection.mount(this);
   }
