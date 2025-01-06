@@ -1,9 +1,9 @@
+import CheckboxField from '@/features/setting/components/CheckboxField.ts';
 import Component from '@/common/ui/base/Component.ts';
-import settingState from '@/core/state/SettingState.ts';
-import CheckboxField from '@/features/setting/components/CheckboxField.ts'
 import NumberField from '@/features/setting/components/NumberField.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SettingSection from '@/features/setting/components/SettingSection.ts';
+import settingState from '@/core/state/SettingState.ts';
 
 class SettingsPage extends Component {
   constructor() {
@@ -68,9 +68,11 @@ class SettingsPage extends Component {
     const section = new SettingSection(label);
 
     for (const settingItem of settingItems) {
+      section.addChild(settingItem);
       settingItem.mount(section.settingContainer);
     }
 
+    this.addChild(section);
     section.mount(this);
   }
 
