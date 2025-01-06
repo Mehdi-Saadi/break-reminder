@@ -10,6 +10,7 @@ class SettingsPage extends Component {
 
     this.setupShortBreaks();
     this.setupLongBreaks();
+    this.setupOptions();
   }
 
   private setupShortBreaks(): void {
@@ -74,6 +75,52 @@ class SettingsPage extends Component {
     longBreakDurationItem.mount(longBreaksSection.settingContainer);
 
     longBreaksSection.mount(this);
+  }
+
+  private setupOptions(): void {
+    const optionsSection = new SettingSection('Options');
+
+    // time to prepare for a break
+    const timeToPrepareForBreakItem = new SettingItem('Time to prepare for a break (in seconds)');
+    const timeToPrepareForBreakInput = new NumberField(
+      5,
+      120,
+      (newValue) => {
+        settingState.settings = { timeToPrepareForBreak: newValue };
+      },
+      settingState.settings.timeToPrepareForBreak,
+    );
+    timeToPrepareForBreakInput.mount(timeToPrepareForBreakItem.buttonContainer);
+    timeToPrepareForBreakItem.mount(optionsSection.settingContainer);
+
+    // strict break
+    const strictBreakItem  = new SettingItem('Strict break (No way to skip breaks)');
+    strictBreakItem.buttonContainer.innerText = 'checkbox';
+    strictBreakItem.mount(optionsSection.settingContainer);
+
+    // allow postponing
+    const allowPostponingBreakItem = new SettingItem('Allow postponing breaks');
+    allowPostponingBreakItem.buttonContainer.innerText = 'checkbox';
+    allowPostponingBreakItem.mount(optionsSection.settingContainer);
+
+    // postpone duration
+    const postponeDurationItem = new SettingItem('Postpone duration (in minutes)');
+    const postponeDurationInput = new NumberField(
+      5,
+      120,
+      (newValue) => {
+        settingState.settings = { postponeDuration: newValue };
+      },
+      settingState.settings.postponeDuration,
+    );
+    postponeDurationInput.mount(postponeDurationItem.buttonContainer);
+    postponeDurationItem.mount(optionsSection.settingContainer);
+
+    if (!settingState.settings.allowPostponingBreaks) {
+      postponeDurationInput.disable();
+    }
+
+    optionsSection.mount(this);
   }
 }
 
