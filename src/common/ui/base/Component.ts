@@ -1,5 +1,6 @@
 abstract class Component {
   protected element: HTMLElement;
+  private children: Component[] = [];
 
   protected constructor(tagName: keyof HTMLElementTagNameMap, classes?: string) {
     this.element = document.createElement(tagName);
@@ -39,8 +40,16 @@ abstract class Component {
   unmount(): void {
     if (this.element.parentElement) {
       this.element.parentElement.removeChild(this.element);
+
+      this.children.forEach(child => child.unmount());
+      this.children = [];
+
       this.onUnmounted();
     }
+  }
+
+  protected addChild(child: Component): void {
+    this.children.push(child);
   }
 }
 
