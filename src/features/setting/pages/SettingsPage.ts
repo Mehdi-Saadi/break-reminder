@@ -46,7 +46,16 @@ class SettingsPage extends Component {
         (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue }; },
         settingState.settings.timeToPrepareForBreak,
       ),
-
+      this.createCheckboxItem(
+        'Strict break (No way to skip breaks)',
+        (newValue) => { settingState.settings = { strictBreak: newValue }; },
+        settingState.settings.strictBreak,
+      ),
+      this.createCheckboxItem(
+        'Allow postponing breaks',
+        (newValue) => { settingState.settings = { allowPostponingBreaks: newValue }; },
+        settingState.settings.allowPostponingBreaks,
+      ),
       this.createNumberItem(
         'Postpone duration (in minutes)',
         (newValue) => { settingState.settings = { postponeDuration: newValue }; },
@@ -81,32 +90,18 @@ class SettingsPage extends Component {
     return settingItem;
   }
 
-  private setupOptions(): void {
-    const optionsSection = new SettingSection('');
+  private createCheckboxItem(
+    label: string,
+    onChange: (newValue: boolean) => void,
+    initialValue: boolean,
+  ): SettingItem {
+    const settingItem = new SettingItem(label);
 
-    // strict break
-    const strictBreakItem  = new SettingItem('Strict break (No way to skip breaks)');
-    const strictBreakInput = new CheckboxField(
-      (newValue) => {
-        settingState.settings = { strictBreak: newValue };
-      },
-      settingState.settings.strictBreak,
-    );
-    strictBreakInput.mount(strictBreakItem.buttonContainer);
-    strictBreakItem.mount(optionsSection.settingContainer);
+    const checkboxField = new CheckboxField(onChange, initialValue);
+    settingItem.addChild(checkboxField);
+    checkboxField.mount(settingItem.buttonContainer);
 
-    // allow postponing
-    const allowPostponingBreakItem = new SettingItem('Allow postponing breaks');
-    const allowPostponingBreakInput = new CheckboxField(
-      (newValue) => {
-        settingState.settings = { allowPostponingBreaks: newValue };
-      },
-      settingState.settings.allowPostponingBreaks,
-    );
-    allowPostponingBreakInput.mount(allowPostponingBreakItem.buttonContainer);
-    allowPostponingBreakItem.mount(optionsSection.settingContainer);
-
-    optionsSection.mount(this);
+    return settingItem;
   }
 }
 
