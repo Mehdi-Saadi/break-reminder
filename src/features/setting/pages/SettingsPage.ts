@@ -39,6 +39,14 @@ class SettingsPage extends Component {
         settingState.settings.longBreakDuration,
       ),
     ]);
+
+    this.createSection('Options', [
+      this.createNumberItem(
+        'Time to prepare for a break (in seconds)',
+        (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue }; },
+        settingState.settings.timeToPrepareForBreak,
+      ),
+    ]);
   }
 
   private createSection(label: string, settingItems: SettingItem[]): void {
@@ -68,20 +76,7 @@ class SettingsPage extends Component {
   }
 
   private setupOptions(): void {
-    const optionsSection = new SettingSection('Options');
-
-    // time to prepare for a break
-    const timeToPrepareForBreakItem = new SettingItem('Time to prepare for a break (in seconds)');
-    const timeToPrepareForBreakInput = new NumberField(
-      5,
-      120,
-      (newValue) => {
-        settingState.settings = { timeToPrepareForBreak: newValue };
-      },
-      settingState.settings.timeToPrepareForBreak,
-    );
-    timeToPrepareForBreakInput.mount(timeToPrepareForBreakItem.buttonContainer);
-    timeToPrepareForBreakItem.mount(optionsSection.settingContainer);
+    const optionsSection = new SettingSection('');
 
     // strict break
     const strictBreakItem  = new SettingItem('Strict break (No way to skip breaks)');
