@@ -8,11 +8,15 @@ class SettingsPage extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-4');
 
-    // short breaks
+    this.setupShortBreaks();
+  }
+
+  private setupShortBreaks(): void {
     const shortBreaksSection = new SettingSection('Short Breaks');
 
-    const workDurationItem = new SettingItem('Work Duration (in minutes)');
-    const workDurationInput = new NumberField(
+    // short work duration
+    const shortWorkDurationItem = new SettingItem('Work Duration (in minutes)');
+    const shortWorkDurationInput = new NumberField(
       5,
       120,
       (newValue) => {
@@ -20,12 +24,21 @@ class SettingsPage extends Component {
       },
       settingState.settings.shortWorkDuration,
     );
-    workDurationInput.mount(workDurationItem.buttonContainer);
-    workDurationItem.mount(shortBreaksSection.settingContainer);
+    shortWorkDurationInput.mount(shortWorkDurationItem.buttonContainer);
+    shortWorkDurationItem.mount(shortBreaksSection.settingContainer);
 
-    const breakDurationItem = new SettingItem('Break Duration (in seconds)');
-    breakDurationItem.buttonContainer.innerText = 'some button';
-    breakDurationItem.mount(shortBreaksSection.settingContainer);
+    // short break duration
+    const shortBreakDurationItem = new SettingItem('Break Duration (in seconds)');
+    const shortBreakDurationInput = new NumberField(
+      5,
+      120,
+      (newValue) => {
+        settingState.settings = { shortBreakDuration: newValue };
+      },
+      settingState.settings.shortBreakDuration,
+    );
+    shortBreakDurationInput.mount(shortBreakDurationItem.buttonContainer);
+    shortBreakDurationItem.mount(shortBreaksSection.settingContainer);
 
     shortBreaksSection.mount(this);
   }
