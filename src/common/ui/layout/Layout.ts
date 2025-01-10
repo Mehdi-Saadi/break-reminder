@@ -1,11 +1,15 @@
 import Component from '@/common/ui/base/Component.ts';
 import Sidebar from '@/common/ui/layout/Sidebar.ts';
+import settingState from '@/core/state/SettingState.ts';
+import { settingStateEventBus } from '@/common/events.ts';
 
 abstract class Layout extends Component {
   protected pageContainer: HTMLDivElement;
 
   protected constructor() {
     super('div', 'size-full min-h-screen grid grid-cols-3 bg-[#f3f3f3] text-gray-800 dark:bg-[#202020] dark:text-white select-none');
+
+    this.setTheme();
 
     const sidebarContainer = document.createElement('div');
     sidebarContainer.setAttribute('class', 'col-span-1');
@@ -16,6 +20,20 @@ abstract class Layout extends Component {
 
     this.element.appendChild(sidebarContainer);
     this.element.appendChild(this.pageContainer);
+
+    this.initThemeListener();
+  }
+
+  private setTheme = (): void => {
+    if (settingState.settings.darkMode) {
+      this.element.classList.add('dark');
+    } else {
+      this.element.classList.remove('dark');
+    }
+  };
+
+  private initThemeListener(): void {
+    settingStateEventBus.on('change', this.setTheme);
   }
 }
 

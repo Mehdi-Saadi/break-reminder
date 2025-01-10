@@ -1,3 +1,4 @@
+import { settingStateEventBus } from '@/common/events';
 import { BreakMessages, UUID } from '@/common/types';
 
 type Minutes = number;
@@ -77,6 +78,8 @@ class SettingState {
     this._settings = {...this._settings, ...value};
 
     this.saveSettingsToStorage();
+
+    settingStateEventBus.emit('change');
   }
 
   getBreakMessageById(id: UUID): string {
