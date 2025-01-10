@@ -1,8 +1,5 @@
+import { BreakMessages, Minutes, Seconds, UUID } from '@/common/types';
 import { settingStateEventBus } from '@/common/events';
-import { BreakMessages, UUID } from '@/common/types';
-
-type Minutes = number;
-type Seconds = number;
 
 interface ISettings {
   // short break
