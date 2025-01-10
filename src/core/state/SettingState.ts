@@ -95,12 +95,15 @@ class SettingState {
     };
   }
 
-  removeMessageById(id: UUID): void {
-    const shortBreakMessages = this._settings.shortBreakMessages;
-    delete shortBreakMessages[id];
+  removeBreakMessageById(id: UUID): void {
+    const shortBreakMessages = {...this._settings.shortBreakMessages};
+    const longBreakMessages = {...this._settings.longBreakMessages};
 
-    const longBreakMessages = this._settings.longBreakMessages;
-    delete longBreakMessages[id];
+    if (shortBreakMessages[id]) {
+      delete shortBreakMessages[id];
+    } else if (longBreakMessages[id]) {
+      delete longBreakMessages[id];
+    }
 
     this.settings = {
       shortBreakMessages: shortBreakMessages,
