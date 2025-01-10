@@ -1,8 +1,7 @@
-import { UUID } from '@/common/types';
+import { BreakMessages, UUID } from '@/common/types';
 
 type Minutes = number;
 type Seconds = number;
-type BreakMessages = Record<UUID, string>;
 
 interface ISettings {
   // short break
