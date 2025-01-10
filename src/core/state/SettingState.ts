@@ -79,6 +79,22 @@ class SettingState {
     this.saveSettingsToStorage();
   }
 
+  updateBreakMessageById(id: UUID, newValue: string): void {
+    const shortBreakMessages: BreakMessages = {...this._settings.shortBreakMessages};
+    const longBreakMessages: BreakMessages = {...this._settings.longBreakMessages};
+
+    if (shortBreakMessages[id]) {
+      shortBreakMessages[id] = newValue;
+    } else if (longBreakMessages[id]) {
+      longBreakMessages[id] = newValue;
+    }
+
+    this.settings = {
+      shortBreakMessages: shortBreakMessages,
+      longBreakMessages: longBreakMessages,
+    };
+  }
+
   removeMessageById(id: UUID): void {
     const shortBreakMessages = this._settings.shortBreakMessages;
     delete shortBreakMessages[id];
