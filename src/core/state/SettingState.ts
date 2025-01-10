@@ -1,20 +1,20 @@
-import { BreakMessages, Minutes, Seconds, UUID } from '@/common/types';
+import { BreakMessages, Minute, Second, UUID } from '@/common/types';
 import { settingStateEventBus } from '@/common/events';
 
 interface ISettings {
   // short break
-  shortBreakDuration: Seconds;
-  shortWorkDuration: Minutes;
+  shortBreakDuration: Second;
+  shortWorkDuration: Minute;
 
   // long break
-  longBreakDuration: Seconds;
+  longBreakDuration: Second;
   countOfShortWorksForLongBreak: number;
 
   // options
-  timeToPrepareForBreak: Seconds;
+  timeToPrepareForBreak: Second;
   strictBreak: boolean;
   allowPostponingBreaks: boolean;
-  postponeDuration: Minutes;
+  postponeDuration: Minute;
 
   // advanced
   doNotDisturb: boolean;

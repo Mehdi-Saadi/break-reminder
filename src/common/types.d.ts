@@ -1,7 +1,7 @@
 // time
-export type Minutes = number;
-export type Seconds = number;
-export type Milliseconds = number;
+export type Minute = number;
+export type Second = number;
+export type Millisecond = number;
 
 export type UUID = `${string}-${string}-${string}-${string}-${string}`;
 export type BreakMessages = Record<UUID, string>;
