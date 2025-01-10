@@ -1,6 +1,6 @@
 import { minutesToMilliseconds, secondsToMilliseconds } from '@/common/time.ts';
-import { Millisecond } from '@/common/types'
 import settingState from '@/core/state/SettingState.ts';
+import { Millisecond } from '@/common/types';
 import notify from '@/core/notification.ts';
 
 class Timer {
@@ -12,9 +12,9 @@ class Timer {
     this.setWorkTimeout();
   }
 
-  private setWorkTimeout(): void {
+  private setWorkTimeout = (): void => {
     this.workTimeout = setTimeout(this.takeBreak, minutesToMilliseconds(settingState.settings.shortWorkDuration));
-  }
+  };
 
   private clearWorkTimeout(): void {
     if (this.workTimeout) {
