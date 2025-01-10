@@ -7,7 +7,10 @@ class BreakMessageItem extends SettingItem {
   constructor(messageId: UUID) {
     super();
 
-    const messageInput = new MessageInput(newValue => settingState.updateBreakMessageById(messageId, newValue));
+    const messageInput = new MessageInput(
+      newValue => settingState.updateBreakMessageById(messageId, newValue),
+      settingState.getBreakMessageById(messageId),
+    );
     this.addChild(messageInput);
     messageInput.mount(this.labelContainer);
 
