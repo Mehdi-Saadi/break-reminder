@@ -7,6 +7,8 @@ class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
   private breakTimeout: NodeJS.Timeout | null = null;
   private countOfShortWorks: number = 0;
+  private shortBreakMessageIndex: number = 0;
+  private longBreakMessageIndex: number = 0;
 
   constructor() {
     this.setWorkTimeout();
@@ -45,16 +47,55 @@ class Timer {
     this.breakTimeout = setTimeout(this.setWorkTimeout, ms);
   }
 
+  private clearBreakTimeout(): void {
+    if (this.breakTimeout) {
+      clearTimeout(this.breakTimeout);
+    }
+  }
+
   private takeLongBreak(): void {
-    notify('Time for a long break!');
+    notify(this.getLongBreakMessage());
 
     this.setBreakTimeout(secondsToMilliseconds(settingState.settings.longBreakDuration));
   }
 
   private takeShortBreak(): void {
-    notify('Time for a short break!');
+    notify(this.getShortBreakMessage());
 
     this.setBreakTimeout(secondsToMilliseconds(settingState.settings.shortBreakDuration));
+  }
+
+  private getMessage(messages: string[], index: number): [string, number] {
+    if (messages.length < (index + 1)) {
+      index = 0;
+    }
+
+    const message = messages[index] || '';
+    index++;
+
+    return [message, index];
+  }
+
+  private getShortBreakMessage(): string {
+    const [message, newIndex] = this.getMessage(
+      Object.values(settingState.settings.shortBreakMessages),
+      this.shortBreakMessageIndex,
+    );
+
+    this.shortBreakMessageIndex = newIndex;
+
+    return message;
+  }
+
+  private getLongBreakMessage(): string {
+    const [message, newIndex] = this.getMessage(
+      Object.values(settingState.settings.longBreakMessages),
+      this.longBreakMessageIndex,
+    );
+
+    this.longBreakMessageIndex = newIndex;
+
+    return message;
   }
 
   skip(): void {
