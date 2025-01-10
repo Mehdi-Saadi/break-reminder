@@ -1,9 +1,14 @@
 import Component from '@/common/ui/base/Component.ts';
 
 class MessageInput extends Component {
-  constructor(private onBlur?: (newValue: string) => void) {
+  constructor(
+    private onBlur?: (newValue: string) => void,
+    initialValue: string = '',
+  ) {
     super('input', 'bg-inherit w-full px-1 outline-gray-300');
     this.element.setAttribute('type', 'text');
+
+    (this.element as HTMLInputElement).value = initialValue;
   }
 
   private blurHandler = (): void => {
