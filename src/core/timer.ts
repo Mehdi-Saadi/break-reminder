@@ -1,8 +1,8 @@
 import { minutesToMilliseconds, secondsToMilliseconds } from '@/common/time.ts';
 import settingState from '@/core/state/SettingState.ts';
 import breakMessage from '@/core/breakMessage.ts';
-import { Millisecond } from '@/common/types';
 import notify from '@/core/notification.ts';
+import { Second } from '@/common/types';
 
 class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
@@ -43,8 +43,8 @@ class Timer {
     }
   }
 
-  private setBreakTimeout(ms: Millisecond): void {
-    this.breakTimeout = setTimeout(this.setWorkTimeout, ms);
+  private setBreakTimeout(seconds: Second): void {
+    this.breakTimeout = setTimeout(this.setWorkTimeout, secondsToMilliseconds(seconds));
   }
 
   private clearBreakTimeout(): void {
@@ -57,13 +57,13 @@ class Timer {
   private async takeLongBreak(): Promise<void> {
     await notify(breakMessage.getLongBreakMessage());
 
-    this.setBreakTimeout(secondsToMilliseconds(settingState.settings.longBreakDuration));
+    this.setBreakTimeout(settingState.settings.longBreakDuration);
   }
 
   private async takeShortBreak(): Promise<void> {
     await notify(breakMessage.getShortBreakMessage());
 
-    this.setBreakTimeout(secondsToMilliseconds(settingState.settings.shortBreakDuration));
+    this.setBreakTimeout(settingState.settings.shortBreakDuration);
   }
 
   skip(): void {
