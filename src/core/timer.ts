@@ -24,13 +24,13 @@ class Timer {
     }
   }
 
-  private takeBreak = (): void => {
+  private takeBreak = async (): Promise<void> => {
     this.countOfShortWorks++;
 
     if (this.shouldTakeLongBreak()) {
-      this.takeLongBreak();
+      await this.takeLongBreak();
     } else {
-      this.takeShortBreak();
+      await this.takeShortBreak();
     }
   };
 
