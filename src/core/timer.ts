@@ -20,6 +20,7 @@ class Timer {
   private clearWorkTimeout(): void {
     if (this.workTimeout) {
       clearTimeout(this.workTimeout);
+      this.workTimeout = null;
     }
   }
 
@@ -49,17 +50,18 @@ class Timer {
   private clearBreakTimeout(): void {
     if (this.breakTimeout) {
       clearTimeout(this.breakTimeout);
+      this.breakTimeout = null;
     }
   }
 
-  private takeLongBreak(): void {
-    notify(breakMessage.getLongBreakMessage());
+  private async takeLongBreak(): Promise<void> {
+    await notify(breakMessage.getLongBreakMessage());
 
     this.setBreakTimeout(secondsToMilliseconds(settingState.settings.longBreakDuration));
   }
 
-  private takeShortBreak(): void {
-    notify(breakMessage.getShortBreakMessage());
+  private async takeShortBreak(): Promise<void> {
+    await notify(breakMessage.getShortBreakMessage());
 
     this.setBreakTimeout(secondsToMilliseconds(settingState.settings.shortBreakDuration));
   }
