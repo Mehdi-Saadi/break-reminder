@@ -1,5 +1,6 @@
 import { minutesToMilliseconds, secondsToMilliseconds } from '@/common/time.ts';
 import settingState from '@/core/state/SettingState.ts';
+import breakMessage from '@/core/breakMessage.ts';
 import { Millisecond } from '@/common/types';
 import notify from '@/core/notification.ts';
 
@@ -7,8 +8,6 @@ class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
   private breakTimeout: NodeJS.Timeout | null = null;
   private countOfShortWorks: number = 0;
-  private shortBreakMessageIndex: number = 0;
-  private longBreakMessageIndex: number = 0;
 
   constructor() {
     this.setWorkTimeout();
@@ -54,48 +53,15 @@ class Timer {
   }
 
   private takeLongBreak(): void {
-    notify(this.getLongBreakMessage());
+    notify(breakMessage.getLongBreakMessage());
 
     this.setBreakTimeout(secondsToMilliseconds(settingState.settings.longBreakDuration));
   }
 
   private takeShortBreak(): void {
-    notify(this.getShortBreakMessage());
+    notify(breakMessage.getShortBreakMessage());
 
     this.setBreakTimeout(secondsToMilliseconds(settingState.settings.shortBreakDuration));
-  }
-
-  private getMessage(messages: string[], index: number): [string, number] {
-    if (messages.length < (index + 1)) {
-      index = 0;
-    }
-
-    const message = messages[index] || '';
-    index++;
-
-    return [message, index];
-  }
-
-  private getShortBreakMessage(): string {
-    const [message, newIndex] = this.getMessage(
-      Object.values(settingState.settings.shortBreakMessages),
-      this.shortBreakMessageIndex,
-    );
-
-    this.shortBreakMessageIndex = newIndex;
-
-    return message;
-  }
-
-  private getLongBreakMessage(): string {
-    const [message, newIndex] = this.getMessage(
-      Object.values(settingState.settings.longBreakMessages),
-      this.longBreakMessageIndex,
-    );
-
-    this.longBreakMessageIndex = newIndex;
-
-    return message;
   }
 
   skip(): void {
