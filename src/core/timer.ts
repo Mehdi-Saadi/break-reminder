@@ -6,6 +6,7 @@ import { Second } from '@/common/types';
 
 class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
+  private prepareForBreakTimeout: NodeJS.Timeout | null = null;
   private breakTimeout: NodeJS.Timeout | null = null;
   private countOfShortWorks: number = 0;
 
@@ -42,6 +43,25 @@ class Timer {
       return false;
     }
   }
+
+  private setPrepareForBreakTimeout(): void {
+    const workTime = minutesToMilliseconds(settingState.settings.shortWorkDuration);
+    const prepareTime = secondsToMilliseconds(settingState.settings.timeToPrepareForBreak);
+    const prepareForBreakTime = workTime - prepareTime;
+
+    this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreak, prepareForBreakTime);
+  }
+
+  private clearPrepareForBreakTimeout(): void {
+    if (this.prepareForBreakTimeout) {
+      clearTimeout(this.prepareForBreakTimeout);
+      this.prepareForBreakTimeout = null;
+    }
+  }
+
+  private notifyBeforeBreak = async (): Promise<void> => {
+    await notify(`Take break in ${settingState.settings.timeToPrepareForBreak} seconds.`)
+  };
 
   private setBreakTimeout(seconds: Second): void {
     this.breakTimeout = setTimeout(this.setWorkTimeout, secondsToMilliseconds(seconds));
