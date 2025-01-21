@@ -11,10 +11,15 @@ class Timer {
   private countOfShortWorks: number = 0;
 
   constructor() {
-    this.setWorkTimeout();
+    this.startWork();
   }
 
-  private setWorkTimeout = (): void => {
+  private startWork = (): void => {
+    this.setWorkTimeout()
+    this.setPrepareForBreakTimeoutIfNeeded();
+  };
+
+  private setWorkTimeout(): void {
     this.workTimeout = setTimeout(this.takeBreak, minutesToMilliseconds(settingState.settings.shortWorkDuration));
   };
 
@@ -63,8 +68,14 @@ class Timer {
     await notify(`Take break in ${settingState.settings.timeToPrepareForBreak} seconds.`)
   };
 
+  private setPrepareForBreakTimeoutIfNeeded(): void {
+    if (settingState.settings.notification) {
+      this.setPrepareForBreakTimeout();
+    }
+  }
+
   private setBreakTimeout(seconds: Second): void {
-    this.breakTimeout = setTimeout(this.setWorkTimeout, secondsToMilliseconds(seconds));
+    this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
   }
 
   private clearBreakTimeout(): void {
