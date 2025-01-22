@@ -15,7 +15,7 @@ class MessageInput extends Component {
     this.onBlur?.((this.element as HTMLInputElement).value);
   };
 
-  protected onMounted() {
+  protected onMounted(): void {
     this.element.addEventListener('blur', this.blurHandler);
   }
 
