@@ -1,6 +1,6 @@
 import Component from '@/shared/ui/base/Component.ts';
 import Sidebar from '@/shared/ui/layout/Sidebar.ts';
-import settingState from '@/app/state/SettingState.ts';
+import settingState from '@/shared/state/SettingState.ts';
 import { settingStateEventBus } from '@/shared/events.ts';
 
 abstract class Layout extends Component {
