@@ -9,4 +9,4 @@ if (app) {
 }
 
 // app scripts
-import 'src/app';
+import '@/app';
