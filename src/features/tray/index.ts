@@ -1,7 +1,7 @@
 import { TrayIcon, TrayIconEvent } from '@tauri-apps/api/tray';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
-import { currentWindow } from '@/app/window';
-import trayMenu from '@/app/tray/menu';
+import trayMenu from '@/features/tray/menu';
 
 const tray = await TrayIcon.new({
   id: 'break-reminder-tray',
@@ -15,7 +15,7 @@ const tray = await TrayIcon.new({
       event.button === 'Left' &&
       event.buttonState === 'Up'
     ) {
-      await currentWindow.show();
+      await getCurrentWindow().show();
     }
   }
 });

@@ -1,1 +1,1 @@
-import '@/app/tray';
+import '@/features/tray';
