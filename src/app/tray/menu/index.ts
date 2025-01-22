@@ -1,4 +1,4 @@
-import quitItem from '@/core/tray/menu/items/quit';
+import quitItem from '@/app/tray/menu/items/quit';
 import { Menu } from '@tauri-apps/api/menu/menu';
 
 const trayMenu = await Menu.new({

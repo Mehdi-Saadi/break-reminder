@@ -1,4 +1,4 @@
-import settingState from '@/core/state/SettingState.ts';
+import settingState from '@/app/state/SettingState.ts';
 
 class BreakMessage {
   private shortBreakMessageIndex: number = 0;

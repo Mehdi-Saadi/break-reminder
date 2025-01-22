@@ -3,7 +3,7 @@ import Component from '@/shared/ui/base/Component.ts';
 import NumberField from '@/features/setting/components/NumberField.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SettingSection from '@/features/setting/components/SettingSection.ts';
-import settingState from '@/core/state/SettingState.ts';
+import settingState from '@/app/state/SettingState.ts';
 
 class SettingsPage extends Component {
   constructor() {

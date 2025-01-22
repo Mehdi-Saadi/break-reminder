@@ -8,5 +8,5 @@ if (app) {
 
 }
 
-// core scripts
-import '@/core';
+// app scripts
+import 'src/app';

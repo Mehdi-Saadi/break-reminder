@@ -1,7 +1,7 @@
 import MessageInput from '@/features/setting/components/MessageInput.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SquareDeleteButton from '@/shared/ui/buttons/SquareDeleteButton.ts';
-import settingState from '@/core/state/SettingState.ts';
+import settingState from '@/app/state/SettingState.ts';
 import { UUID } from '@/shared/types';
 
 class BreakMessageItem extends SettingItem {

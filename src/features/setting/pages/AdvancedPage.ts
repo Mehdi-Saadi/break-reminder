@@ -1,7 +1,7 @@
 import CheckboxField from '@/features/setting/components/CheckboxField.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
-import settingState from '@/core/state/SettingState.ts';
+import settingState from '@/app/state/SettingState.ts';
 import icon, { IconName } from '@/shared/ui/icons.ts';
 
 class AdvancedPage extends Component {

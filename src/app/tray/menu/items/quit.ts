@@ -1,5 +1,5 @@
 import { MenuItem } from '@tauri-apps/api/menu/menuItem';
-import { currentWindow } from '@/core/window';
+import { currentWindow } from '@/app/window';
 
 const quitItem = await MenuItem.new({
   id: 'quit',

@@ -1,7 +1,7 @@
 import { minutesToMilliseconds, secondsToMilliseconds } from '@/shared/time.ts';
-import settingState from '@/core/state/SettingState.ts';
-import breakMessage from '@/core/breakMessage.ts';
-import notify from '@/core/notification.ts';
+import settingState from '@/app/state/SettingState.ts';
+import breakMessage from '@/app/breakMessage.ts';
+import notify from '@/app/notification.ts';
 import { Second } from '@/shared/types';
 
 class Timer {
