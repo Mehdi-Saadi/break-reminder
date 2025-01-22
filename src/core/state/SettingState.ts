@@ -1,5 +1,5 @@
-import { BreakMessages, Minute, Second, UUID } from '@/common/types';
-import { settingStateEventBus } from '@/common/events';
+import { BreakMessages, Minute, Second, UUID } from '@/shared/types';
+import { settingStateEventBus } from '@/shared/events';
 
 interface ISettings {
   // short break

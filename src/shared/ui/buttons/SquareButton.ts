@@ -1,4 +1,4 @@
-import Component from '@/common/ui/base/Component.ts'
+import Component from '@/shared/ui/base/Component.ts';
 
 class SquareButton extends Component {
   constructor(protected onClick?: (event: MouseEvent) => void) {
@@ -7,7 +7,7 @@ class SquareButton extends Component {
     this.element.setAttribute('type', 'button');
   }
 
-  protected onMounted() {
+  protected onMounted(): void {
     if (this.onClick) {
       this.element.addEventListener('click', this.onClick);
     }

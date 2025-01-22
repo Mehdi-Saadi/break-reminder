@@ -1,5 +1,5 @@
-import SquareButton from '@/common/ui/buttons/SquareButton.ts';
-import icon from '@/common/ui/icons.ts';
+import SquareButton from '@/shared/ui/buttons/SquareButton.ts';
+import icon from '@/shared/ui/icons.ts';
 
 class SquareRemoveButton extends SquareButton {
   constructor(onClick?: (event: MouseEvent) => void) {

@@ -1,7 +1,7 @@
-import Component from '@/common/ui/base/Component.ts';
-import Sidebar from '@/common/ui/layout/Sidebar.ts';
+import Component from '@/shared/ui/base/Component.ts';
+import Sidebar from '@/shared/ui/layout/Sidebar.ts';
 import settingState from '@/core/state/SettingState.ts';
-import { settingStateEventBus } from '@/common/events.ts';
+import { settingStateEventBus } from '@/shared/events.ts';
 
 abstract class Layout extends Component {
   protected pageContainer: HTMLDivElement;

@@ -1,5 +1,5 @@
-import SidebarNavigationButton from '@/common/ui/buttons/SidebarNavigationButton.ts';
-import icon from '@/common/ui/icons.ts';
+import SidebarNavigationButton from '@/shared/ui/buttons/SidebarNavigationButton.ts';
+import icon from '@/shared/ui/icons.ts';
 
 class SidebarBreakMessagesButton extends SidebarNavigationButton {
   constructor() {

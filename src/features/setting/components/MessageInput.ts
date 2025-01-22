@@ -1,4 +1,4 @@
-import Component from '@/common/ui/base/Component.ts';
+import Component from '@/shared/ui/base/Component.ts';
 
 class MessageInput extends Component {
   constructor(

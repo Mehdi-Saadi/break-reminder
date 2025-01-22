@@ -1,5 +1,5 @@
 import CheckboxField from '@/features/setting/components/CheckboxField.ts';
-import Component from '@/common/ui/base/Component.ts';
+import Component from '@/shared/ui/base/Component.ts';
 import NumberField from '@/features/setting/components/NumberField.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SettingSection from '@/features/setting/components/SettingSection.ts';

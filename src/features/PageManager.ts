@@ -1,9 +1,9 @@
 import AdvancedPage from '@/features/setting/pages/AdvancedPage.ts';
 import BreakMessagesPage from '@/features/setting/pages/BreakMessagesPage.ts';
-import Component from '@/common/ui/base/Component.ts';
-import Layout from '@/common/ui/layout/Layout.ts';
+import Component from '@/shared/ui/base/Component.ts';
+import Layout from '@/shared/ui/layout/Layout.ts';
 import SettingsPage from '@/features/setting/pages/SettingsPage.ts';
-import { NavigationPage, pageNavEventBus } from '@/common/events.ts';
+import { NavigationPage, pageNavEventBus } from '@/shared/events.ts';
 
 class PageManager extends Layout {
   private currentPage: Component;
@@ -25,7 +25,7 @@ class PageManager extends Layout {
           this.currentPage = new SettingsPage();
           break;
         case 'break_messages':
-          this.currentPage = new BreakMessagesPage()
+          this.currentPage = new BreakMessagesPage();
           break;
         case 'advanced':
           this.currentPage = new AdvancedPage();

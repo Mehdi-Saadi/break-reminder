@@ -1,5 +1,5 @@
-import { NavigationPage, pageNavEventBus } from '@/common/events.ts';
-import Component from '@/common/ui/base/Component.ts';
+import { NavigationPage, pageNavEventBus } from '@/shared/events.ts';
+import Component from '@/shared/ui/base/Component.ts';
 
 abstract class SidebarNavigationButton extends Component {
   protected activeIcon: HTMLDivElement;

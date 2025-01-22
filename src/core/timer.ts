@@ -1,8 +1,8 @@
-import { minutesToMilliseconds, secondsToMilliseconds } from '@/common/time.ts';
+import { minutesToMilliseconds, secondsToMilliseconds } from '@/shared/time.ts';
 import settingState from '@/core/state/SettingState.ts';
 import breakMessage from '@/core/breakMessage.ts';
 import notify from '@/core/notification.ts';
-import { Second } from '@/common/types';
+import { Second } from '@/shared/types';
 
 class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
@@ -15,7 +15,7 @@ class Timer {
   }
 
   private startWork = (): void => {
-    this.setWorkTimeout()
+    this.setWorkTimeout();
     this.setPrepareForBreakTimeoutIfNeeded();
   };
 
@@ -44,9 +44,8 @@ class Timer {
     if (this.countOfShortWorks >= settingState.settings.countOfShortWorksForLongBreak) {
       this.countOfShortWorks = 0;
       return true;
-    } else {
-      return false;
-    }
+    } 
+    return false;
   }
 
   private setPrepareForBreakTimeout(): void {
@@ -65,7 +64,7 @@ class Timer {
   }
 
   private notifyBeforeBreak = async (): Promise<void> => {
-    await notify(`Take break in ${settingState.settings.timeToPrepareForBreak} seconds.`)
+    await notify(`Take break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
   };
 
   private setPrepareForBreakTimeoutIfNeeded(): void {
