@@ -1,5 +1,5 @@
 import Component from '@/shared/ui/base/Component.ts';
-import Sidebar from '@/shared/ui/layout/Sidebar.ts';
+import Sidebar from '@/features/setting/layouts/Sidebar.ts';
 import settingState from '@/shared/state/SettingState.ts';
 import { settingStateEventBus } from '@/shared/events.ts';
 
