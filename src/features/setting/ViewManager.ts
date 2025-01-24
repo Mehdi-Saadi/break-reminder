@@ -5,7 +5,7 @@ import Layout from '@/shared/ui/layout/Layout.ts';
 import SettingsView from '@/features/setting/views/SettingsView.ts';
 import { NavigationPage, pageNavEventBus } from '@/shared/events.ts';
 
-class PageManager extends Layout {
+class ViewManager extends Layout {
   private currentPage: Component;
 
   constructor() {
@@ -41,4 +41,4 @@ class PageManager extends Layout {
   }
 }
 
-export default PageManager;
+export default ViewManager;

@@ -1,10 +1,10 @@
-import PageManager from '@/features/PageManager.ts';
+import ViewManager from '@/features/setting/ViewManager.ts';
 
 const app = document.getElementById('app');
 
 if (app) {
 
-  new PageManager().mount(app);
+  new ViewManager().mount(app);
 
 }
 
