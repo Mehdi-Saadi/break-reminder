@@ -1,4 +1,4 @@
-import MessageInput from '@/features/setting/components/MessageInput.ts';
+import MessageField from '@/features/setting/components/fields/MessageField.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SquareDeleteButton from '@/features/setting/components/buttons/SquareDeleteButton.ts';
 import settingState from '@/shared/state/SettingState.ts';
@@ -8,7 +8,7 @@ class BreakMessageItem extends SettingItem {
   constructor(messageId: UUID) {
     super();
 
-    const messageInput = new MessageInput(
+    const messageInput = new MessageField(
       newValue => settingState.updateBreakMessageById(messageId, newValue),
       settingState.getBreakMessageById(messageId),
     );

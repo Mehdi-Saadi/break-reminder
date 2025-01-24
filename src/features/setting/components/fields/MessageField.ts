@@ -1,6 +1,6 @@
 import Component from '@/shared/ui/base/Component.ts';
 
-class MessageInput extends Component {
+class MessageField extends Component {
   constructor(
     private onBlur?: (newValue: string) => void,
     initialValue: string = '',
@@ -24,4 +24,4 @@ class MessageInput extends Component {
   }
 }
 
-export default MessageInput;
+export default MessageField;
