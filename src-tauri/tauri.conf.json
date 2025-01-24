@@ -33,6 +33,7 @@
             "core:window:allow-hide",
             "core:window:allow-show",
             "core:window:allow-destroy",
+            "core:window:allow-create",
             "notification:allow-request-permission",
             "notification:allow-notify",
             "autostart:allow-enable",
