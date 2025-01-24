@@ -4,7 +4,7 @@ import SettingItem from '@/features/setting/components/SettingItem.ts';
 import settingState from '@/shared/state/SettingState.ts';
 import icon, { IconName } from '@/shared/ui/icons.ts';
 
-class AdvancedPage extends Component {
+class AdvancedView extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-5 p-4 text-sm');
 
@@ -101,4 +101,4 @@ class AdvancedPage extends Component {
   }
 }
 
-export default AdvancedPage;
+export default AdvancedView;

@@ -5,7 +5,7 @@ import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SettingSection from '@/features/setting/components/SettingSection.ts';
 import settingState from '@/shared/state/SettingState.ts';
 
-class SettingsPage extends Component {
+class SettingsView extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-4');
 
@@ -107,4 +107,4 @@ class SettingsPage extends Component {
   }
 }
 
-export default SettingsPage;
+export default SettingsView;

@@ -4,7 +4,7 @@ import SettingSection from '@/features/setting/components/SettingSection.ts';
 import settingState from '@/shared/state/SettingState.ts';
 import { BreakMessages, UUID } from '@/shared/types';
 
-class BreakMessagesPage extends Component {
+class BreakMessagesView extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-4');
 
@@ -26,4 +26,4 @@ class BreakMessagesPage extends Component {
   }
 }
 
-export default BreakMessagesPage;
+export default BreakMessagesView;
