@@ -1,4 +1,4 @@
-import CheckboxField from '@/features/setting/components/CheckboxField.ts';
+import CheckboxField from '@/features/setting/components/fields/CheckboxField.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import settingState from '@/shared/state/SettingState.ts';
