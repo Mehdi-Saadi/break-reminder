@@ -34,7 +34,10 @@
             "core:window:allow-show",
             "core:window:allow-destroy",
             "notification:allow-request-permission",
-            "notification:allow-notify"
+            "notification:allow-notify",
+            "autostart:allow-enable",
+            "autostart:allow-disable",
+            "autostart:allow-is-enabled"
           ]
         }
       ]
