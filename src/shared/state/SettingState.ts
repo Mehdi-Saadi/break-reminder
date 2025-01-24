@@ -1,5 +1,5 @@
 import { BreakMessages, Minute, Second, UUID } from '@/shared/types';
-import { settingStateEventBus } from '@/shared/events.ts';
+import { settingStateEventBus } from '@/shared/event/setting.ts';
 
 interface ISettings {
   // short break
