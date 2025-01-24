@@ -1,6 +1,6 @@
 import Component from '@/shared/ui/base/Component.ts';
-import SquareAddButton from '@/shared/ui/buttons/SquareAddButton.ts';
-import SquareRemoveButton from '@/shared/ui/buttons/SquareRemoveButton.ts';
+import SquareAddButton from '@/features/setting/components/buttons/SquareAddButton.ts';
+import SquareRemoveButton from '@/features/setting/components/buttons/SquareRemoveButton.ts';
 
 class NumberField extends Component {
   protected disableLayer: HTMLDivElement;

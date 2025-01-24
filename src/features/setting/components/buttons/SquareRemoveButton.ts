@@ -1,4 +1,4 @@
-import SquareButton from '@/shared/ui/buttons/SquareButton.ts';
+import SquareButton from '@/features/setting/components/buttons/SquareButton.ts';
 import icon from '@/shared/ui/icons.ts';
 
 class SquareRemoveButton extends SquareButton {

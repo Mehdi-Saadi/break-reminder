@@ -1,4 +1,4 @@
-import SidebarNavigationButton from '@/shared/ui/buttons/SidebarNavigationButton.ts';
+import SidebarNavigationButton from '@/features/setting/components/buttons/SidebarNavigationButton.ts';
 import icon from '@/shared/ui/icons.ts';
 
 class SidebarSettingButton extends SidebarNavigationButton {

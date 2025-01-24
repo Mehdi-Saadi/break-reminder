@@ -1,7 +1,7 @@
 import Component from '@/shared/ui/base/Component.ts';
-import SidebarAdvancedButton from '@/shared/ui/buttons/SidebarAdvancedButton.ts';
-import SidebarBreakMessagesButton from '@/shared/ui/buttons/SidebarBreakMessagesButton.ts';
-import SidebarSettingButton from '@/shared/ui/buttons/SidebarSettingButton.ts';
+import SidebarAdvancedButton from '@/features/setting/components/buttons/SidebarAdvancedButton.ts';
+import SidebarBreakMessagesButton from '@/features/setting/components/buttons/SidebarBreakMessagesButton.ts';
+import SidebarSettingButton from '@/features/setting/components/buttons/SidebarSettingButton.ts';
 
 class Sidebar extends Component {
   constructor() {
