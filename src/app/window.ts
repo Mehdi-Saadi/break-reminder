@@ -1,11 +1,10 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
-export const currentWindow = getCurrentWindow();
-
-export const unListenCloseRequest = await currentWindow
+// prevent user to close app by close button, instead hide the window
+await getCurrentWindow()
   .onCloseRequested(
     async (event): Promise<void> => {
       event.preventDefault();
-      await currentWindow.hide();
+      await getCurrentWindow().hide();
     }
   );
