@@ -1,5 +1,5 @@
 import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
-import breakMessage from '@/features/break/breakMessage';
+import breakMessage from '@/features/break/message';
 import settingState from '@/shared/state/setting';
 import notify from '@/app/notification.ts';
 
