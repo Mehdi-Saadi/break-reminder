@@ -1,14 +1,22 @@
 import { getCurrentWindow, availableMonitors, Window } from '@tauri-apps/api/window';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
+import { UnlistenFn } from '@tauri-apps/api/event';
 
-// prevent user to close app by close button, instead hide the window
-getCurrentWindow()
-  .onCloseRequested(
-    async (event): Promise<void> => {
-      event.preventDefault();
-      await getCurrentWindow().hide();
-    }
-  );
+/**
+ * Returns an unListenFn to remove listener.
+ * 
+ * Use this function once to prevent adding multiple close listeners
+ */
+const hideWindowOnCloseClick = async (): Promise<UnlistenFn> =>
+  await getCurrentWindow()
+    .onCloseRequested(
+      async (event): Promise<void> => {
+        event.preventDefault();
+        await getCurrentWindow().hide();
+      }
+    );
+
+hideWindowOnCloseClick();
 
 const createBreakWindow = async (): Promise<void> => {
   const monitors = await availableMonitors();
