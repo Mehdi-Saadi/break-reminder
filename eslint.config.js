@@ -4,6 +4,8 @@ import tseslint from 'typescript-eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
   {
     rules: {
       'semi': ['warn', 'always'], // Always require semicolons
@@ -30,12 +32,11 @@ export default [
 
       // TypeScript-Specific Rules
       '@typescript-eslint/explicit-function-return-type': ['warn'], // Require explicit return type for functions and methods
+      '@typescript-eslint/no-unused-vars': ['warn'],
     }
   },
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
     languageOptions: { globals: globals.browser },
   },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
 ];
