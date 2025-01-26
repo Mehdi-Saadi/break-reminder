@@ -14,7 +14,7 @@ const checkPermission = async (): Promise<boolean> => {
 
 const notify = async (options: Options | string): Promise<void> => {
   if (!(await checkPermission())) {
-    return;
+    return console.error('Can not send notifications. Access Denied.');
   }
 
   sendNotification(options);
