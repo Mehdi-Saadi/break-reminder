@@ -1,6 +1,6 @@
 import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
 import settingState from '@/shared/state/SettingState.ts';
-import breakMessage from '@/app/breakMessage.ts';
+import breakMessage from '@/features/break/breakMessage';
 import notify from '@/app/notification.ts';
 
 class Timer {
@@ -43,7 +43,7 @@ class Timer {
     if (this.countOfShortWorks >= settingState.settings.countOfShortWorksForLongBreak) {
       this.countOfShortWorks = 0;
       return true;
-    } 
+    }
     return false;
   }
 
