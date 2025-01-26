@@ -1,8 +1,7 @@
-import { minutesToMilliseconds, secondsToMilliseconds } from '@/shared/time.ts';
+import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
 import settingState from '@/shared/state/SettingState.ts';
 import breakMessage from '@/app/breakMessage.ts';
 import notify from '@/app/notification.ts';
-import { Second } from '@/shared/types';
 
 class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
