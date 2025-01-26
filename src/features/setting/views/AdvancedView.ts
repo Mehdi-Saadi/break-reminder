@@ -1,7 +1,7 @@
 import CheckboxField from '@/features/setting/components/fields/CheckboxField.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
-import settingState from '@/shared/state/SettingState.ts';
+import settingState from '@/shared/state/setting';
 import icon, { IconName } from '@/shared/ui/icons.ts';
 
 class AdvancedView extends Component {

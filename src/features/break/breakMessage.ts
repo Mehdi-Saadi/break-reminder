@@ -1,4 +1,4 @@
-import settingState from '@/shared/state/SettingState.ts';
+import settingState from '@/shared/state/setting';
 
 class BreakMessage {
   private shortBreakMessageIndex: number = 0;

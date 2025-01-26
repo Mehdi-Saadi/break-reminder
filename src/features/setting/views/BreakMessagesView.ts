@@ -1,7 +1,7 @@
 import Component from '@/shared/ui/base/Component.ts';
 import BreakMessageItem from '@/features/setting/components/BreakMessageItem.ts';
 import SettingSection from '@/features/setting/components/SettingSection.ts';
-import settingState from '@/shared/state/SettingState.ts';
+import settingState from '@/shared/state/setting';
 import { BreakMessages } from '@/shared/types';
 import { UUID } from '@/shared/crypto';
 

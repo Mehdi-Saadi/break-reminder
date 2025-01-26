@@ -1,6 +1,6 @@
 import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
-import settingState from '@/shared/state/SettingState.ts';
 import breakMessage from '@/features/break/breakMessage';
+import settingState from '@/shared/state/setting';
 import notify from '@/app/notification.ts';
 
 class Timer {
