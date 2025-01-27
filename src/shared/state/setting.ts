@@ -35,14 +35,14 @@ class SettingState {
   private readonly _storageKey = 'settings';
   private _settings: ISettings;
   private _defaultSettings = Object.freeze<ISettings>({
-    shortBreakDuration: 20,
-    shortWorkDuration: 20,
-    longBreakDuration: 120,
+    shortBreakDuration: 20 as Second,
+    shortWorkDuration: 20 as Minute,
+    longBreakDuration: 120 as Second,
     countOfShortWorksForLongBreak: 3,
-    timeToPrepareForBreak: 10,
+    timeToPrepareForBreak: 10 as Second,
     strictBreak: false,
     allowPostponingBreaks: false,
-    postponeDuration: 5,
+    postponeDuration: 5 as Minute,
     doNotDisturb: true,
     notification: true,
     audibleAlert: true,
@@ -74,7 +74,7 @@ class SettingState {
   }
 
   set settings(value: Partial<ISettings>) {
-    this._settings = {...this._settings, ...value};
+    this._settings = { ...this._settings, ...value };
 
     this.saveSettingsToStorage();
 
@@ -94,8 +94,8 @@ class SettingState {
   }
 
   updateBreakMessageById(id: UUID, newValue: string): void {
-    const shortBreakMessages: BreakMessages = {...this._settings.shortBreakMessages};
-    const longBreakMessages: BreakMessages = {...this._settings.longBreakMessages};
+    const shortBreakMessages: BreakMessages = { ...this._settings.shortBreakMessages };
+    const longBreakMessages: BreakMessages = { ...this._settings.longBreakMessages };
 
     if (shortBreakMessages[id]) {
       shortBreakMessages[id] = newValue;
@@ -110,8 +110,8 @@ class SettingState {
   }
 
   removeBreakMessageById(id: UUID): void {
-    const shortBreakMessages = {...this._settings.shortBreakMessages};
-    const longBreakMessages = {...this._settings.longBreakMessages};
+    const shortBreakMessages = { ...this._settings.shortBreakMessages };
+    const longBreakMessages = { ...this._settings.longBreakMessages };
 
     if (shortBreakMessages[id]) {
       delete shortBreakMessages[id];
@@ -129,7 +129,7 @@ class SettingState {
     const localData = localStorage.getItem(this._storageKey);
 
     if (!localData) {
-      return {...this._defaultSettings};
+      return { ...this._defaultSettings };
     }
 
     try {
@@ -137,13 +137,13 @@ class SettingState {
 
       for (const key in parsedData) {
         if (!(key in this._defaultSettings)) {
-          return {...this._defaultSettings};
+          return { ...this._defaultSettings };
         }
       }
 
-      return {...this._defaultSettings, ...parsedData};
+      return { ...this._defaultSettings, ...parsedData };
     } catch {
-      return {...this._defaultSettings};
+      return { ...this._defaultSettings };
     }
   }
 
