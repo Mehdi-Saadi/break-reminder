@@ -24,6 +24,20 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
   });
 };
 
+// todo
+// const getLargestOrFirstMonitor = async (): Promise<Monitor> => {
+//   const monitors = await availableMonitors();
+
+//   return monitors.reduce((previousMonitor, currentMonitor) => {
+//     if (previousMonitor.scaleFactor === currentMonitor.scaleFactor) {
+//       return previousMonitor;
+//     } else if (previousMonitor.scaleFactor > currentMonitor.scaleFactor) {
+//       return previousMonitor;
+//     }
+//     return currentMonitor;
+//   });
+// };
+
 const createFullscreenBreak = async (
   breakWindowPayload: BreakWindowPayload
 ): Promise<void> => {
@@ -34,7 +48,6 @@ const createFullscreenBreak = async (
 
     await breakWindow.once('tauri://created', async () => {
       await breakWindow.emit(BREAK_WINDOW_EVENT, breakWindowPayload);
-      await breakWindow.show();
     });
 
     await breakWindow.once('tauri://error', error => {
