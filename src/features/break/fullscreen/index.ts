@@ -9,7 +9,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
     x: x,
     y: y,
     maximized: true,
-    decorations: true,
+    decorations: false,
     alwaysOnTop: true,
     skipTaskbar: true,
     resizable: false,
@@ -20,7 +20,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
   });
 };
 
-const createBreakWebViewWindowForAllMonitors = async (): Promise<void> => {
+const createBreakWebViewWindowForAllMonitors = async (onWindowCreated: (win: WebviewWindow) => void): Promise<void> => {
   const monitors = await availableMonitors();
 
   for (const monitor of monitors) {
@@ -28,19 +28,20 @@ const createBreakWebViewWindowForAllMonitors = async (): Promise<void> => {
 
     // Handle webview creation
     await breakWindow.once('tauri://created', async () => {
-      console.log('window created!');
       await breakWindow.show();
 
-      setTimeout(async () => {
-        await breakWindow.destroy();
-        console.log('window destroyed', breakWindow);
-      }, 5000);
+      onWindowCreated(breakWindow);
     });
 
-    await breakWindow.once('tauri://error', (error) => {
+    await breakWindow.once('tauri://error', error => {
       console.error('Error while creating window:', breakWindow, error);
     });
   }
 };
 
-createBreakWebViewWindowForAllMonitors();
+createBreakWebViewWindowForAllMonitors(breakWindow => {
+  setTimeout(async () => {
+    await breakWindow.destroy();
+    console.log('window destroyed', breakWindow);
+  }, 5000);
+});
