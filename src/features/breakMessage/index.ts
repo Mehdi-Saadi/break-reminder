@@ -1,5 +1,8 @@
 import settingState from '@/shared/state/setting';
 
+/**
+ * Rotates over the break messages saved in settings
+ */
 class BreakMessage {
   private shortBreakMessageIndex: number = 0;
   private longBreakMessageIndex: number = 0;
