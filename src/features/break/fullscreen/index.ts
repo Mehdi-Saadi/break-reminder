@@ -25,7 +25,7 @@ const createBreakWebview = (window: Window): Webview => {
     window,
     webviewUniqueLabel,
     {
-      url: '',
+      url: '/src/features/break/fullscreen/views/index.html',
       x: 0,
       y: 0,
       width: 400,
@@ -33,6 +33,11 @@ const createBreakWebview = (window: Window): Webview => {
       backgroundColor: '#000000',
     }
   );
+};
+
+const createBreakWebviewWindow = (x?: number, y?: number): Webview => {
+  const window = createBreakWindow(x, y);
+  return createBreakWebview(window);
 };
 
 const func = async (): Promise<void> => {
