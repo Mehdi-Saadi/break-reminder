@@ -1,6 +1,10 @@
-import { availableMonitors } from '@tauri-apps/api/window';
-import { generateRandomAlphabeticId } from '@/shared/crypto';
+import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/features/break/fullscreen/payload';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { generateRandomAlphabeticId } from '@/shared/crypto';
+import { availableMonitors } from '@tauri-apps/api/window';
+import { secondsToMilliseconds } from '@/shared/time';
+import breakMessage from '@/features/break/message';
+import settingState from '@/shared/state/setting';
 
 const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
   const windowUniqueLabel = `break-window-${generateRandomAlphabeticId()}`;
@@ -21,7 +25,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
 };
 
 const createFullscreenBreak = async (
-  onCreate: (win: WebviewWindow) => void
+  breakWindowPayload: BreakWindowPayload
 ): Promise<void> => {
   const monitors = await availableMonitors();
 
@@ -29,9 +33,8 @@ const createFullscreenBreak = async (
     const breakWindow = createBreakWebviewWindow(monitor.position.x, monitor.position.y);
 
     await breakWindow.once('tauri://created', async () => {
+      await breakWindow.emit(BREAK_WINDOW_EVENT, breakWindowPayload);
       await breakWindow.show();
-
-      onCreate(breakWindow);
     });
 
     await breakWindow.once('tauri://error', error => {
@@ -40,4 +43,16 @@ const createFullscreenBreak = async (
   }
 };
 
-export default createFullscreenBreak;
+export const createFullscreenShortBreak = async (): Promise<void> => {
+  await createFullscreenBreak({
+    message: breakMessage.getShortBreakMessage(),
+    timeout: secondsToMilliseconds(settingState.settings.shortBreakDuration),
+  });
+};
+
+export const createFullscreenLongBreak = async (): Promise<void> => {
+  await createFullscreenBreak({
+    message: breakMessage.getLongBreakMessage(),
+    timeout: secondsToMilliseconds(settingState.settings.longBreakDuration),
+  });
+};
