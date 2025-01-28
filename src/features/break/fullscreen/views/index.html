@@ -4,10 +4,48 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="/src/assets/styles/main.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <title>Break Reminder</title>
 </head>
 
 <body>
-<div class="font-bold text-5xl text-red-700">Hello world!</div>
+
+<div class="w-screen h-screen flex items-center justify-center bg-black bg-opacity-80 text-gray-300 select-none">
+  <div class="flex flex-col items-center space-y-5">
+    <!-- message -->
+    <div id="message" class="font-semibold text-4xl"></div>
+  
+    <!-- todo implement timer -->
+    <div class="text-sm opacity-0">
+      00:12
+    </div>
+
+    <!-- todo implement actions -->
+    <div class="flex items-center text-xs opacity-0">
+      <button 
+        class="flex items-center justify-center border border-gray-300 rounded-3xl w-24 h-10 mx-2 hover:bg-gray-300 hover:bg-opacity-10 active:bg-opacity-20"
+        type="button"
+      >
+        <span>Postpone</span>
+      </button>
+      <button 
+        class="flex items-center justify-center border border-gray-300 rounded-3xl w-24 h-10 mx-2 hover:bg-gray-300 hover:bg-opacity-10 active:bg-opacity-20"
+        type="button"
+      >
+        <span>Skip</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import breakMessage from '@/features/break/message';
+
+const messageDiv = document.getElementById('message');
+
+if (messageDiv) {
+  messageDiv.innerText = breakMessage.getShortBreakMessage()
+}
+</script>
 </body>
 </html>
