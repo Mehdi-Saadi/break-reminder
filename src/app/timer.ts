@@ -1,5 +1,5 @@
+import { createFullscreenLongBreak, createFullscreenShortBreak } from '@/features/break/fullscreen';
 import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
-import createFullscreenBreak from '@/features/break/fullscreen';
 import settingState from '@/shared/state/setting';
 import notify from '@/app/notification.ts';
 
@@ -83,24 +83,16 @@ class Timer {
     }
   }
 
-  private async takeLongBreak(): Promise<void> {
-    createFullscreenBreak(breakWindow => {
-      setTimeout(() => {
-        breakWindow.destroy();
-      }, secondsToMilliseconds(settingState.settings.longBreakDuration));
-    });
-
-    this.setBreakTimeout(settingState.settings.longBreakDuration);
-  }
-
   private async takeShortBreak(): Promise<void> {
-    createFullscreenBreak(breakWindow => {
-      setTimeout(() => {
-        breakWindow.destroy();
-      }, secondsToMilliseconds(settingState.settings.shortBreakDuration));
-    });
+    await createFullscreenShortBreak();
 
     this.setBreakTimeout(settingState.settings.shortBreakDuration);
+  }
+
+  private async takeLongBreak(): Promise<void> {
+    await createFullscreenLongBreak();
+
+    this.setBreakTimeout(settingState.settings.longBreakDuration);
   }
 }
 
