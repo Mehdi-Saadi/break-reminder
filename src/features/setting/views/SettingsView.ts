@@ -41,28 +41,28 @@ class SettingsView extends Component {
       ),
     ]);
 
-    this.createSection('Options', [
-      this.createNumberItem(
-        'Time to prepare for a break (in seconds)',
-        (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue as Second }; },
-        settingState.settings.timeToPrepareForBreak,
-      ),
-      this.createCheckboxItem(
-        'Strict break (No way to skip breaks)',
-        (newValue) => { settingState.settings = { strictBreak: newValue }; },
-        settingState.settings.strictBreak,
-      ),
-      this.createCheckboxItem(
-        'Allow postponing breaks',
-        (newValue) => { settingState.settings = { allowPostponingBreaks: newValue }; },
-        settingState.settings.allowPostponingBreaks,
-      ),
-      this.createNumberItem(
-        'Postpone duration (in minutes)',
-        (newValue) => { settingState.settings = { postponeDuration: newValue as Minute }; },
-        settingState.settings.postponeDuration,
-      ),
-    ]);
+    // this.createSection('Options', [
+    //   this.createNumberItem(
+    //     'Time to prepare for a break (in seconds)',
+    //     (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue as Second }; },
+    //     settingState.settings.timeToPrepareForBreak,
+    //   ),
+    //   this.createCheckboxItem(
+    //     'Strict break (No way to skip breaks)',
+    //     (newValue) => { settingState.settings = { strictBreak: newValue }; },
+    //     settingState.settings.strictBreak,
+    //   ),
+    //   this.createCheckboxItem(
+    //     'Allow postponing breaks',
+    //     (newValue) => { settingState.settings = { allowPostponingBreaks: newValue }; },
+    //     settingState.settings.allowPostponingBreaks,
+    //   ),
+    //   this.createNumberItem(
+    //     'Postpone duration (in minutes)',
+    //     (newValue) => { settingState.settings = { postponeDuration: newValue as Minute }; },
+    //     settingState.settings.postponeDuration,
+    //   ),
+    // ]);
   }
 
   private createSection(label: string, settingItems: SettingItem[]): void {

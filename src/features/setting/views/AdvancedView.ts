@@ -12,41 +12,41 @@ class AdvancedView extends Component {
   }
 
   private createSettingItems(): void {
-    this.createSettingItem(
-      'Do Not Disturb',
-      'Skip the break if the active window is in fullscreen mode',
-      'doNotDisturbOn',
-      settingState.settings.doNotDisturb,
-      (newValue) => (settingState.settings = { doNotDisturb: newValue })
-    );
-    this.createSettingItem(
-      'Notification',
-      'Show a system notification before breaks',
-      'notifications',
-      settingState.settings.notification,
-      (newValue) => (settingState.settings = { notification: newValue })
-    );
-    this.createSettingItem(
-      'Audible Alert',
-      'Play an audible alert at the end of breaks',
-      'musicNote',
-      settingState.settings.audibleAlert,
-      (newValue) => (settingState.settings = { audibleAlert: newValue })
-    );
-    this.createSettingItem(
-      'Smart Pause',
-      'Pause reminder if system is idle',
-      'networkIntelligence',
-      settingState.settings.smartPause,
-      (newValue) => (settingState.settings = { smartPause: newValue })
-    );
-    this.createSettingItem(
-      'Screensaver',
-      'Lock the screen after long breaks by starting screensaver',
-      'lock',
-      settingState.settings.screensaver,
-      (newValue) => (settingState.settings = { screensaver: newValue })
-    );
+    // this.createSettingItem(
+    //   'Do Not Disturb',
+    //   'Skip the break if the active window is in fullscreen mode',
+    //   'doNotDisturbOn',
+    //   settingState.settings.doNotDisturb,
+    //   (newValue) => (settingState.settings = { doNotDisturb: newValue })
+    // );
+    // this.createSettingItem(
+    //   'Notification',
+    //   'Show a system notification before breaks',
+    //   'notifications',
+    //   settingState.settings.notification,
+    //   (newValue) => (settingState.settings = { notification: newValue })
+    // );
+    // this.createSettingItem(
+    //   'Audible Alert',
+    //   'Play an audible alert at the end of breaks',
+    //   'musicNote',
+    //   settingState.settings.audibleAlert,
+    //   (newValue) => (settingState.settings = { audibleAlert: newValue })
+    // );
+    // this.createSettingItem(
+    //   'Smart Pause',
+    //   'Pause reminder if system is idle',
+    //   'networkIntelligence',
+    //   settingState.settings.smartPause,
+    //   (newValue) => (settingState.settings = { smartPause: newValue })
+    // );
+    // this.createSettingItem(
+    //   'Screensaver',
+    //   'Lock the screen after long breaks by starting screensaver',
+    //   'lock',
+    //   settingState.settings.screensaver,
+    //   (newValue) => (settingState.settings = { screensaver: newValue })
+    // );
     this.createSettingItem(
       'Dark Mode',
       '',
