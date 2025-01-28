@@ -21,7 +21,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
 };
 
 const createFullscreenBreakForAllMonitors = async (
-  onWindowCreated: (win: WebviewWindow) => void
+  onCreate: (win: WebviewWindow) => void
 ): Promise<void> => {
   const monitors = await availableMonitors();
 
@@ -32,7 +32,7 @@ const createFullscreenBreakForAllMonitors = async (
     await breakWindow.once('tauri://created', async () => {
       await breakWindow.show();
 
-      onWindowCreated(breakWindow);
+      onCreate(breakWindow);
     });
 
     await breakWindow.once('tauri://error', error => {
