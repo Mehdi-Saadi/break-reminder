@@ -20,7 +20,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
   });
 };
 
-const createBreakWebViewWindowForAllMonitors = async (
+const createFullscreenBreakForAllMonitors = async (
   onWindowCreated: (win: WebviewWindow) => void
 ): Promise<void> => {
   const monitors = await availableMonitors();
@@ -41,7 +41,7 @@ const createBreakWebViewWindowForAllMonitors = async (
   }
 };
 
-createBreakWebViewWindowForAllMonitors(breakWindow => {
+createFullscreenBreakForAllMonitors(breakWindow => {
   setTimeout(async () => {
     await breakWindow.destroy();
     console.log('window destroyed', breakWindow);
