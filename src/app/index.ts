@@ -1,4 +1,5 @@
 import ViewManager from '@/features/setting/ViewManager.ts';
+import '@/app/contextmenu';
 import '@/app/window';
 import '@/app/timer';
 import '@/features/tray';
