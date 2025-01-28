@@ -1,12 +1,11 @@
 import settingState from '@/shared/state/setting';
 
+type BreakMessageIndex = 'shortBreakMessageIndex' | 'longBreakMessageIndex';
+
 /**
  * Rotates over the break messages saved in settings
  */
 class BreakMessage {
-  private shortBreakMessageIndex: number = 0;
-  private longBreakMessageIndex: number = 0;
-
   private getMessage(messages: string[], index: number): [string, number] {
     if (messages.length < (index + 1)) {
       index = 0;
@@ -18,18 +17,22 @@ class BreakMessage {
     return [message, index];
   }
 
-  private getIndexFromLocalStorage(key: 'shortBreakMessageIndex' | 'longBreakMessageIndex'): number {
+  private getIndexFromLocalStorage(key: BreakMessageIndex): number {
     const index = Number(localStorage.getItem(key));
     return !isNaN(index) && index >= 0 ? index : 0;
+  }
+
+  private setIndexToLocalStorage(key: BreakMessageIndex, value: number): void {
+    localStorage.setItem(key, String(value));
   }
 
   getShortBreakMessage(): string {
     const [message, newIndex] = this.getMessage(
       Object.values(settingState.settings.shortBreakMessages),
-      this.shortBreakMessageIndex,
+      this.getIndexFromLocalStorage('shortBreakMessageIndex'),
     );
 
-    this.shortBreakMessageIndex = newIndex;
+    this.setIndexToLocalStorage('shortBreakMessageIndex', newIndex);
 
     return message;
   }
@@ -37,10 +40,10 @@ class BreakMessage {
   getLongBreakMessage(): string {
     const [message, newIndex] = this.getMessage(
       Object.values(settingState.settings.longBreakMessages),
-      this.longBreakMessageIndex,
+      this.getIndexFromLocalStorage('longBreakMessageIndex'),
     );
 
-    this.longBreakMessageIndex = newIndex;
+    this.setIndexToLocalStorage('longBreakMessageIndex', newIndex);
 
     return message;
   }
