@@ -1,4 +1,5 @@
-import BreakView from '@/features/fullscreenBreak/views/BreakView';
+import BreakView from '@/features/fullscreenBreak/window/views/BreakView';
+
 const app = document.getElementById('app');
 
 if (app) {
