@@ -1,5 +1,5 @@
+import ActionButton from '@/features/fullscreenBreak/components/ActionButton';
 import Component from '@/shared/ui/base/Component.ts';
-import ActionButton from '../components/ActionButton';
 
 class BreakView extends Component {
   constructor() {
