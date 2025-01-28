@@ -20,7 +20,9 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
   });
 };
 
-const createBreakWebViewWindowForAllMonitors = async (onWindowCreated: (win: WebviewWindow) => void): Promise<void> => {
+const createBreakWebViewWindowForAllMonitors = async (
+  onWindowCreated: (win: WebviewWindow) => void
+): Promise<void> => {
   const monitors = await availableMonitors();
 
   for (const monitor of monitors) {
