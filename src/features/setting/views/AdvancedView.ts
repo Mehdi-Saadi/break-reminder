@@ -12,6 +12,7 @@ class AdvancedView extends Component {
   }
 
   private createSettingItems(): void {
+    // todo: implement more setting options
     // this.createSettingItem(
     //   'Do Not Disturb',
     //   'Skip the break if the active window is in fullscreen mode',

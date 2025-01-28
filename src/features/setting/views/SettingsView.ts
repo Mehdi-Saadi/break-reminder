@@ -41,6 +41,7 @@ class SettingsView extends Component {
       ),
     ]);
 
+    // todo: implement more setting options
     // this.createSection('Options', [
     //   this.createNumberItem(
     //     'Time to prepare for a break (in seconds)',
