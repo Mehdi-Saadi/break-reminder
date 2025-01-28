@@ -1,12 +1,11 @@
-import { availableMonitors, Window } from '@tauri-apps/api/window';
+import { availableMonitors } from '@tauri-apps/api/window';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
-import { Webview } from '@tauri-apps/api/webview';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
-const createBreakWindow = (x?: number, y?: number): Window => {
+const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
   const windowUniqueLabel = `break-window-${generateRandomAlphabeticId()}`;
 
-  return new Window(windowUniqueLabel, {
+  return new WebviewWindow(windowUniqueLabel, {
     x: x,
     y: y,
     maximized: true,
@@ -16,42 +15,21 @@ const createBreakWindow = (x?: number, y?: number): Window => {
     resizable: false,
     focus: true,
     visible: false,
+    url: '/src/features/break/fullscreen/views/index.html',
+    backgroundColor: '#000000',
   });
-};
-
-const createBreakWebview = (breakWindow: Window): Webview => {
-  const webviewUniqueLabel = `break-webview-${generateRandomAlphabeticId()}`;
-
-  return new Webview(
-    breakWindow,
-    webviewUniqueLabel,
-    {
-      url: '/src/features/break/fullscreen/views/index.html',
-      x: 0,
-      y: 0,
-      width: 400,
-      height: 400,
-      backgroundColor: '#000000',
-    }
-  );
-};
-
-const createBreakWebviewWindow = (x?: number, y?: number): [Window, Webview] => {
-  const breakWindow = createBreakWindow(x, y);
-  const breakWebview = createBreakWebview(breakWindow);
-
-  return [breakWindow, breakWebview];
 };
 
 const createBreakWebViewWindowForAllMonitors = async (): Promise<void> => {
   const monitors = await availableMonitors();
 
   for (const monitor of monitors) {
-    const [breakWindow, breakWebview] = createBreakWebviewWindow(monitor.position.x, monitor.position.y);
+    const breakWindow = createBreakWebviewWindow(monitor.position.x, monitor.position.y);
 
     // Handle webview creation
     await breakWindow.once('tauri://created', async () => {
       console.log('window created!');
+      await breakWindow.show();
 
       setTimeout(async () => {
         await breakWindow.destroy();
@@ -61,16 +39,6 @@ const createBreakWebViewWindowForAllMonitors = async (): Promise<void> => {
 
     await breakWindow.once('tauri://error', (error) => {
       console.error('Error while creating window:', breakWindow, error);
-    });
-
-    // Handle webview creation
-    await breakWebview.once('tauri://created', async () => {
-      console.log('webview created', breakWebview);
-      breakWindow.show();
-    });
-
-    await breakWebview.once('tauri://error', (error) => {
-      console.error('Error while creating webview:', breakWebview, error);
     });
   }
 };
