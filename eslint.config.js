@@ -33,6 +33,7 @@ export default [
       // TypeScript-Specific Rules
       '@typescript-eslint/explicit-function-return-type': ['warn'], // Require explicit return type for functions and methods
       '@typescript-eslint/no-unused-vars': ['warn'],
+      '@typescript-eslint/no-explicit-any': ['warn'],
     }
   },
   {
