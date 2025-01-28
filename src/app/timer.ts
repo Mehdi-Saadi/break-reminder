@@ -1,5 +1,5 @@
 import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
-import breakMessage from '@/features/break/message';
+import createFullscreenBreakForAllMonitors from '@/features/break/fullscreen';
 import settingState from '@/shared/state/setting';
 import notify from '@/app/notification.ts';
 
@@ -84,19 +84,23 @@ class Timer {
   }
 
   private async takeLongBreak(): Promise<void> {
-    await notify(breakMessage.getLongBreakMessage());
+    createFullscreenBreakForAllMonitors(breakWindow => {
+      setTimeout(() => {
+        breakWindow.destroy();
+      }, secondsToMilliseconds(settingState.settings.longBreakDuration));
+    });
 
     this.setBreakTimeout(settingState.settings.longBreakDuration);
   }
 
   private async takeShortBreak(): Promise<void> {
-    await notify(breakMessage.getShortBreakMessage());
+    createFullscreenBreakForAllMonitors(breakWindow => {
+      setTimeout(() => {
+        breakWindow.destroy();
+      }, secondsToMilliseconds(settingState.settings.shortBreakDuration));
+    });
 
     this.setBreakTimeout(settingState.settings.shortBreakDuration);
-  }
-
-  skip(): void {
-    console.log('skip');
   }
 }
 
