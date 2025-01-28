@@ -1,6 +1,7 @@
 import { availableMonitors, Window } from '@tauri-apps/api/window';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
 import { Webview } from '@tauri-apps/api/webview';
+import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 const createBreakWindow = (x?: number, y?: number): Window => {
   const windowUniqueLabel = `break-window-${generateRandomAlphabeticId()}`;
@@ -11,10 +12,10 @@ const createBreakWindow = (x?: number, y?: number): Window => {
     maximized: true,
     decorations: true,
     alwaysOnTop: true,
-    skipTaskbar: false,
+    skipTaskbar: true,
     resizable: false,
     focus: true,
-    backgroundColor: '#000000',
+    visible: false,
   });
 };
 
@@ -50,7 +51,6 @@ const createBreakWebViewWindowForAllMonitors = async (): Promise<void> => {
 
     // Handle webview creation
     await breakWindow.once('tauri://created', async () => {
-      breakWindow.hide();
       console.log('window created!');
 
       setTimeout(async () => {
