@@ -1,7 +1,7 @@
-const disableContextMenu = (): void => {
-  window.addEventListener('contextmenu', event => event.preventDefault());
+const disableContextMenuInProd = (): void => {
+  if (import.meta.env.PROD) {
+    window.addEventListener('contextmenu', event => event.preventDefault());
+  }
 };
 
-if (import.meta.env.PROD) {
-  disableContextMenu();
-}
+disableContextMenuInProd();
