@@ -34,6 +34,7 @@
             "core:window:allow-show",
             "core:window:allow-destroy",
             "core:window:allow-create",
+            "core:webview:allow-create-webview",
             "notification:allow-request-permission",
             "notification:allow-notify",
             "autostart:allow-enable",
