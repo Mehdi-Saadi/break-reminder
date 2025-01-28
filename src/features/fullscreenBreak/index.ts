@@ -20,7 +20,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
   });
 };
 
-const createFullscreenBreakForAllMonitors = async (
+const createFullscreenBreak = async (
   onCreate: (win: WebviewWindow) => void
 ): Promise<void> => {
   const monitors = await availableMonitors();
@@ -40,4 +40,4 @@ const createFullscreenBreakForAllMonitors = async (
   }
 };
 
-export default createFullscreenBreakForAllMonitors;
+export default createFullscreenBreak;
