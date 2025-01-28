@@ -28,7 +28,6 @@ const createFullscreenBreakForAllMonitors = async (
   for (const monitor of monitors) {
     const breakWindow = createBreakWebviewWindow(monitor.position.x, monitor.position.y);
 
-    // Handle webview creation
     await breakWindow.once('tauri://created', async () => {
       await breakWindow.show();
 
@@ -41,9 +40,4 @@ const createFullscreenBreakForAllMonitors = async (
   }
 };
 
-createFullscreenBreakForAllMonitors(breakWindow => {
-  setTimeout(async () => {
-    await breakWindow.destroy();
-    console.log('window destroyed', breakWindow);
-  }, 5000);
-});
+export default createFullscreenBreakForAllMonitors;
