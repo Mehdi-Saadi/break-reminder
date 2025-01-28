@@ -9,14 +9,14 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
     x: x,
     y: y,
     maximized: true,
-    decorations: false,
+    decorations: !import.meta.env.PROD,
     alwaysOnTop: true,
-    skipTaskbar: true,
+    skipTaskbar: !import.meta.env.PROD,
     resizable: false,
     focus: true,
     visible: false,
+    transparent: true,
     url: '/src/features/break/fullscreen/views/index.html',
-    backgroundColor: '#000000',
   });
 };
 
