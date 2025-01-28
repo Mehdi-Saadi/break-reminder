@@ -4,6 +4,7 @@ import NumberField from '@/features/setting/components/fields/NumberField.ts';
 import SettingItem from '@/features/setting/components/SettingItem.ts';
 import SettingSection from '@/features/setting/components/SettingSection.ts';
 import settingState from '@/shared/state/setting';
+import { Minute, Second } from '@/shared/time';
 
 class SettingsView extends Component {
   constructor() {
@@ -16,12 +17,12 @@ class SettingsView extends Component {
     this.createSection('Short Breaks', [
       this.createNumberItem(
         'Work Duration (in minutes)',
-        (newValue) => { settingState.settings = { shortWorkDuration: newValue }; },
+        (newValue) => { settingState.settings = { shortWorkDuration: newValue as Minute }; },
         settingState.settings.shortWorkDuration,
       ),
       this.createNumberItem(
         'Break Duration (in seconds)',
-        (newValue) => { settingState.settings = { shortBreakDuration: newValue }; },
+        (newValue) => { settingState.settings = { shortBreakDuration: newValue as Second }; },
         settingState.settings.shortBreakDuration,
       ),
     ]);
@@ -35,7 +36,7 @@ class SettingsView extends Component {
       ),
       this.createNumberItem(
         'Break Duration (in seconds)',
-        (newValue) => { settingState.settings = { longBreakDuration: newValue }; },
+        (newValue) => { settingState.settings = { longBreakDuration: newValue as Second }; },
         settingState.settings.longBreakDuration,
       ),
     ]);
@@ -43,7 +44,7 @@ class SettingsView extends Component {
     this.createSection('Options', [
       this.createNumberItem(
         'Time to prepare for a break (in seconds)',
-        (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue }; },
+        (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue as Second }; },
         settingState.settings.timeToPrepareForBreak,
       ),
       this.createCheckboxItem(
@@ -58,7 +59,7 @@ class SettingsView extends Component {
       ),
       this.createNumberItem(
         'Postpone duration (in minutes)',
-        (newValue) => { settingState.settings = { postponeDuration: newValue }; },
+        (newValue) => { settingState.settings = { postponeDuration: newValue as Minute }; },
         settingState.settings.postponeDuration,
       ),
     ]);
