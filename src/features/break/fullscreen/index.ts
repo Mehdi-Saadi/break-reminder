@@ -11,7 +11,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
     maximized: true,
     decorations: !import.meta.env.PROD,
     alwaysOnTop: true,
-    skipTaskbar: !import.meta.env.PROD,
+    skipTaskbar: import.meta.env.PROD,
     resizable: false,
     focus: true,
     visible: false,
