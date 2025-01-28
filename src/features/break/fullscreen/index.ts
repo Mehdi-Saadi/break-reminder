@@ -1,5 +1,6 @@
 import { availableMonitors, Window } from '@tauri-apps/api/window';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
+import { Webview } from '@tauri-apps/api/webview';
 
 const createBreakWindow = (x?: number, y?: number): Window => {
   const windowUniqueLabel = `break-window-${generateRandomAlphabeticId()}`;
@@ -15,6 +16,23 @@ const createBreakWindow = (x?: number, y?: number): Window => {
     focus: true,
     backgroundColor: '#000000',
   });
+};
+
+const createBreakWebview = (window: Window): Webview => {
+  const webviewUniqueLabel = `break-webview-${generateRandomAlphabeticId()}`;
+
+  return new Webview(
+    window,
+    webviewUniqueLabel,
+    {
+      url: '',
+      x: 0,
+      y: 0,
+      width: 400,
+      height: 400,
+      backgroundColor: '#000000',
+    }
+  );
 };
 
 const func = async (): Promise<void> => {
