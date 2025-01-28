@@ -18,6 +18,11 @@ class BreakMessage {
     return [message, index];
   }
 
+  private getIndexFromLocalStorage(key: 'shortBreakMessageIndex' | 'longBreakMessageIndex'): number {
+    const index = Number(localStorage.getItem(key));
+    return !isNaN(index) && index >= 0 ? index : 0;
+  }
+
   getShortBreakMessage(): string {
     const [message, newIndex] = this.getMessage(
       Object.values(settingState.settings.shortBreakMessages),
