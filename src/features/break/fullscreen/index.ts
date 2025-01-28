@@ -16,7 +16,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
     focus: true,
     visible: false,
     transparent: true,
-    url: '/src/features/fullscreenBreak/window/index.html',
+    url: '/src/features/break/fullscreen/window/index.html',
   });
 };
 

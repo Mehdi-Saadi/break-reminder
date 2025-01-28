@@ -1,5 +1,5 @@
 import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
-import createFullscreenBreak from '@/features/fullscreenBreak';
+import createFullscreenBreak from '@/features/break/fullscreen';
 import settingState from '@/shared/state/setting';
 import notify from '@/app/notification.ts';
 
