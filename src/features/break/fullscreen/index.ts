@@ -18,11 +18,11 @@ const createBreakWindow = (x?: number, y?: number): Window => {
   });
 };
 
-const createBreakWebview = (window: Window): Webview => {
+const createBreakWebview = (breakWindow: Window): Webview => {
   const webviewUniqueLabel = `break-webview-${generateRandomAlphabeticId()}`;
 
   return new Webview(
-    window,
+    breakWindow,
     webviewUniqueLabel,
     {
       url: '/src/features/break/fullscreen/views/index.html',
@@ -35,42 +35,44 @@ const createBreakWebview = (window: Window): Webview => {
   );
 };
 
-const createBreakWebviewWindow = (x?: number, y?: number): Webview => {
-  const window = createBreakWindow(x, y);
-  return createBreakWebview(window);
+const createBreakWebviewWindow = (x?: number, y?: number): [Window, Webview] => {
+  const breakWindow = createBreakWindow(x, y);
+  const breakWebview = createBreakWebview(breakWindow);
+
+  return [breakWindow, breakWebview];
 };
 
-const func = async (): Promise<void> => {
+const createBreakWebViewWindowForAllMonitors = async (): Promise<void> => {
   const monitors = await availableMonitors();
 
   for (const monitor of monitors) {
-    const windowUniqueLabel = `break-reminder-${generateRandomAlphabeticId()}`;
+    const [breakWindow, breakWebview] = createBreakWebviewWindow(monitor.position.x, monitor.position.y);
 
-    const breakWindow = new Window(windowUniqueLabel, {
-      x: monitor.position.x,
-      y: monitor.position.y,
-      maximized: true,
-      decorations: true,
-      alwaysOnTop: true,
-      skipTaskbar: false,
-      resizable: false,
-      focus: true,
-      backgroundColor: '#000000',  // Ensure black background
-    });
-
-    // Handle window creation
+    // Handle webview creation
     await breakWindow.once('tauri://created', async () => {
-      console.log(`Window created: ${windowUniqueLabel} at ${monitor.position.x}, ${monitor.position.y}`);
+      breakWindow.hide();
+      console.log('window created!');
 
-      // Wait a bit to ensure the window is fully rendered before closing
       setTimeout(async () => {
         await breakWindow.destroy();
-        console.log(`Window ${windowUniqueLabel} closed`);
+        console.log('window destroyed', breakWindow);
       }, 5000);
     });
 
     await breakWindow.once('tauri://error', (error) => {
-      console.error(`Error creating window ${windowUniqueLabel}:`, error);
+      console.error('Error while creating window:', breakWindow, error);
+    });
+
+    // Handle webview creation
+    await breakWebview.once('tauri://created', async () => {
+      console.log('webview created', breakWebview);
+      breakWindow.show();
+    });
+
+    await breakWebview.once('tauri://error', (error) => {
+      console.error('Error while creating webview:', breakWebview, error);
     });
   }
 };
+
+createBreakWebViewWindowForAllMonitors();
