@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "break-reminder",
+  "productName": "Break Reminder",
   "version": "0.1.0",
   "identifier": "com.break-reminder.app",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "break-reminder",
+        "title": "Break Reminder",
         "width": 768,
         "height": 480,
         "fullscreen": false,
