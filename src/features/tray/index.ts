@@ -8,7 +8,7 @@ const createTray = async (): Promise<TrayIcon> =>
     id: 'break-reminder-tray',
     icon: await defaultWindowIcon() || undefined,
     menu: await trayMenu,
-    tooltip: 'Break reminder',
+    tooltip: 'Break Reminder',
     menuOnLeftClick: false,
     action: async (event: TrayIconEvent): Promise<void> => {
       if (
