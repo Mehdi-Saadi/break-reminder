@@ -1,17 +1,29 @@
-import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/features/break/fullscreen/payload';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
 import { availableMonitors } from '@tauri-apps/api/window';
-import { secondsToMilliseconds } from '@/shared/time';
+import { Millisecond, secondsToMilliseconds } from '@/shared/time';
 import breakMessage from '@/features/break/message';
 import settingState from '@/shared/state/setting';
+import { objectToQuery } from '@/shared/url';
 
-const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
+interface BreakWindowPayload {
+  message: string;
+  timeout: Millisecond
+}
+
+interface IWebviewWindowParams {
+  x?: number;
+  y?: number;
+  query?: BreakWindowPayload;
+}
+
+const createBreakWebviewWindow = (params: IWebviewWindowParams): WebviewWindow => {
   const windowUniqueLabel = `break-window-${generateRandomAlphabeticId()}`;
+  const queryParams = params.query ? objectToQuery(params.query) : '';
 
   return new WebviewWindow(windowUniqueLabel, {
-    x: x,
-    y: y,
+    x: params.x,
+    y: params.y,
     maximized: true,
     decorations: !import.meta.env.PROD,
     alwaysOnTop: true,
@@ -20,7 +32,7 @@ const createBreakWebviewWindow = (x?: number, y?: number): WebviewWindow => {
     focus: true,
     visible: false,
     transparent: true,
-    url: '/src/features/break/fullscreen/window/index.html',
+    url: `/src/features/break/fullscreen/window/index.html${queryParams}`,
   });
 };
 
@@ -44,11 +56,13 @@ const createFullscreenBreak = async (
   const monitors = await availableMonitors();
 
   for (const monitor of monitors) {
-    const breakWindow = createBreakWebviewWindow(monitor.position.x, monitor.position.y);
-
-    await breakWindow.once('tauri://created', async () => {
-      await breakWindow.emit(BREAK_WINDOW_EVENT, breakWindowPayload);
+    const breakWindow = createBreakWebviewWindow({
+      x: monitor.position.x,
+      y: monitor.position.y,
+      query: breakWindowPayload,
     });
+
+    await breakWindow.once('tauri://created', async (): Promise<void> => await breakWindow.show());
 
     await breakWindow.once('tauri://error', error => {
       console.error('Error while creating window:', breakWindow, error);
