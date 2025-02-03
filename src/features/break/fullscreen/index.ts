@@ -1,21 +1,11 @@
+import { BreakWindowPayload, IWebviewWindowParams } from '@/features/break/fullscreen/types';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
 import { availableMonitors } from '@tauri-apps/api/window';
-import { Millisecond, secondsToMilliseconds } from '@/shared/time';
+import { secondsToMilliseconds } from '@/shared/time';
 import breakMessage from '@/features/break/message';
 import settingState from '@/shared/state/setting';
 import { objectToQuery } from '@/shared/url';
-
-interface BreakWindowPayload {
-  message: string;
-  timeout: Millisecond
-}
-
-interface IWebviewWindowParams {
-  x?: number;
-  y?: number;
-  query?: BreakWindowPayload;
-}
 
 const createBreakWebviewWindow = (params: IWebviewWindowParams): WebviewWindow => {
   const windowUniqueLabel = `break-window-${generateRandomAlphabeticId()}`;
@@ -36,7 +26,7 @@ const createBreakWebviewWindow = (params: IWebviewWindowParams): WebviewWindow =
   });
 };
 
-// todo
+// TODO: show break message only for largest monitor
 // const getLargestOrFirstMonitor = async (): Promise<Monitor> => {
 //   const monitors = await availableMonitors();
 
