@@ -1,6 +1,6 @@
 import { Millisecond } from '@/shared/time';
 
 export interface BreakWindowPayload {
-  message: string;
+  message?: string;
   timeout: Millisecond
 }

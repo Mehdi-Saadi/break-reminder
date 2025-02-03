@@ -10,7 +10,7 @@ import { objectToQuery } from '@/shared/url';
 interface IWebviewWindowParams {
   x?: number;
   y?: number;
-  query?: BreakWindowPayload;
+  query: BreakWindowPayload;
 }
 
 const createBreakWebviewWindow = (params: IWebviewWindowParams): WebviewWindow => {
