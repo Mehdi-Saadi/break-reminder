@@ -1,6 +1,13 @@
-# Tauri + Vanilla TS
+# Break Reminder
+## Features:
+- Set short work/break duration
+- Set count of short works to take a long break
+- Set long break duration
+- Light/Dart mode
+- Edit or Delete break messages
+- Fullscreen breaks
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Typescript.
+# Tauri + Vanilla TS
 
 ## Recommended IDE Setup
 
