@@ -2,6 +2,7 @@ import ActionButton from '@/features/break/fullscreen/window/components/ActionBu
 import { BreakWindowPayload } from '@/features/break/fullscreen/types';
 import Component from '@/shared/ui/base/Component.ts';
 import { Millisecond } from '@/shared/time';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 
 class BreakView extends Component {
   private wrapper: HTMLDivElement;
@@ -15,11 +16,12 @@ class BreakView extends Component {
 
     this.windowPayload = this.getBreakWindowPayloadFromUrl();
 
-    this.createMessageSection(this.windowPayload.message);
+    this.createMessageSection();
     // this.createTimerSection();
     // this.createActionButtons();
 
     this.element.appendChild(this.wrapper);
+    this.initDestroyWindowTimeout();
   }
 
   private getBreakWindowPayloadFromUrl(): BreakWindowPayload {
@@ -31,10 +33,10 @@ class BreakView extends Component {
     };
   }
 
-  private createMessageSection(message?: string): void {
+  private createMessageSection(): void {
     const messageContainer = document.createElement('div');
     messageContainer.setAttribute('class', 'font-semibold text-4xl');
-    messageContainer.innerHTML = message || '';
+    messageContainer.innerHTML = this.windowPayload.message || '';
     this.wrapper.appendChild(messageContainer);
   }
 
@@ -59,6 +61,10 @@ class BreakView extends Component {
     skipButton.mount(actionWrapper);
     this.addChild(skipButton);
     this.wrapper.appendChild(actionWrapper);
+  }
+
+  private initDestroyWindowTimeout(): void {
+    setTimeout(async () => await getCurrentWindow().destroy(), this.windowPayload.timeout);
   }
 }
 
