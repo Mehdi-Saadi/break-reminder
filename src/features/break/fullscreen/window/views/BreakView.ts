@@ -1,8 +1,11 @@
 import ActionButton from '@/features/break/fullscreen/window/components/ActionButton';
+import { BreakWindowPayload } from '@/features/break/fullscreen/types';
 import Component from '@/shared/ui/base/Component.ts';
+import { Millisecond } from '@/shared/time';
 
 class BreakView extends Component {
   private wrapper: HTMLDivElement;
+  private windowPayload: BreakWindowPayload;
 
   constructor() {
     super('div', 'w-screen h-screen flex items-center justify-center bg-black bg-opacity-80 text-gray-300 select-none');
@@ -10,17 +13,28 @@ class BreakView extends Component {
     this.wrapper = document.createElement('div');
     this.wrapper.setAttribute('class', 'flex flex-col items-center space-y-5');
 
-    this.createMessageSection();
+    this.windowPayload = this.getBreakWindowPayloadFromUrl();
+
+    this.createMessageSection(this.windowPayload.message);
     // this.createTimerSection();
     // this.createActionButtons();
 
     this.element.appendChild(this.wrapper);
   }
 
-  private createMessageSection(): void {
+  private getBreakWindowPayloadFromUrl(): BreakWindowPayload {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    return {
+      message: searchParams.get('message') || undefined,
+      timeout: parseInt(searchParams.get('timeout') || '20000') as Millisecond,
+    };
+  }
+
+  private createMessageSection(message?: string): void {
     const messageContainer = document.createElement('div');
     messageContainer.setAttribute('class', 'font-semibold text-4xl');
-    messageContainer.innerHTML = 'Hello World!';
+    messageContainer.innerHTML = message || '';
     this.wrapper.appendChild(messageContainer);
   }
 
