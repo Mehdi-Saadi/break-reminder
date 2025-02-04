@@ -1,5 +1,5 @@
 interface ImportMetaEnv {
-  readonly PROD: boolean;
+  readonly PRODUCTION: boolean;
 }
 
 interface ImportMeta {
