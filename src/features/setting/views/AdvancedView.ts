@@ -20,13 +20,13 @@ class AdvancedView extends Component {
     //   settingState.settings.doNotDisturb,
     //   (newValue) => (settingState.settings = { doNotDisturb: newValue })
     // );
-    // this.createSettingItem(
-    //   'Notification',
-    //   'Show a system notification before breaks',
-    //   'notifications',
-    //   settingState.settings.notification,
-    //   (newValue) => (settingState.settings = { notification: newValue })
-    // );
+    this.createSettingItem(
+      'Notification',
+      'Show a system notification before breaks',
+      'notifications',
+      settingState.settings.notification,
+      (newValue) => (settingState.settings = { notification: newValue })
+    );
     // this.createSettingItem(
     //   'Audible Alert',
     //   'Play an audible alert at the end of breaks',
