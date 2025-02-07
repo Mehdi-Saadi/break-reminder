@@ -15,7 +15,7 @@ class Timer {
 
   private startWork = (): void => {
     this.setWorkTimeout();
-    this.setPrepareForBreakTimeoutIfNeeded();
+    this.setPrepareForBreakTimeout();
   };
 
   private setWorkTimeout(): void {
@@ -52,7 +52,7 @@ class Timer {
     const prepareTime = secondsToMilliseconds(settingState.settings.timeToPrepareForBreak);
     const prepareForBreakTime = workTime - prepareTime;
 
-    this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreak, prepareForBreakTime);
+    this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreakIfNeeded, prepareForBreakTime);
   }
 
   private clearPrepareForBreakTimeout(): void {
@@ -62,15 +62,11 @@ class Timer {
     }
   }
 
-  private notifyBeforeBreak = async (): Promise<void> => {
-    await notify(`Take break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
-  };
-
-  private setPrepareForBreakTimeoutIfNeeded(): void {
+  private notifyBeforeBreakIfNeeded = async (): Promise<void> => {
     if (settingState.settings.notification) {
-      this.setPrepareForBreakTimeout();
+      await notify(`Take a break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
     }
-  }
+  };
 
   private setBreakTimeout(seconds: Second): void {
     this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
