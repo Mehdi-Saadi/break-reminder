@@ -15,7 +15,7 @@ class Timer {
 
   private startWork = (): void => {
     this.setWorkTimeout();
-    this.setPrepareForBreakTimeoutIfNeeded();
+    this.setPrepareForBreakTimeout();
   };
 
   private setWorkTimeout(): void {
@@ -67,12 +67,6 @@ class Timer {
       await notify(`Take a break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
     }
   };
-
-  private setPrepareForBreakTimeoutIfNeeded(): void {
-    if (settingState.settings.notification) {
-      this.setPrepareForBreakTimeout();
-    }
-  }
 
   private setBreakTimeout(seconds: Second): void {
     this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
