@@ -66,7 +66,7 @@ class SettingState {
   });
 
   constructor() {
-    this._settings = this.getSettingsFromStorage();
+    this._settings = this.getSettings();
   }
 
   get settings(): ISettings {
@@ -79,6 +79,32 @@ class SettingState {
     this.saveSettingsToStorage();
 
     settingStateEventBus.emit('change');
+  }
+
+  private getSettings(): ISettings {
+    const localData = localStorage.getItem(this._storageKey);
+
+    if (!localData) {
+      return { ...this._defaultSettings };
+    }
+
+    try {
+      const parsedData = JSON.parse(localData);
+
+      for (const key in parsedData) {
+        if (!(key in this._defaultSettings)) {
+          return { ...this._defaultSettings };
+        }
+      }
+
+      return { ...this._defaultSettings, ...parsedData };
+    } catch {
+      return { ...this._defaultSettings };
+    }
+  }
+
+  private saveSettingsToStorage(): void {
+    localStorage.setItem(this._storageKey, JSON.stringify(this._settings));
   }
 
   getBreakMessageById(id: UUID): string {
@@ -123,32 +149,6 @@ class SettingState {
       shortBreakMessages: shortBreakMessages,
       longBreakMessages: longBreakMessages,
     };
-  }
-
-  private getSettingsFromStorage(): ISettings {
-    const localData = localStorage.getItem(this._storageKey);
-
-    if (!localData) {
-      return { ...this._defaultSettings };
-    }
-
-    try {
-      const parsedData = JSON.parse(localData);
-
-      for (const key in parsedData) {
-        if (!(key in this._defaultSettings)) {
-          return { ...this._defaultSettings };
-        }
-      }
-
-      return { ...this._defaultSettings, ...parsedData };
-    } catch {
-      return { ...this._defaultSettings };
-    }
-  }
-
-  private saveSettingsToStorage(): void {
-    localStorage.setItem(this._storageKey, JSON.stringify(this._settings));
   }
 }
 
