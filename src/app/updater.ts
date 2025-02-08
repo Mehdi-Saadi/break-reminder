@@ -1,22 +1,24 @@
+import { promiseHandler } from '@/shared/promise';
 import { check } from '@tauri-apps/plugin-updater';
 
 const installUpdateIfAvailable = async (): Promise<void> => {
-  try {
-    const update = await check();
+  const [checkError, update] = await promiseHandler(check());
 
-    if (!update) {
-      return;
-    }
+  if (checkError) {
+    alert('There was an error while checking for updates..');
+    console.error(checkError);
+    return;
+  }
 
-    try {
-      await update.downloadAndInstall();
-    } catch (error) {
-      alert('There was an error while downloading updates..');
-      console.error(error);
-    }
-  } catch (error) {
-    alert('There was an error while checking updates..');
-    console.error(error);
+  if (!update) {
+    return;
+  }
+
+  const [downloadAndInstallError] = await promiseHandler(update.downloadAndInstall());
+
+  if (downloadAndInstallError) {
+    alert('There was an error while downloading updates..');
+    console.error(downloadAndInstallError);
   }
 };
 
