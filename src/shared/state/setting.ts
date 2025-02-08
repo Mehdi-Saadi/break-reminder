@@ -65,22 +65,6 @@ class SettingState {
     },
   });
 
-  constructor() {
-    this._settings = this.getSettings();
-  }
-
-  get settings(): ISettings {
-    return this._settings;
-  }
-
-  set settings(value: Partial<ISettings>) {
-    this._settings = { ...this._settings, ...value };
-
-    this.saveSettingsToStorage();
-
-    settingStateEventBus.emit('change');
-  }
-
   private getSettings(): ISettings {
     const localData = localStorage.getItem(this._storageKey);
 
@@ -105,6 +89,22 @@ class SettingState {
 
   private saveSettingsToStorage(): void {
     localStorage.setItem(this._storageKey, JSON.stringify(this._settings));
+  }
+
+  constructor() {
+    this._settings = this.getSettings();
+  }
+
+  get settings(): ISettings {
+    return this._settings;
+  }
+
+  set settings(value: Partial<ISettings>) {
+    this._settings = { ...this._settings, ...value };
+
+    this.saveSettingsToStorage();
+
+    settingStateEventBus.emit('change');
   }
 
   getBreakMessageById(id: UUID): string {
