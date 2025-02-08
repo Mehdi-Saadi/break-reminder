@@ -108,15 +108,7 @@ class SettingState {
   }
 
   getBreakMessageById(id: UUID): string {
-    let message = '';
-
-    if (this._settings.shortBreakMessages[id]) {
-      message = this._settings.shortBreakMessages[id];
-    } else if (this._settings.longBreakMessages[id]) {
-      message = this._settings.longBreakMessages[id];
-    }
-
-    return message;
+    return this._settings.shortBreakMessages[id] || this._settings.longBreakMessages[id] || '';
   }
 
   updateBreakMessageById(id: UUID, newValue: string): void {
