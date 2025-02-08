@@ -1,5 +1,5 @@
+import { generateRandomAlphabeticId } from '@/shared/crypto';
 import { describe, it, expect } from 'vitest';
-import { generateRandomAlphabeticId } from '../crypto';
 
 describe('generateRandomAlphabeticId', () => {
   it('returns an id with expected length', () => {
