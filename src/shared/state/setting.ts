@@ -65,8 +65,34 @@ class SettingState {
     },
   });
 
+  private getSettings(): ISettings {
+    const localData = localStorage.getItem(this._storageKey);
+
+    if (!localData) {
+      return { ...this._defaultSettings };
+    }
+
+    try {
+      const parsedData = JSON.parse(localData);
+
+      for (const key in parsedData) {
+        if (!(key in this._defaultSettings)) {
+          return { ...this._defaultSettings };
+        }
+      }
+
+      return { ...this._defaultSettings, ...parsedData };
+    } catch {
+      return { ...this._defaultSettings };
+    }
+  }
+
+  private saveSettingsToStorage(): void {
+    localStorage.setItem(this._storageKey, JSON.stringify(this._settings));
+  }
+
   constructor() {
-    this._settings = this.getSettingsFromStorage();
+    this._settings = this.getSettings();
   }
 
   get settings(): ISettings {
@@ -82,15 +108,7 @@ class SettingState {
   }
 
   getBreakMessageById(id: UUID): string {
-    let message = '';
-
-    if (this._settings.shortBreakMessages[id]) {
-      message = this._settings.shortBreakMessages[id];
-    } else if (this._settings.longBreakMessages[id]) {
-      message = this._settings.longBreakMessages[id];
-    }
-
-    return message;
+    return this._settings.shortBreakMessages[id] || this._settings.longBreakMessages[id] || '';
   }
 
   updateBreakMessageById(id: UUID, newValue: string): void {
@@ -123,32 +141,6 @@ class SettingState {
       shortBreakMessages: shortBreakMessages,
       longBreakMessages: longBreakMessages,
     };
-  }
-
-  private getSettingsFromStorage(): ISettings {
-    const localData = localStorage.getItem(this._storageKey);
-
-    if (!localData) {
-      return { ...this._defaultSettings };
-    }
-
-    try {
-      const parsedData = JSON.parse(localData);
-
-      for (const key in parsedData) {
-        if (!(key in this._defaultSettings)) {
-          return { ...this._defaultSettings };
-        }
-      }
-
-      return { ...this._defaultSettings, ...parsedData };
-    } catch {
-      return { ...this._defaultSettings };
-    }
-  }
-
-  private saveSettingsToStorage(): void {
-    localStorage.setItem(this._storageKey, JSON.stringify(this._settings));
   }
 }
 
