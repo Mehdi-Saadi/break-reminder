@@ -1,4 +1,5 @@
 import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
+import { playPreBreakAudio, playStopBreakAudio } from '@/features/break/audio';
 import fullscreenBreak from '@/features/break/fullscreen';
 import settingState from '@/shared/state/setting';
 import notify from '@/app/notification.ts';
@@ -16,6 +17,7 @@ class Timer {
   private startWork = (): void => {
     this.setWorkTimeout();
     this.setPrepareForBreakTimeout();
+    this.playStopBreakAudioIfNeeded();
   };
 
   private setWorkTimeout(): void {
@@ -37,6 +39,8 @@ class Timer {
     } else {
       await this.takeShortBreak();
     }
+
+    await this.playPreBreakAudioIfNeeded();
   };
 
   private shouldTakeLongBreak(): boolean {
@@ -53,6 +57,18 @@ class Timer {
     const prepareForBreakTime = workTime - prepareTime;
 
     this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreakIfNeeded, prepareForBreakTime);
+  }
+
+  private async playPreBreakAudioIfNeeded(): Promise<void> {
+    if (settingState.settings.audibleAlert) {
+      await playPreBreakAudio();
+    }
+  }
+
+  private async playStopBreakAudioIfNeeded(): Promise<void> {
+    if (settingState.settings.audibleAlert && this.countOfShortWorks) {
+      await playStopBreakAudio();
+    }
   }
 
   private clearPrepareForBreakTimeout(): void {
