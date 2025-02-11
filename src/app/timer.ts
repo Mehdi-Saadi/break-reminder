@@ -1,8 +1,10 @@
-import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
-import { playPreBreakAudio, playStopBreakAudio } from '@/features/break/audio';
 import fullscreenBreak from '@/features/break/fullscreen';
-import settingState from '@/shared/state/setting';
 import notify from '@/app/notification.ts';
+import settingState from '@/shared/state/setting';
+import { BREAK_WINDOW_EVENT } from '@/features/break/fullscreen/communication';
+import { listen } from '@tauri-apps/api/event';
+import { minutesToMilliseconds, Second, secondsToMilliseconds } from '@/shared/time.ts';
+import { playPreBreakAudio, playStopBreakAudio } from '@/features/break/audio';
 
 class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
@@ -12,6 +14,7 @@ class Timer {
 
   constructor() {
     this.startWork();
+    this.initBreakWindowListeners();
   }
 
   private startWork = (): void => {
@@ -105,6 +108,13 @@ class Timer {
     await fullscreenBreak.longBreak();
 
     this.setBreakTimeout(settingState.settings.longBreakDuration);
+  }
+
+  private initBreakWindowListeners(): void {
+    listen(BREAK_WINDOW_EVENT.skip, () => {
+      this.clearBreakTimeout();
+      this.startWork();
+    });
   }
 }
 
