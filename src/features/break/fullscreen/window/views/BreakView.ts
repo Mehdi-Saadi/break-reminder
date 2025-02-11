@@ -11,6 +11,7 @@ class BreakView extends Component {
 
   constructor() {
     super('div', 'w-screen h-screen flex items-center justify-center bg-black bg-opacity-80 text-gray-300 select-none');
+    this.initActionListeners();
 
     this.wrapper = document.createElement('div');
     this.wrapper.setAttribute('class', 'flex flex-col items-center space-y-5');
@@ -23,7 +24,6 @@ class BreakView extends Component {
 
     this.element.appendChild(this.wrapper);
 
-    this.initActionListeners();
     this.initDestroyWindowTimeout();
   }
 
