@@ -3,7 +3,7 @@ import Component from '@/shared/ui/base/Component.ts';
 import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/features/break/fullscreen/communication';
 import { emit, listen } from '@tauri-apps/api/event';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { Millisecond } from '@/shared/time';
+import { Millisecond, millisecondsToSeconds, secondsToMinutes } from '@/shared/time';
 
 class BreakView extends Component {
   private wrapper: HTMLDivElement;
@@ -45,12 +45,34 @@ class BreakView extends Component {
     this.wrapper.appendChild(messageContainer);
   }
 
-  // TODO: implement a count down timer
   private createTimerSection(): void {
     const timerWrapper = document.createElement('div');
-    timerWrapper.setAttribute('class', 'text-sm opacity-0');
-    timerWrapper.innerHTML = '00:12';
+    timerWrapper.setAttribute('class', 'text-sm');
+
+    this.timer(formattedTime => { timerWrapper.innerHTML = formattedTime; });
+
     this.wrapper.appendChild(timerWrapper);
+  }
+
+  private timer(onUpdate: (formattedTime: string) => void): void {
+    const interval = 1000 as Millisecond;
+    let remainingTime = this.windowPayload.timeout;
+
+    const formatTime = (ms: Millisecond): string => {
+      const totalSeconds = millisecondsToSeconds(ms);
+      const minutes = secondsToMinutes(totalSeconds);
+      const seconds = totalSeconds % 60;
+      return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    };
+
+    onUpdate(formatTime(remainingTime));
+
+    setInterval(() => {
+      remainingTime = (remainingTime - interval) as Millisecond;
+      if (remainingTime > 0) {
+        onUpdate(formatTime(remainingTime));
+      }
+    }, interval);
   }
 
   private createActionButtons(): void {
