@@ -48,11 +48,11 @@ class SettingsView extends Component {
         (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue as Second }; },
         settingState.settings.timeToPrepareForBreak,
       ),
-      // this.createCheckboxItem(
-      //   'Strict break (No way to skip breaks)',
-      //   (newValue) => { settingState.settings = { strictBreak: newValue }; },
-      //   settingState.settings.strictBreak,
-      // ),
+      this.createCheckboxItem(
+        'Strict break (No way to skip breaks)',
+        (newValue) => { settingState.settings = { strictBreak: newValue }; },
+        settingState.settings.strictBreak,
+      ),
       // this.createCheckboxItem(
       //   'Allow postponing breaks',
       //   (newValue) => { settingState.settings = { allowPostponingBreaks: newValue }; },
