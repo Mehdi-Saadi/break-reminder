@@ -79,11 +79,11 @@ class BreakView extends Component {
     await emit(BREAK_WINDOW_EVENT.skip);
   };
 
+  private destroyCurrentWindow = (): Promise<void> => getCurrentWindow().destroy();
+
   private initActionListeners(): void {
     listen(BREAK_WINDOW_EVENT.skip, this.destroyCurrentWindow);
   }
-
-  private destroyCurrentWindow = (): Promise<void> => getCurrentWindow().destroy();
 
   private initDestroyWindowTimeout(): void {
     setTimeout(this.destroyCurrentWindow, this.windowPayload.timeout);
