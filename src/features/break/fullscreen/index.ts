@@ -1,11 +1,11 @@
-import { BreakWindowPayload } from '@/features/break/fullscreen/communication';
-import { availableMonitors, Monitor } from '@tauri-apps/api/window';
-import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { generateRandomAlphabeticId } from '@/shared/crypto';
-import { secondsToMilliseconds } from '@/shared/time';
 import breakMessage from '@/features/break/message';
 import settingState from '@/shared/state/setting';
+import { availableMonitors, Monitor } from '@tauri-apps/api/window';
+import { BreakWindowPayload } from '@/features/break/fullscreen/communication';
+import { generateRandomAlphabeticId } from '@/shared/crypto';
 import { objectToQuery } from '@/shared/url';
+import { secondsToMilliseconds } from '@/shared/time';
+import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 interface IWebviewWindowParams {
   x?: number;
@@ -85,6 +85,8 @@ class FullscreenBreak {
     await this.createFullscreenBreak({
       message: breakMessage.getShortBreakMessage(),
       timeout: secondsToMilliseconds(settingState.settings.shortBreakDuration),
+      showSkipBtn: !settingState.settings.strictBreak,
+      showPostponeBtn: settingState.settings.allowPostponingBreaks,
     });
   }
 
@@ -92,6 +94,8 @@ class FullscreenBreak {
     await this.createFullscreenBreak({
       message: breakMessage.getLongBreakMessage(),
       timeout: secondsToMilliseconds(settingState.settings.longBreakDuration),
+      showSkipBtn: !settingState.settings.strictBreak,
+      showPostponeBtn: settingState.settings.allowPostponingBreaks,
     });
   }
 }
