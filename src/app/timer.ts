@@ -1,7 +1,10 @@
-import { minutesToMilliseconds, secondsToMilliseconds, Second } from '@/shared/time.ts';
 import fullscreenBreak from '@/features/break/fullscreen';
-import settingState from '@/shared/state/setting';
 import notify from '@/app/notification.ts';
+import settingState from '@/shared/state/setting';
+import { BREAK_WINDOW_EVENT } from '@/features/break/fullscreen/communication';
+import { listen } from '@tauri-apps/api/event';
+import { minutesToMilliseconds, Second, secondsToMilliseconds } from '@/shared/time.ts';
+import { playPreBreakAudio, playStopBreakAudio } from '@/features/break/audio';
 
 class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
@@ -11,11 +14,13 @@ class Timer {
 
   constructor() {
     this.startWork();
+    this.initBreakWindowListeners();
   }
 
   private startWork = (): void => {
     this.setWorkTimeout();
     this.setPrepareForBreakTimeout();
+    this.playStopBreakAudioIfNeeded();
   };
 
   private setWorkTimeout(): void {
@@ -37,6 +42,8 @@ class Timer {
     } else {
       await this.takeShortBreak();
     }
+
+    await this.playPreBreakAudioIfNeeded();
   };
 
   private shouldTakeLongBreak(): boolean {
@@ -53,6 +60,18 @@ class Timer {
     const prepareForBreakTime = workTime - prepareTime;
 
     this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreakIfNeeded, prepareForBreakTime);
+  }
+
+  private async playPreBreakAudioIfNeeded(): Promise<void> {
+    if (settingState.settings.audibleAlert) {
+      await playPreBreakAudio();
+    }
+  }
+
+  private async playStopBreakAudioIfNeeded(): Promise<void> {
+    if (settingState.settings.audibleAlert && this.countOfShortWorks) {
+      await playStopBreakAudio();
+    }
   }
 
   private clearPrepareForBreakTimeout(): void {
@@ -89,6 +108,13 @@ class Timer {
     await fullscreenBreak.longBreak();
 
     this.setBreakTimeout(settingState.settings.longBreakDuration);
+  }
+
+  private initBreakWindowListeners(): void {
+    listen(BREAK_WINDOW_EVENT.skip, () => {
+      this.clearBreakTimeout();
+      this.startWork();
+    });
   }
 }
 

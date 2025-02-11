@@ -5,3 +5,8 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+declare module '*.wav' {
+  const src: string;
+  export default src;
+}

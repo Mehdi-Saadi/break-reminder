@@ -27,13 +27,13 @@ class AdvancedView extends Component {
       settingState.settings.notification,
       (newValue) => (settingState.settings = { notification: newValue })
     );
-    // this.createSettingItem(
-    //   'Audible Alert',
-    //   'Play an audible alert at the end of breaks',
-    //   'musicNote',
-    //   settingState.settings.audibleAlert,
-    //   (newValue) => (settingState.settings = { audibleAlert: newValue })
-    // );
+    this.createSettingItem(
+      'Audible Alert',
+      'Play an audible alert at the end of breaks',
+      'musicNote',
+      settingState.settings.audibleAlert,
+      (newValue) => (settingState.settings = { audibleAlert: newValue })
+    );
     // this.createSettingItem(
     //   'Smart Pause',
     //   'Pause reminder if system is idle',
