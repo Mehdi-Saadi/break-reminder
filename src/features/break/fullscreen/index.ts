@@ -1,4 +1,4 @@
-import { BreakWindowPayload } from '@/features/break/fullscreen/types';
+import { BreakWindowPayload } from '@/features/break/fullscreen/communication';
 import { availableMonitors, Monitor } from '@tauri-apps/api/window';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
