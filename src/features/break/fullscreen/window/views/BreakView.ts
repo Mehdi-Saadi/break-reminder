@@ -1,8 +1,9 @@
 import ActionButton from '@/features/break/fullscreen/window/components/ActionButton';
-import { BreakWindowPayload } from '@/features/break/fullscreen/types';
 import Component from '@/shared/ui/base/Component.ts';
-import { Millisecond } from '@/shared/time';
+import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/features/break/fullscreen/communication';
+import { emit, listen } from '@tauri-apps/api/event';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { Millisecond } from '@/shared/time';
 
 class BreakView extends Component {
   private wrapper: HTMLDivElement;
@@ -17,10 +18,12 @@ class BreakView extends Component {
     this.windowPayload = this.getBreakWindowPayloadFromUrl();
 
     this.createMessageSection();
-    // this.createTimerSection();
-    // this.createActionButtons();
+    this.createTimerSection();
+    this.createActionButtons();
 
     this.element.appendChild(this.wrapper);
+
+    this.initActionListeners();
     this.initDestroyWindowTimeout();
   }
 
@@ -30,6 +33,8 @@ class BreakView extends Component {
     return {
       message: searchParams.get('message') || undefined,
       timeout: parseInt(searchParams.get('timeout') || '20000') as Millisecond,
+      showSkipBtn: searchParams.get('showSkipBtn') !== 'false',
+      showPostponeBtn: searchParams.get('showPostponeBtn') !== 'false'
     };
   }
 
@@ -48,23 +53,40 @@ class BreakView extends Component {
     this.wrapper.appendChild(timerWrapper);
   }
 
-  // TODO: implement action buttons for skipping and postponing break
   private createActionButtons(): void {
     const actionWrapper = document.createElement('div');
-    actionWrapper.setAttribute('class', 'flex items-center text-xs opacity-0');
+    actionWrapper.setAttribute('class', 'flex items-center text-xs');
+
+    // Todo: implement postpone functionality
     // postpone
-    const postponeButton = new ActionButton('Postpone');
-    postponeButton.mount(actionWrapper);
-    this.addChild(postponeButton);
+    if (this.windowPayload.showPostponeBtn) {
+      const postponeButton = new ActionButton('Postpone');
+      postponeButton.mount(actionWrapper);
+      this.addChild(postponeButton);
+    }
+
     // skip
-    const skipButton = new ActionButton('Skip');
-    skipButton.mount(actionWrapper);
-    this.addChild(skipButton);
+    if (this.windowPayload.showSkipBtn) {
+      const skipButton = new ActionButton('Skip', this.onSkip);
+      skipButton.mount(actionWrapper);
+      this.addChild(skipButton);
+    }
+
     this.wrapper.appendChild(actionWrapper);
   }
 
+  private onSkip = async (): Promise<void> => {
+    await emit(BREAK_WINDOW_EVENT.skip);
+  };
+
+  private initActionListeners(): void {
+    listen(BREAK_WINDOW_EVENT.skip, this.destroyCurrentWindow);
+  }
+
+  private destroyCurrentWindow = (): Promise<void> => getCurrentWindow().destroy();
+
   private initDestroyWindowTimeout(): void {
-    setTimeout(async () => await getCurrentWindow().destroy(), this.windowPayload.timeout);
+    setTimeout(this.destroyCurrentWindow, this.windowPayload.timeout);
   }
 }
 
