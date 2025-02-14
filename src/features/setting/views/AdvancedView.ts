@@ -55,6 +55,13 @@ class AdvancedView extends Component {
       settingState.settings.darkMode,
       (newValue) => (settingState.settings = { darkMode: newValue })
     );
+    this.createSettingItem(
+      'Run on startup',
+      '',
+      'presentToAll',
+      settingState.settings.autostart,
+      (newValue) => (settingState.settings = { autostart: newValue })
+    );
   }
 
   private createSettingItem(
