@@ -3,12 +3,11 @@ import { disable, enable, isEnabled } from '@tauri-apps/plugin-autostart';
 import { settingStateEventBus } from '@/shared/event/setting';
 
 const enableAutoStartIfNeeded = async (): Promise<void> => {
-  const checkIsEnabled = await isEnabled();
+  const isAutoStartEnabled = await isEnabled();
+  const shouldEnable = settingState.settings.autostart;
 
-  if (settingState.settings.autostart && !checkIsEnabled) {
-    await enable();
-  } else if (checkIsEnabled) {
-    await disable();
+  if (shouldEnable !== isAutoStartEnabled) {
+    await (shouldEnable ? enable() : disable());
   }
 };
 
