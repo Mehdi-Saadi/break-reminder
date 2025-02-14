@@ -19,6 +19,7 @@ interface ISettings {
   postponeDuration: Minute;
 
   // advanced
+  autostart: boolean;
   doNotDisturb: boolean;
   notification: boolean;
   audibleAlert: boolean;
@@ -43,6 +44,7 @@ class SettingState {
     strictBreak: false,
     allowPostponingBreaks: false,
     postponeDuration: 5 as Minute,
+    autostart: true,
     doNotDisturb: true,
     notification: true,
     audibleAlert: true,
