@@ -11,10 +11,12 @@ class Timer {
   private prepareForBreakTimeout: NodeJS.Timeout | null = null;
   private breakTimeout: NodeJS.Timeout | null = null;
   private countOfShortWorks: number = 0;
+  private isFirstWork: boolean = true;
 
   constructor() {
     this.startWork();
     this.initBreakWindowListeners();
+    this.isFirstWork = false;
   }
 
   private startWork = (): void => {
@@ -62,6 +64,13 @@ class Timer {
     this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreakIfNeeded, prepareForBreakTime);
   }
 
+  private clearPrepareForBreakTimeout(): void {
+    if (this.prepareForBreakTimeout) {
+      clearTimeout(this.prepareForBreakTimeout);
+      this.prepareForBreakTimeout = null;
+    }
+  }
+
   private async playPreBreakAudioIfNeeded(): Promise<void> {
     if (settingState.settings.audibleAlert) {
       await playPreBreakAudio();
@@ -69,15 +78,8 @@ class Timer {
   }
 
   private async playStopBreakAudioIfNeeded(): Promise<void> {
-    if (settingState.settings.audibleAlert && this.countOfShortWorks) {
+    if (settingState.settings.audibleAlert && !this.isFirstWork) {
       await playStopBreakAudio();
-    }
-  }
-
-  private clearPrepareForBreakTimeout(): void {
-    if (this.prepareForBreakTimeout) {
-      clearTimeout(this.prepareForBreakTimeout);
-      this.prepareForBreakTimeout = null;
     }
   }
 
