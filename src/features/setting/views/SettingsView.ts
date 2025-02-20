@@ -83,11 +83,11 @@ class SettingsView extends Component {
     onChange: (newValue: number) => void,
     initialValue: number,
     step: number = 5,
-    max: number = 120,
+    max: number = 900,
   ): SettingItem {
     const settingItem = new SettingItem(label);
 
-    const numberField = new NumberField(step, max, onChange, initialValue);
+    const numberField = new NumberField(onChange, step, max, initialValue);
     settingItem.addChild(numberField);
     numberField.mount(settingItem.buttonContainer);
 
