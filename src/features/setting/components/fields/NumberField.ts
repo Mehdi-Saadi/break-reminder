@@ -7,10 +7,10 @@ class NumberField extends Component {
   protected inputField: HTMLInputElement;
 
   constructor(
-    public step: number,
-    public max: number,
     private onChange?: (newValue: number) => void,
-    initialValue: number = 0,
+    public step: number = 5,
+    public max: number = 900,
+    initialValue: number = 1,
   ) {
     super('div', 'flex items-center border border-gray-300 rounded-md overflow-hidden relative');
 
@@ -57,15 +57,15 @@ class NumberField extends Component {
   private decrease = (): void => {
     const newValue = Number(this.inputField.value) - this.step;
 
-    this.inputField.value = String(newValue < 0 ? 0 : newValue);
+    this.inputField.value = String(newValue <= 0 ? 1 : newValue);
     this.onChange?.(Number(this.inputField.value));
   };
 
   private onInput = (): void => {
     let newValue = this.inputField.value.replace(/\D/g, '');
 
-    if (!newValue) {
-      newValue = '0';
+    if (!newValue || Number(newValue) <= 0) {
+      newValue = '1';
     } else if (Number(newValue) > this.max) {
       newValue = newValue.slice(0, -1);
     }
