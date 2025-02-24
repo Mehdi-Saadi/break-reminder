@@ -55,7 +55,7 @@ Make sure you've installed [Tauri](https://tauri.app) on your system
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/your-repo/break-reminder.git
+git clone https://github.com/Mehdi-Saadi/break-reminder.git
 cd break-reminder
 ```
 
