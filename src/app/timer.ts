@@ -20,20 +20,25 @@ class Timer {
   }
 
   private startWork = (): void => {
-    this.setWorkTimeout();
-    this.setPrepareForBreakTimeout();
+    this.resetWorkTimeout();
+    this.resetPrepareForBreakTimeout();
     this.playStopBreakAudioIfNeeded();
   };
 
   private setWorkTimeout(): void {
     this.workTimeout = setTimeout(this.takeBreak, minutesToMilliseconds(settingState.settings.shortWorkDuration));
-  };
+  }
 
   private clearWorkTimeout(): void {
     if (this.workTimeout) {
       clearTimeout(this.workTimeout);
       this.workTimeout = null;
     }
+  }
+
+  private resetWorkTimeout(): void {
+    this.clearWorkTimeout();
+    this.setWorkTimeout();
   }
 
   private takeBreak = async (): Promise<void> => {
@@ -71,6 +76,11 @@ class Timer {
     }
   }
 
+  private resetPrepareForBreakTimeout(): void {
+    this.clearPrepareForBreakTimeout();
+    this.setPrepareForBreakTimeout();
+  }
+
   private async playPreBreakAudioIfNeeded(): Promise<void> {
     if (settingState.settings.audibleAlert) {
       await playPreBreakAudio();
@@ -100,16 +110,21 @@ class Timer {
     }
   }
 
+  private resetBreakTimeout(seconds: Second): void {
+    this.clearBreakTimeout();
+    this.setBreakTimeout(seconds);
+  }
+
   private async takeShortBreak(): Promise<void> {
     await fullscreenBreak.shortBreak();
 
-    this.setBreakTimeout(settingState.settings.shortBreakDuration);
+    this.resetBreakTimeout(settingState.settings.shortBreakDuration);
   }
 
   private async takeLongBreak(): Promise<void> {
     await fullscreenBreak.longBreak();
 
-    this.setBreakTimeout(settingState.settings.longBreakDuration);
+    this.resetBreakTimeout(settingState.settings.longBreakDuration);
   }
 
   private initBreakWindowListeners(): void {
