@@ -45,7 +45,10 @@ class Timer {
 
   private takeBreakIfNeeded = async (): Promise<void> => {
     // if focused window is maximized, skip break and start work again
-    if (await invoke('check_focused_window_maximized')) {
+    if (
+      settingState.settings.doNotDisturb &&
+      await invoke('check_focused_window_maximized')
+    ) {
       this.startWork();
     } else {
       await this.takeBreak();
