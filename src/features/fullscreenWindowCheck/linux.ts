@@ -2,6 +2,13 @@ import { Command } from '@tauri-apps/plugin-shell';
 
 const isFullscreenOrMaximizedLinux = async (): Promise<boolean> => {
   try {
+    // Check if xdotool and xprop are installed
+    const checkCmd = await Command.create('which', ['xdotool']).execute();
+    if (!checkCmd.stdout.trim()) {
+      console.error('xdotool is not installed.');
+      return false;
+    }
+
     const activeWindowCmd = await Command.create('xdotool', ['getactivewindow']).execute();
     const windowId = activeWindowCmd.stdout.trim();
 

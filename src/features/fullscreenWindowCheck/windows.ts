@@ -32,12 +32,12 @@ const isFullscreenOrMaximizedWindows = async (): Promise<boolean> => {
       
       $isFullscreen = ($rect.Left -eq 0 -and $rect.Top -eq 0 -and $rect.Right -eq $screenWidth -and $rect.Bottom -eq $screenHeight)
       
-      Write-Output ($isMaximized -or $isFullscreen)
+      Write-Output ($isMaximized -or $isFullscreen) | Out-String
       `,
     ]);
 
     const output = await cmd.execute();
-    return output.stdout.trim() === 'True';
+    return output.stdout.trim().toLowerCase() === 'true';
   } catch (error) {
     console.error('Error checking fullscreen state on Windows:', error);
     return false;

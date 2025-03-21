@@ -9,9 +9,13 @@ const isFullscreenOrMaximizedMacOS = async (): Promise<boolean> => {
         set frontApp to name of first application process whose frontmost is true
         tell application frontApp
           try
-            set isFullscreen to window 1's fullscreen
-            set isZoomed to window 1's zoomed
-            return isFullscreen or isZoomed
+            if (count of windows) > 0 then
+              set isFullscreen to window 1's fullscreen
+              set isZoomed to window 1's zoomed
+              return (isFullscreen or isZoomed)
+            else
+              return false
+            end if
           on error
             return false
           end try
@@ -21,7 +25,7 @@ const isFullscreenOrMaximizedMacOS = async (): Promise<boolean> => {
     ]);
 
     const output = await cmd.execute();
-    return output.stdout.trim() === 'true';
+    return output.stdout.trim().toLowerCase() === 'true';
   } catch (error) {
     console.error('Error checking fullscreen state on macOS:', error);
     return false;
