@@ -61,6 +61,18 @@ class Timer {
     return false;
   }
 
+  private async takeLongBreak(): Promise<void> {
+    await fullscreenBreak.longBreak();
+
+    this.resetBreakTimeout(settingState.settings.longBreakDuration);
+  }
+
+  private async takeShortBreak(): Promise<void> {
+    await fullscreenBreak.shortBreak();
+
+    this.resetBreakTimeout(settingState.settings.shortBreakDuration);
+  }
+
   private resetPrepareForBreakTimeout(): void {
     this.clearPrepareForBreakTimeout();
     this.setPrepareForBreakTimeout();
@@ -113,18 +125,6 @@ class Timer {
       clearTimeout(this.breakTimeout);
       this.breakTimeout = null;
     }
-  }
-
-  private async takeShortBreak(): Promise<void> {
-    await fullscreenBreak.shortBreak();
-
-    this.resetBreakTimeout(settingState.settings.shortBreakDuration);
-  }
-
-  private async takeLongBreak(): Promise<void> {
-    await fullscreenBreak.longBreak();
-
-    this.resetBreakTimeout(settingState.settings.longBreakDuration);
   }
 
   private initBreakWindowListeners(): void {
