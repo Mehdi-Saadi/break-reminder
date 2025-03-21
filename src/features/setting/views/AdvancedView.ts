@@ -12,14 +12,13 @@ class AdvancedView extends Component {
   }
 
   private createSettingItems(): void {
-    // todo: implement more setting options
-    // this.createSettingItem(
-    //   'Do Not Disturb',
-    //   'Skip the break if the active window is in fullscreen mode',
-    //   'doNotDisturbOn',
-    //   settingState.settings.doNotDisturb,
-    //   (newValue) => (settingState.settings = { doNotDisturb: newValue })
-    // );
+    this.createSettingItem(
+      'Do Not Disturb',
+      'Skip the break if the active window is in fullscreen mode',
+      'doNotDisturbOn',
+      settingState.settings.doNotDisturb,
+      (newValue) => (settingState.settings = { doNotDisturb: newValue })
+    );
     this.createSettingItem(
       'Notification',
       'Show a system notification before breaks',
@@ -34,6 +33,7 @@ class AdvancedView extends Component {
       settingState.settings.audibleAlert,
       (newValue) => (settingState.settings = { audibleAlert: newValue })
     );
+    // todo: implement more setting options
     // this.createSettingItem(
     //   'Smart Pause',
     //   'Pause reminder if system is idle',
