@@ -18,7 +18,7 @@ pub fn run() {
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
-            commands::is_fullscreen_or_maximized
+            commands::check_focused_window_maximized
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
