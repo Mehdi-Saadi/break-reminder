@@ -1,32 +1,32 @@
+import breakAudio from '@/features/break/audio';
+import breakNotification from '@/features/break/notification';
 import fullscreenBreak from '@/features/break/fullscreen';
-import notify from '@/app/notification.ts';
 import settingState from '@/shared/state/setting';
 import { BREAK_WINDOW_EVENT } from '@/features/break/fullscreen/communication';
+import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { minutesToMilliseconds, Second, secondsToMilliseconds } from '@/shared/time.ts';
-import { playPreBreakAudio, playStopBreakAudio } from '@/features/break/audio';
 
 class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
   private prepareForBreakTimeout: NodeJS.Timeout | null = null;
   private breakTimeout: NodeJS.Timeout | null = null;
   private countOfShortWorks: number = 0;
-  private isFirstWork: boolean = true;
 
   constructor() {
     this.startWork();
     this.initBreakWindowListeners();
-    this.isFirstWork = false;
   }
 
   private startWork = (): void => {
     this.resetWorkTimeout();
     this.resetPrepareForBreakTimeout();
-    this.playStopBreakAudioIfNeeded();
+    breakAudio.playStopBreakAudio();
   };
 
-  private setWorkTimeout(): void {
-    this.workTimeout = setTimeout(this.takeBreak, minutesToMilliseconds(settingState.settings.shortWorkDuration));
+  private resetWorkTimeout(): void {
+    this.clearWorkTimeout();
+    this.setWorkTimeout();
   }
 
   private clearWorkTimeout(): void {
@@ -36,9 +36,11 @@ class Timer {
     }
   }
 
-  private resetWorkTimeout(): void {
-    this.clearWorkTimeout();
-    this.setWorkTimeout();
+  private setWorkTimeout(): void {
+    this.workTimeout = setTimeout(
+      this.takeBreak,
+      minutesToMilliseconds(settingState.settings.shortWorkDuration)
+    );
   }
 
   private takeBreak = async (): Promise<void> => {
@@ -50,7 +52,7 @@ class Timer {
       await this.takeShortBreak();
     }
 
-    await this.playPreBreakAudioIfNeeded();
+    await breakAudio.playPreBreakAudio();
   };
 
   private shouldTakeLongBreak(): boolean {
@@ -62,28 +64,43 @@ class Timer {
   }
 
   private async takeLongBreak(): Promise<void> {
-    await fullscreenBreak.longBreak();
+    if (!await invoke('check_focused_window_maximized')) {
+      await fullscreenBreak.longBreak();
+    }
 
     this.resetBreakTimeout(settingState.settings.longBreakDuration);
   }
 
   private async takeShortBreak(): Promise<void> {
-    await fullscreenBreak.shortBreak();
+    if (!await invoke('check_focused_window_maximized')) {
+      await fullscreenBreak.shortBreak();
+    }
 
     this.resetBreakTimeout(settingState.settings.shortBreakDuration);
+  }
+
+  private resetBreakTimeout(seconds: Second): void {
+    this.clearBreakTimeout();
+    this.setBreakTimeout(seconds);
+  }
+
+  private clearBreakTimeout(): void {
+    if (this.breakTimeout) {
+      clearTimeout(this.breakTimeout);
+      this.breakTimeout = null;
+    }
+  }
+
+  private setBreakTimeout(seconds: Second): void {
+    this.breakTimeout = setTimeout(
+      this.startWork,
+      secondsToMilliseconds(seconds)
+    );
   }
 
   private resetPrepareForBreakTimeout(): void {
     this.clearPrepareForBreakTimeout();
     this.setPrepareForBreakTimeout();
-  }
-
-  private setPrepareForBreakTimeout(): void {
-    const workTime = minutesToMilliseconds(settingState.settings.shortWorkDuration);
-    const prepareTime = secondsToMilliseconds(settingState.settings.timeToPrepareForBreak);
-    const prepareForBreakTime = workTime - prepareTime;
-
-    this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreakIfNeeded, prepareForBreakTime);
   }
 
   private clearPrepareForBreakTimeout(): void {
@@ -93,38 +110,12 @@ class Timer {
     }
   }
 
-  private async playPreBreakAudioIfNeeded(): Promise<void> {
-    if (settingState.settings.audibleAlert) {
-      await playPreBreakAudio();
-    }
-  }
+  private setPrepareForBreakTimeout(): void {
+    const workTime = minutesToMilliseconds(settingState.settings.shortWorkDuration);
+    const prepareTime = secondsToMilliseconds(settingState.settings.timeToPrepareForBreak);
+    const prepareForBreakTime = workTime - prepareTime;
 
-  private async playStopBreakAudioIfNeeded(): Promise<void> {
-    if (settingState.settings.audibleAlert && !this.isFirstWork) {
-      await playStopBreakAudio();
-    }
-  }
-
-  private notifyBeforeBreakIfNeeded = async (): Promise<void> => {
-    if (settingState.settings.notification) {
-      await notify(`Take a break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
-    }
-  };
-
-  private resetBreakTimeout(seconds: Second): void {
-    this.clearBreakTimeout();
-    this.setBreakTimeout(seconds);
-  }
-
-  private setBreakTimeout(seconds: Second): void {
-    this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
-  }
-
-  private clearBreakTimeout(): void {
-    if (this.breakTimeout) {
-      clearTimeout(this.breakTimeout);
-      this.breakTimeout = null;
-    }
+    this.prepareForBreakTimeout = setTimeout(breakNotification.show, prepareForBreakTime);
   }
 
   private initBreakWindowListeners(): void {
