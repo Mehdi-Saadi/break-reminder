@@ -3,6 +3,7 @@ import fullscreenBreak from '@/features/break/fullscreen';
 import notify from '@/app/notification.ts';
 import settingState from '@/shared/state/setting';
 import { BREAK_WINDOW_EVENT } from '@/features/break/fullscreen/communication';
+import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { minutesToMilliseconds, Second, secondsToMilliseconds } from '@/shared/time.ts';
 
@@ -60,13 +61,17 @@ class Timer {
   }
 
   private async takeLongBreak(): Promise<void> {
-    await fullscreenBreak.longBreak();
+    if (!await invoke('check_focused_window_maximized')) {
+      await fullscreenBreak.longBreak();
+    }
 
     this.resetBreakTimeout(settingState.settings.longBreakDuration);
   }
 
   private async takeShortBreak(): Promise<void> {
-    await fullscreenBreak.shortBreak();
+    if (!await invoke('check_focused_window_maximized')) {
+      await fullscreenBreak.shortBreak();
+    }
 
     this.resetBreakTimeout(settingState.settings.shortBreakDuration);
   }
@@ -92,7 +97,10 @@ class Timer {
   }
 
   private notifyBeforeBreakIfNeeded = async (): Promise<void> => {
-    if (settingState.settings.notification) {
+    if (
+      settingState.settings.notification &&
+      !await invoke('check_focused_window_maximized')
+    ) {
       await notify(`Take a break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
     }
   };
