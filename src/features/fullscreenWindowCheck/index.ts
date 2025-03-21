@@ -1,16 +1,16 @@
-import linuxCommand from '@/features/fullscreenWindowCheck/linux';
-import macosCommand from '@/features/fullscreenWindowCheck/macos';
-import winCommand from '@/features/fullscreenWindowCheck/windows';
+import isFullscreenOrMaximizedLinux from '@/features/fullscreenWindowCheck/linux';
+import isFullscreenOrMaximizedMacOS from '@/features/fullscreenWindowCheck/macos';
+import isFullscreenOrMaximizedWindows from '@/features/fullscreenWindowCheck/windows';
 import { platform } from '@tauri-apps/plugin-os';
 
 const isFullscreenOrMaximized = async (): Promise<boolean> => {
   switch (platform()) {
     case 'windows':
-      return winCommand();
+      return isFullscreenOrMaximizedWindows();
     case 'linux':
-      return linuxCommand();
+      return isFullscreenOrMaximizedLinux();
     case 'macos':
-      return macosCommand();
+      return isFullscreenOrMaximizedMacOS();
     default:
       console.error('Platform specific command does not found');
       return false;
