@@ -1,13 +1,13 @@
 import ActionButton from '@/features/break/fullscreen/window/components/ActionButton';
 import Component from '@/shared/ui/base/Component.ts';
-import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/features/break/fullscreen/communication';
+import { BREAK_WINDOW_EVENT, IBreakWindowPayload } from '@/features/break/fullscreen/communication';
 import { emit, listen } from '@tauri-apps/api/event';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Millisecond, millisecondsToSeconds, secondsToMinutes } from '@/shared/time';
 
 class BreakView extends Component {
   private wrapper: HTMLDivElement;
-  private windowPayload: BreakWindowPayload;
+  private windowPayload: IBreakWindowPayload;
 
   constructor() {
     super('div', 'w-screen h-screen flex items-center justify-center bg-black bg-opacity-80 text-gray-300 select-none');
@@ -27,7 +27,7 @@ class BreakView extends Component {
     this.initDestroyWindowTimeout();
   }
 
-  private getBreakWindowPayloadFromUrl(): BreakWindowPayload {
+  private getBreakWindowPayloadFromUrl(): IBreakWindowPayload {
     const searchParams = new URLSearchParams(window.location.search);
 
     return {

@@ -1,7 +1,7 @@
 import breakMessage from '@/features/break/message';
 import settingState from '@/shared/state/setting';
 import { availableMonitors, Monitor } from '@tauri-apps/api/window';
-import { BreakWindowPayload } from '@/features/break/fullscreen/communication';
+import { IBreakWindowPayload } from '@/features/break/fullscreen/communication';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
 import { objectToQuery } from '@/shared/url';
 import { secondsToMilliseconds } from '@/shared/time';
@@ -10,7 +10,7 @@ import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 interface IWebviewWindowParams {
   x?: number;
   y?: number;
-  query: BreakWindowPayload;
+  query: IBreakWindowPayload;
 }
 
 class FullscreenBreak {
@@ -51,7 +51,7 @@ class FullscreenBreak {
   }
 
   private async createFullscreenBreak(
-    breakWindowPayload: BreakWindowPayload
+    breakWindowPayload: IBreakWindowPayload
   ): Promise<void> {
     const monitors = await availableMonitors();
 
