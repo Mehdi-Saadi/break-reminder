@@ -1,6 +1,6 @@
 import breakAudio from '@/features/break/audio';
+import breakNotification from '@/features/break/notification';
 import fullscreenBreak from '@/features/break/fullscreen';
-import notify from '@/app/notification.ts';
 import settingState from '@/shared/state/setting';
 import { BREAK_WINDOW_EVENT } from '@/features/break/fullscreen/communication';
 import { invoke } from '@tauri-apps/api/core';
@@ -109,17 +109,8 @@ class Timer {
     const prepareTime = secondsToMilliseconds(settingState.settings.timeToPrepareForBreak);
     const prepareForBreakTime = workTime - prepareTime;
 
-    this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreakIfNeeded, prepareForBreakTime);
+    this.prepareForBreakTimeout = setTimeout(breakNotification.show, prepareForBreakTime);
   }
-
-  private notifyBeforeBreakIfNeeded = async (): Promise<void> => {
-    if (
-      settingState.settings.notification &&
-      !await invoke('check_focused_window_maximized')
-    ) {
-      await notify(`Take a break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
-    }
-  };
 
   private initBreakWindowListeners(): void {
     listen(BREAK_WINDOW_EVENT.skip, () => {
