@@ -37,7 +37,10 @@ class Timer {
   }
 
   private setWorkTimeout(): void {
-    this.workTimeout = setTimeout(this.takeBreak, minutesToMilliseconds(settingState.settings.shortWorkDuration));
+    this.workTimeout = setTimeout(
+      this.takeBreak,
+      minutesToMilliseconds(settingState.settings.shortWorkDuration)
+    );
   }
 
   private takeBreak = async (): Promise<void> => {
@@ -89,7 +92,10 @@ class Timer {
   }
 
   private setBreakTimeout(seconds: Second): void {
-    this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
+    this.breakTimeout = setTimeout(
+      this.startWork,
+      secondsToMilliseconds(seconds)
+    );
   }
 
   private resetPrepareForBreakTimeout(): void {
