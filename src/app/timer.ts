@@ -61,6 +61,11 @@ class Timer {
     return false;
   }
 
+  private resetPrepareForBreakTimeout(): void {
+    this.clearPrepareForBreakTimeout();
+    this.setPrepareForBreakTimeout();
+  }
+
   private setPrepareForBreakTimeout(): void {
     const workTime = minutesToMilliseconds(settingState.settings.shortWorkDuration);
     const prepareTime = secondsToMilliseconds(settingState.settings.timeToPrepareForBreak);
@@ -74,11 +79,6 @@ class Timer {
       clearTimeout(this.prepareForBreakTimeout);
       this.prepareForBreakTimeout = null;
     }
-  }
-
-  private resetPrepareForBreakTimeout(): void {
-    this.clearPrepareForBreakTimeout();
-    this.setPrepareForBreakTimeout();
   }
 
   private async playPreBreakAudioIfNeeded(): Promise<void> {
@@ -99,6 +99,11 @@ class Timer {
     }
   };
 
+  private resetBreakTimeout(seconds: Second): void {
+    this.clearBreakTimeout();
+    this.setBreakTimeout(seconds);
+  }
+
   private setBreakTimeout(seconds: Second): void {
     this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
   }
@@ -108,11 +113,6 @@ class Timer {
       clearTimeout(this.breakTimeout);
       this.breakTimeout = null;
     }
-  }
-
-  private resetBreakTimeout(seconds: Second): void {
-    this.clearBreakTimeout();
-    this.setBreakTimeout(seconds);
   }
 
   private async takeShortBreak(): Promise<void> {
