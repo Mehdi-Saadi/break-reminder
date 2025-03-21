@@ -20,20 +20,25 @@ class Timer {
   }
 
   private startWork = (): void => {
-    this.setWorkTimeout();
-    this.setPrepareForBreakTimeout();
+    this.resetWorkTimeout();
+    this.resetPrepareForBreakTimeout();
     this.playStopBreakAudioIfNeeded();
   };
 
   private setWorkTimeout(): void {
     this.workTimeout = setTimeout(this.takeBreak, minutesToMilliseconds(settingState.settings.shortWorkDuration));
-  };
+  }
 
   private clearWorkTimeout(): void {
     if (this.workTimeout) {
       clearTimeout(this.workTimeout);
       this.workTimeout = null;
     }
+  }
+
+  private resetWorkTimeout(): void {
+    this.clearWorkTimeout();
+    this.setWorkTimeout();
   }
 
   private takeBreak = async (): Promise<void> => {
@@ -54,6 +59,23 @@ class Timer {
       return true;
     }
     return false;
+  }
+
+  private async takeLongBreak(): Promise<void> {
+    await fullscreenBreak.longBreak();
+
+    this.resetBreakTimeout(settingState.settings.longBreakDuration);
+  }
+
+  private async takeShortBreak(): Promise<void> {
+    await fullscreenBreak.shortBreak();
+
+    this.resetBreakTimeout(settingState.settings.shortBreakDuration);
+  }
+
+  private resetPrepareForBreakTimeout(): void {
+    this.clearPrepareForBreakTimeout();
+    this.setPrepareForBreakTimeout();
   }
 
   private setPrepareForBreakTimeout(): void {
@@ -89,6 +111,11 @@ class Timer {
     }
   };
 
+  private resetBreakTimeout(seconds: Second): void {
+    this.clearBreakTimeout();
+    this.setBreakTimeout(seconds);
+  }
+
   private setBreakTimeout(seconds: Second): void {
     this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
   }
@@ -98,18 +125,6 @@ class Timer {
       clearTimeout(this.breakTimeout);
       this.breakTimeout = null;
     }
-  }
-
-  private async takeShortBreak(): Promise<void> {
-    await fullscreenBreak.shortBreak();
-
-    this.setBreakTimeout(settingState.settings.shortBreakDuration);
-  }
-
-  private async takeLongBreak(): Promise<void> {
-    await fullscreenBreak.longBreak();
-
-    this.setBreakTimeout(settingState.settings.longBreakDuration);
   }
 
   private initBreakWindowListeners(): void {

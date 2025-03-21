@@ -1,45 +1,31 @@
 import breakMessage from '@/features/break/message';
 import settingState from '@/shared/state/setting';
 import { availableMonitors, Monitor } from '@tauri-apps/api/window';
-import { BreakWindowPayload } from '@/features/break/fullscreen/communication';
+import { IBreakWindowPayload } from '@/features/break/fullscreen/communication';
 import { generateRandomAlphabeticId } from '@/shared/crypto';
 import { objectToQuery } from '@/shared/url';
 import { secondsToMilliseconds } from '@/shared/time';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 interface IWebviewWindowParams {
-  x?: number;
-  y?: number;
-  query: BreakWindowPayload;
+  monitor: Monitor;
+  query: IBreakWindowPayload;
 }
 
 class FullscreenBreak {
-  private monitors: Monitor[] = [];
-  private largestMonitor: Monitor | null = null;
-
-  constructor() {
-    this.initMonitors();
-  }
-
-  private initMonitors = async (): Promise<void> => {
-    this.monitors = await availableMonitors();
-  };
-
   // TODO: show break message only for largest monitor
-  private getLargestOrFirstMonitor(): Monitor {
-    if (!this.largestMonitor) {
-      this.largestMonitor = this.monitors.reduce((previousMonitor, currentMonitor) => {
-        if (previousMonitor.scaleFactor === currentMonitor.scaleFactor) {
-          return previousMonitor;
-        }
-        if (previousMonitor.scaleFactor > currentMonitor.scaleFactor) {
-          return previousMonitor;
-        }
-        return currentMonitor;
-      });
-    }
+  private async getLargestOrFirstMonitor(): Promise<Monitor> {
+    const monitors = await availableMonitors();
 
-    return this.largestMonitor;
+    return monitors.reduce((previousMonitor, currentMonitor) => {
+      if (previousMonitor.scaleFactor === currentMonitor.scaleFactor) {
+        return previousMonitor;
+      }
+      if (previousMonitor.scaleFactor > currentMonitor.scaleFactor) {
+        return previousMonitor;
+      }
+      return currentMonitor;
+    });
   }
 
   private createWebviewWindow(
@@ -49,9 +35,9 @@ class FullscreenBreak {
     const queryParams = params.query ? objectToQuery(params.query) : '';
 
     return new WebviewWindow(windowUniqueLabel, {
-      x: params.x,
-      y: params.y,
-      maximized: true,
+      x: params.monitor.position.x,
+      y: params.monitor.position.y,
+      fullscreen: true,
       decorations: import.meta.env.VITE_PRODUCTION === 'false',
       alwaysOnTop: true,
       skipTaskbar: import.meta.env.VITE_PRODUCTION === 'true',
@@ -64,12 +50,13 @@ class FullscreenBreak {
   }
 
   private async createFullscreenBreak(
-    breakWindowPayload: BreakWindowPayload
+    breakWindowPayload: IBreakWindowPayload
   ): Promise<void> {
-    for (const monitor of this.monitors) {
+    const monitors = await availableMonitors();
+
+    for (const monitor of monitors) {
       const breakWindow = this.createWebviewWindow({
-        x: monitor.position.x,
-        y: monitor.position.y,
+        monitor,
         query: breakWindowPayload,
       });
 
