@@ -1,6 +1,6 @@
 import { Command } from '@tauri-apps/plugin-shell';
 
-const isFullscreenOrMaximized = async (): Promise<boolean> => {
+const isFullscreenOrMaximizedMacOS = async (): Promise<boolean> => {
   try {
     const cmd = Command.create('osascript', [
       '-e',
@@ -9,7 +9,9 @@ const isFullscreenOrMaximized = async (): Promise<boolean> => {
         set frontApp to name of first application process whose frontmost is true
         tell application frontApp
           try
-            return window 1's fullscreen
+            set isFullscreen to window 1's fullscreen
+            set isZoomed to window 1's zoomed
+            return isFullscreen or isZoomed
           on error
             return false
           end try
@@ -21,9 +23,9 @@ const isFullscreenOrMaximized = async (): Promise<boolean> => {
     const output = await cmd.execute();
     return output.stdout.trim() === 'true';
   } catch (error) {
-    console.error('Error checking fullscreen state:', error);
+    console.error('Error checking fullscreen state on macOS:', error);
     return false;
   }
 };
 
-export default isFullscreenOrMaximized;
+export default isFullscreenOrMaximizedMacOS;
