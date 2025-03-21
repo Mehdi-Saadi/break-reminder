@@ -24,8 +24,9 @@ class Timer {
     breakAudio.playStopBreakAudio();
   };
 
-  private setWorkTimeout(): void {
-    this.workTimeout = setTimeout(this.takeBreak, minutesToMilliseconds(settingState.settings.shortWorkDuration));
+  private resetWorkTimeout(): void {
+    this.clearWorkTimeout();
+    this.setWorkTimeout();
   }
 
   private clearWorkTimeout(): void {
@@ -35,9 +36,8 @@ class Timer {
     }
   }
 
-  private resetWorkTimeout(): void {
-    this.clearWorkTimeout();
-    this.setWorkTimeout();
+  private setWorkTimeout(): void {
+    this.workTimeout = setTimeout(this.takeBreak, minutesToMilliseconds(settingState.settings.shortWorkDuration));
   }
 
   private takeBreak = async (): Promise<void> => {
@@ -76,9 +76,32 @@ class Timer {
     this.resetBreakTimeout(settingState.settings.shortBreakDuration);
   }
 
+  private resetBreakTimeout(seconds: Second): void {
+    this.clearBreakTimeout();
+    this.setBreakTimeout(seconds);
+  }
+
+  private clearBreakTimeout(): void {
+    if (this.breakTimeout) {
+      clearTimeout(this.breakTimeout);
+      this.breakTimeout = null;
+    }
+  }
+
+  private setBreakTimeout(seconds: Second): void {
+    this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
+  }
+
   private resetPrepareForBreakTimeout(): void {
     this.clearPrepareForBreakTimeout();
     this.setPrepareForBreakTimeout();
+  }
+
+  private clearPrepareForBreakTimeout(): void {
+    if (this.prepareForBreakTimeout) {
+      clearTimeout(this.prepareForBreakTimeout);
+      this.prepareForBreakTimeout = null;
+    }
   }
 
   private setPrepareForBreakTimeout(): void {
@@ -89,13 +112,6 @@ class Timer {
     this.prepareForBreakTimeout = setTimeout(this.notifyBeforeBreakIfNeeded, prepareForBreakTime);
   }
 
-  private clearPrepareForBreakTimeout(): void {
-    if (this.prepareForBreakTimeout) {
-      clearTimeout(this.prepareForBreakTimeout);
-      this.prepareForBreakTimeout = null;
-    }
-  }
-
   private notifyBeforeBreakIfNeeded = async (): Promise<void> => {
     if (
       settingState.settings.notification &&
@@ -104,22 +120,6 @@ class Timer {
       await notify(`Take a break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
     }
   };
-
-  private resetBreakTimeout(seconds: Second): void {
-    this.clearBreakTimeout();
-    this.setBreakTimeout(seconds);
-  }
-
-  private setBreakTimeout(seconds: Second): void {
-    this.breakTimeout = setTimeout(this.startWork, secondsToMilliseconds(seconds));
-  }
-
-  private clearBreakTimeout(): void {
-    if (this.breakTimeout) {
-      clearTimeout(this.breakTimeout);
-      this.breakTimeout = null;
-    }
-  }
 
   private initBreakWindowListeners(): void {
     listen(BREAK_WINDOW_EVENT.skip, () => {
