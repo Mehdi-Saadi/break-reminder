@@ -1,28 +1,26 @@
+import breakAudio from '@/features/break/audio';
 import fullscreenBreak from '@/features/break/fullscreen';
 import notify from '@/app/notification.ts';
 import settingState from '@/shared/state/setting';
 import { BREAK_WINDOW_EVENT } from '@/features/break/fullscreen/communication';
 import { listen } from '@tauri-apps/api/event';
 import { minutesToMilliseconds, Second, secondsToMilliseconds } from '@/shared/time.ts';
-import { playPreBreakAudio, playStopBreakAudio } from '@/features/break/audio';
 
 class Timer {
   private workTimeout: NodeJS.Timeout | null = null;
   private prepareForBreakTimeout: NodeJS.Timeout | null = null;
   private breakTimeout: NodeJS.Timeout | null = null;
   private countOfShortWorks: number = 0;
-  private isFirstWork: boolean = true;
 
   constructor() {
     this.startWork();
     this.initBreakWindowListeners();
-    this.isFirstWork = false;
   }
 
   private startWork = (): void => {
     this.resetWorkTimeout();
     this.resetPrepareForBreakTimeout();
-    this.playStopBreakAudioIfNeeded();
+    breakAudio.playStopBreakAudio();
   };
 
   private setWorkTimeout(): void {
@@ -50,7 +48,7 @@ class Timer {
       await this.takeShortBreak();
     }
 
-    await this.playPreBreakAudioIfNeeded();
+    await breakAudio.playPreBreakAudio();
   };
 
   private shouldTakeLongBreak(): boolean {
@@ -90,18 +88,6 @@ class Timer {
     if (this.prepareForBreakTimeout) {
       clearTimeout(this.prepareForBreakTimeout);
       this.prepareForBreakTimeout = null;
-    }
-  }
-
-  private async playPreBreakAudioIfNeeded(): Promise<void> {
-    if (settingState.settings.audibleAlert) {
-      await playPreBreakAudio();
-    }
-  }
-
-  private async playStopBreakAudioIfNeeded(): Promise<void> {
-    if (settingState.settings.audibleAlert && !this.isFirstWork) {
-      await playStopBreakAudio();
     }
   }
 
