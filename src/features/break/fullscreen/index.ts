@@ -8,8 +8,7 @@ import { secondsToMilliseconds } from '@/shared/time';
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 interface IWebviewWindowParams {
-  x?: number;
-  y?: number;
+  monitor: Monitor;
   query: IBreakWindowPayload;
 }
 
@@ -36,8 +35,8 @@ class FullscreenBreak {
     const queryParams = params.query ? objectToQuery(params.query) : '';
 
     return new WebviewWindow(windowUniqueLabel, {
-      x: params.x,
-      y: params.y,
+      x: params.monitor.position.x,
+      y: params.monitor.position.y,
       maximized: true,
       decorations: import.meta.env.VITE_PRODUCTION === 'false',
       alwaysOnTop: true,
@@ -57,8 +56,7 @@ class FullscreenBreak {
 
     for (const monitor of monitors) {
       const breakWindow = this.createWebviewWindow({
-        x: monitor.position.x,
-        y: monitor.position.y,
+        monitor,
         query: breakWindowPayload,
       });
 
