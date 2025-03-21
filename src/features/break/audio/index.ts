@@ -1,7 +1,6 @@
 import preBreakAudio from '@/assets/audio/on_pre_break.wav';
 import settingState from '@/shared/state/setting';
 import stopBreakAudio from '@/assets/audio/on_stop_break.wav';
-import { invoke } from '@tauri-apps/api/core';
 import { playAudio } from '@/shared/audio';
 
 const playPreBreakAudio = (): Promise<void> => playAudio(preBreakAudio);
@@ -11,10 +10,7 @@ class BreakAudio {
   private preBreakAudioHasBeenPlayed: boolean = false;
 
   async playPreBreakAudio(): Promise<void> {
-    if (
-      settingState.settings.audibleAlert &&
-      !await invoke('check_focused_window_maximized')
-    ) {
+    if (settingState.settings.audibleAlert) {
       await playPreBreakAudio();
       this.preBreakAudioHasBeenPlayed = true;
     }
