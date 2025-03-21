@@ -38,12 +38,21 @@ class Timer {
 
   private setWorkTimeout(): void {
     this.workTimeout = setTimeout(
-      this.takeBreak,
+      this.takeBreakIfNeeded,
       minutesToMilliseconds(settingState.settings.shortWorkDuration)
     );
   }
 
-  private takeBreak = async (): Promise<void> => {
+  private takeBreakIfNeeded = async (): Promise<void> => {
+    // if focused window is maximized, skip break and start work again
+    if (await invoke('check_focused_window_maximized')) {
+      this.startWork();
+    } else {
+      await this.takeBreak();
+    }
+  };
+
+  private async takeBreak(): Promise<void> {
     this.countOfShortWorks++;
 
     if (this.shouldTakeLongBreak()) {
@@ -53,7 +62,7 @@ class Timer {
     }
 
     await breakAudio.playPreBreakAudio();
-  };
+  }
 
   private shouldTakeLongBreak(): boolean {
     if (this.countOfShortWorks >= settingState.settings.countOfShortWorksForLongBreak) {
@@ -64,17 +73,13 @@ class Timer {
   }
 
   private async takeLongBreak(): Promise<void> {
-    if (!await invoke('check_focused_window_maximized')) {
-      await fullscreenBreak.longBreak();
-    }
+    await fullscreenBreak.longBreak();
 
     this.resetBreakTimeout(settingState.settings.longBreakDuration);
   }
 
   private async takeShortBreak(): Promise<void> {
-    if (!await invoke('check_focused_window_maximized')) {
-      await fullscreenBreak.shortBreak();
-    }
+    await fullscreenBreak.shortBreak();
 
     this.resetBreakTimeout(settingState.settings.shortBreakDuration);
   }
