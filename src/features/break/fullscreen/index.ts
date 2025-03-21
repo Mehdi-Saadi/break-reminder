@@ -37,7 +37,7 @@ class FullscreenBreak {
     return new WebviewWindow(windowUniqueLabel, {
       x: params.monitor.position.x,
       y: params.monitor.position.y,
-      maximized: true,
+      fullscreen: true,
       decorations: import.meta.env.VITE_PRODUCTION === 'false',
       alwaysOnTop: true,
       skipTaskbar: import.meta.env.VITE_PRODUCTION === 'true',
