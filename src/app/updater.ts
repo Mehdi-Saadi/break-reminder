@@ -1,6 +1,6 @@
 import { check } from '@tauri-apps/plugin-updater';
 import { promiseHandler } from '@/shared/promise';
-import notify from '@/app/notification';
+import notify from '@/features/notification';
 
 const installUpdateIfAvailable = async (): Promise<void> => {
   const [checkError, update] = await promiseHandler(check());
