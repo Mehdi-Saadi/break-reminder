@@ -1,4 +1,4 @@
-import notify from '@/modules/notification';
+import notify from '@/shared/notification';
 import settingState from '@/shared/state/setting';
 import { invoke } from '@tauri-apps/api/core';
 
