@@ -1,9 +1,9 @@
-type Subscriber = () => void;
+type Subscriber<T> = (newValue: T, oldValue: T) => void;
 type UnSubscribeFn = () => boolean;
 
 class State<T> {
   private _value: T;
-  private _subscribers = new Set<Subscriber>();
+  private _subscribers = new Set<Subscriber<T>>();
 
   constructor(initialValue: T) {
     this._value = initialValue;
@@ -14,11 +14,12 @@ class State<T> {
   }
 
   set value(newVal: T) {
+    const oldValue = structuredClone(this._value);
     this._value = newVal;
-    this._subscribers.forEach(sub => sub());
+    this._subscribers.forEach(sub => sub(newVal, oldValue));
   }
 
-  subscribe(callback: Subscriber): UnSubscribeFn {
+  subscribe(callback: Subscriber<T>): UnSubscribeFn {
     this._subscribers.add(callback);
 
     return (): boolean => this._subscribers.delete(callback);
