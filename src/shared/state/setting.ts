@@ -97,8 +97,8 @@ class SettingState extends State<ISettings> {
     }
   }
 
-  private saveSettingsToStorage = (): void => {
-    localStorage.setItem(this._storageKey, JSON.stringify(this.value));
+  private saveSettingsToStorage = (newValue: ISettings): void => {
+    localStorage.setItem(this._storageKey, JSON.stringify(newValue));
   };
 
   getBreakMessageById(id: UUID): string {
