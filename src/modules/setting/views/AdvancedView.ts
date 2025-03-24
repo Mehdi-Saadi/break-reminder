@@ -17,21 +17,36 @@ class AdvancedView extends Component {
       'Skip the break if the active window is in fullscreen mode',
       'doNotDisturbOn',
       settingState.value.doNotDisturb,
-      (newValue) => (settingState.value = { ...settingState.value, doNotDisturb: newValue })
+      (newValue) => {
+        settingState.value = {
+          ...settingState.value,
+          doNotDisturb: newValue
+        };
+      }
     );
     this.createSettingItem(
       'Notification',
       'Show a system notification before breaks',
       'notifications',
       settingState.value.notification,
-      (newValue) => (settingState.value = { ...settingState.value, notification: newValue })
+      (newValue) => {
+        settingState.value = {
+          ...settingState.value,
+          notification: newValue
+        };
+      }
     );
     this.createSettingItem(
       'Audible Alert',
       'Play an audible alert at the end of breaks',
       'musicNote',
       settingState.value.audibleAlert,
-      (newValue) => (settingState.value = { ...settingState.value, audibleAlert: newValue })
+      (newValue) => {
+        settingState.value = {
+          ...settingState.value,
+          audibleAlert: newValue
+        };
+      }
     );
     // todo: implement more setting options
     // this.createSettingItem(
@@ -53,14 +68,24 @@ class AdvancedView extends Component {
       '',
       'darkMode',
       settingState.value.darkMode,
-      (newValue) => (settingState.value = { ...settingState.value, darkMode: newValue })
+      (newValue) => {
+        settingState.value = {
+          ...settingState.value,
+          darkMode: newValue
+        };
+      }
     );
     this.createSettingItem(
       'Run on startup',
       '',
       'presentToAll',
       settingState.value.autostart,
-      (newValue) => (settingState.value = { ...settingState.value, autostart: newValue })
+      (newValue) => {
+        settingState.value = {
+          ...settingState.value,
+          autostart: newValue
+        };
+      }
     );
   }
 
