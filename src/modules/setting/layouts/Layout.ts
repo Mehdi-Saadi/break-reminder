@@ -1,7 +1,6 @@
 import Component from '@/shared/ui/base/Component.ts';
 import Sidebar from '@/modules/setting/layouts/Sidebar.ts';
 import settingState from '@/shared/state/setting';
-import { settingStateEventBus } from '@/shared/event/setting.ts';
 
 abstract class Layout extends Component {
   protected pageContainer: HTMLDivElement;
@@ -33,7 +32,11 @@ abstract class Layout extends Component {
   };
 
   private initThemeListener(): void {
-    settingStateEventBus.on('change', this.setTheme);
+    settingState.subscribe((newValue, oldValue) => {
+      if (newValue.darkMode !== oldValue.darkMode) {
+        this.setTheme();
+      }
+    });
   }
 }
 
