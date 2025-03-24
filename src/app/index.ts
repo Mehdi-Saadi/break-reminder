@@ -3,7 +3,7 @@ import browserShortcut from '@/shared/browserShortcut';
 import '@/app/window';
 import '@/app/timer';
 import '@/app/updater';
-import '@/app/autostart';
+import '@/features/autostart';
 import '@/features/tray';
 
 browserShortcut.disableAllInProd();
