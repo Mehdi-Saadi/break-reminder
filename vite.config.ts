@@ -39,7 +39,7 @@ export default defineConfig(async () => ({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'), // Main window
-        breakWindow: resolve(__dirname, 'src/features/break/fullscreen/window/index.html'), // Break window
+        breakWindow: resolve(__dirname, 'src/modules/break/fullscreen/window/index.html'), // Break window
       },
     },
   },

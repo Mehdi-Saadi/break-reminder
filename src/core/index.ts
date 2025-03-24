@@ -1,10 +1,10 @@
-import ViewManager from '@/features/setting/ViewManager.ts';
+import ViewManager from '@/modules/setting/ViewManager.ts';
 import browserShortcut from '@/shared/browserShortcut';
-import '@/features/window';
-import '@/features/timer';
-import '@/features/updater';
-import '@/features/autostart';
-import '@/features/tray';
+import '@/modules/window';
+import '@/modules/timer';
+import '@/modules/updater';
+import '@/modules/autostart';
+import '@/modules/tray';
 
 browserShortcut.disableAllInProd();
 
