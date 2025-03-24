@@ -9,8 +9,8 @@ class BreakMessagesView extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-4');
 
-    this.createMessageSection('Short Breaks', settingState.settings.shortBreakMessages);
-    this.createMessageSection('Long Breaks', settingState.settings.longBreakMessages);
+    this.createMessageSection('Short Breaks', settingState.value.shortBreakMessages);
+    this.createMessageSection('Long Breaks', settingState.value.longBreakMessages);
   }
 
   private createMessageSection(sectionLabel: string, breakMessages: BreakMessages): void {

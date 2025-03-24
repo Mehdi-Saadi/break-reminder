@@ -4,7 +4,7 @@ import { settingStateEventBus } from '@/shared/event/setting';
 
 const enableAutoStartIfNeeded = async (): Promise<void> => {
   const isAutoStartEnabled = await isEnabled();
-  const shouldEnable = settingState.settings.autostart;
+  const shouldEnable = settingState.value.autostart;
 
   if (shouldEnable !== isAutoStartEnabled) {
     await (shouldEnable ? enable() : disable());

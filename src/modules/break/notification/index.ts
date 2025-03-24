@@ -5,13 +5,13 @@ import { invoke } from '@tauri-apps/api/core';
 class BreakNotification {
   show = async (): Promise<void> => {
     if (
-      settingState.settings.notification &&
+      settingState.value.notification &&
       !(
-        settingState.settings.doNotDisturb &&
+        settingState.value.doNotDisturb &&
         await invoke('check_focused_window_maximized')
       )
     ) {
-      await notify(`Take a break in ${settingState.settings.timeToPrepareForBreak} seconds.`);
+      await notify(`Take a break in ${settingState.value.timeToPrepareForBreak} seconds.`);
     }
   };
 }

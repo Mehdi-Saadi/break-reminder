@@ -20,7 +20,7 @@ class BreakMessage {
 
   getShortBreakMessage(): string {
     const [message, newIndex] = this.getMessage(
-      Object.values(settingState.settings.shortBreakMessages),
+      Object.values(settingState.value.shortBreakMessages),
       this.shortBreakMessageIndex,
     );
 
@@ -31,7 +31,7 @@ class BreakMessage {
 
   getLongBreakMessage(): string {
     const [message, newIndex] = this.getMessage(
-      Object.values(settingState.settings.longBreakMessages),
+      Object.values(settingState.value.longBreakMessages),
       this.longBreakMessageIndex,
     );
 

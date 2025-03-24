@@ -17,27 +17,47 @@ class SettingsView extends Component {
     this.createSection('Short Breaks', [
       this.createNumberItem(
         'Work Duration (in minutes)',
-        (newValue) => { settingState.settings = { shortWorkDuration: newValue as Minute }; },
-        settingState.settings.shortWorkDuration,
+        (newValue) => {
+          settingState.value = {
+            ...settingState.value,
+            shortWorkDuration: newValue as Minute
+          };
+        },
+        settingState.value.shortWorkDuration,
       ),
       this.createNumberItem(
         'Break Duration (in seconds)',
-        (newValue) => { settingState.settings = { shortBreakDuration: newValue as Second }; },
-        settingState.settings.shortBreakDuration,
+        (newValue) => {
+          settingState.value = {
+            ...settingState.value,
+            shortBreakDuration: newValue as Second
+          };
+        },
+        settingState.value.shortBreakDuration,
       ),
     ]);
 
     this.createSection('Long Breaks', [
       this.createNumberItem(
         'Count of short works for a long break',
-        (newValue) => { settingState.settings = { countOfShortWorksForLongBreak: newValue }; },
-        settingState.settings.countOfShortWorksForLongBreak,
+        (newValue) => {
+          settingState.value = {
+            ...settingState.value,
+            countOfShortWorksForLongBreak: newValue
+          };
+        },
+        settingState.value.countOfShortWorksForLongBreak,
         1,
       ),
       this.createNumberItem(
         'Break Duration (in seconds)',
-        (newValue) => { settingState.settings = { longBreakDuration: newValue as Second }; },
-        settingState.settings.longBreakDuration,
+        (newValue) => {
+          settingState.value = {
+            ...settingState.value,
+            longBreakDuration: newValue as Second
+          };
+        },
+        settingState.value.longBreakDuration,
       ),
     ]);
 
@@ -45,23 +65,33 @@ class SettingsView extends Component {
     this.createSection('Options', [
       this.createNumberItem(
         'Time to prepare for a break (in seconds)',
-        (newValue) => { settingState.settings = { timeToPrepareForBreak: newValue as Second }; },
-        settingState.settings.timeToPrepareForBreak,
+        (newValue) => {
+          settingState.value = {
+            ...settingState.value,
+            timeToPrepareForBreak: newValue as Second
+          };
+        },
+        settingState.value.timeToPrepareForBreak,
       ),
       this.createCheckboxItem(
         'Strict break (No way to skip breaks)',
-        (newValue) => { settingState.settings = { strictBreak: newValue }; },
-        settingState.settings.strictBreak,
+        (newValue) => {
+          settingState.value = {
+            ...settingState.value,
+            strictBreak: newValue
+          };
+        },
+        settingState.value.strictBreak,
       ),
       // this.createCheckboxItem(
       //   'Allow postponing breaks',
-      //   (newValue) => { settingState.settings = { allowPostponingBreaks: newValue }; },
-      //   settingState.settings.allowPostponingBreaks,
+      //   (newValue) => { settingState.value = { allowPostponingBreaks: newValue }; },
+      //   settingState.value.allowPostponingBreaks,
       // ),
       // this.createNumberItem(
       //   'Postpone duration (in minutes)',
-      //   (newValue) => { settingState.settings = { postponeDuration: newValue as Minute }; },
-      //   settingState.settings.postponeDuration,
+      //   (newValue) => { settingState.value = { postponeDuration: newValue as Minute }; },
+      //   settingState.value.postponeDuration,
       // ),
     ]);
   }

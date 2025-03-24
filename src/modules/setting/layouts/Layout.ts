@@ -25,7 +25,7 @@ abstract class Layout extends Component {
   }
 
   private setTheme = (): void => {
-    if (settingState.settings.darkMode) {
+    if (settingState.value.darkMode) {
       this.element.classList.add('dark');
     } else {
       this.element.classList.remove('dark');

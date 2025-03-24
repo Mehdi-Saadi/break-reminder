@@ -14,7 +14,7 @@ describe('SettingState', () => {
   });
 
   it('should initialize with default settings if localStorage is empty', () => {
-    expect(settingState.settings).toMatchObject({
+    expect(settingState.value).toMatchObject({
       shortBreakDuration: 20,
       shortWorkDuration: 20,
       longBreakDuration: 120,
@@ -34,8 +34,11 @@ describe('SettingState', () => {
   });
 
   it('should update settings and save to localStorage', () => {
-    settingState.settings = { darkMode: true };
-    expect(settingState.settings.darkMode).toBe(true);
+    settingState.value = {
+      ...settingState.value,
+      darkMode: true
+    };
+    expect(settingState.value.darkMode).toBe(true);
     expect(JSON.parse(localStorage.getItem('settings') || '')).toMatchObject({ darkMode: true });
     expect(settingStateEventBus.emit).toHaveBeenCalledWith('change');
   });

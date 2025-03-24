@@ -16,51 +16,51 @@ class AdvancedView extends Component {
       'Do Not Disturb',
       'Skip the break if the active window is in fullscreen mode',
       'doNotDisturbOn',
-      settingState.settings.doNotDisturb,
-      (newValue) => (settingState.settings = { doNotDisturb: newValue })
+      settingState.value.doNotDisturb,
+      (newValue) => (settingState.value = { ...settingState.value, doNotDisturb: newValue })
     );
     this.createSettingItem(
       'Notification',
       'Show a system notification before breaks',
       'notifications',
-      settingState.settings.notification,
-      (newValue) => (settingState.settings = { notification: newValue })
+      settingState.value.notification,
+      (newValue) => (settingState.value = { ...settingState.value, notification: newValue })
     );
     this.createSettingItem(
       'Audible Alert',
       'Play an audible alert at the end of breaks',
       'musicNote',
-      settingState.settings.audibleAlert,
-      (newValue) => (settingState.settings = { audibleAlert: newValue })
+      settingState.value.audibleAlert,
+      (newValue) => (settingState.value = { ...settingState.value, audibleAlert: newValue })
     );
     // todo: implement more setting options
     // this.createSettingItem(
     //   'Smart Pause',
     //   'Pause reminder if system is idle',
     //   'networkIntelligence',
-    //   settingState.settings.smartPause,
-    //   (newValue) => (settingState.settings = { smartPause: newValue })
+    //   settingState.value.smartPause,
+    //   (newValue) => (settingState.value = { smartPause: newValue })
     // );
     // this.createSettingItem(
     //   'Screensaver',
     //   'Lock the screen after long breaks by starting screensaver',
     //   'lock',
-    //   settingState.settings.screensaver,
-    //   (newValue) => (settingState.settings = { screensaver: newValue })
+    //   settingState.value.screensaver,
+    //   (newValue) => (settingState.value = { screensaver: newValue })
     // );
     this.createSettingItem(
       'Dark Mode',
       '',
       'darkMode',
-      settingState.settings.darkMode,
-      (newValue) => (settingState.settings = { darkMode: newValue })
+      settingState.value.darkMode,
+      (newValue) => (settingState.value = { ...settingState.value, darkMode: newValue })
     );
     this.createSettingItem(
       'Run on startup',
       '',
       'presentToAll',
-      settingState.settings.autostart,
-      (newValue) => (settingState.settings = { autostart: newValue })
+      settingState.value.autostart,
+      (newValue) => (settingState.value = { ...settingState.value, autostart: newValue })
     );
   }
 

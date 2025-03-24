@@ -39,14 +39,14 @@ class Timer {
   private setWorkTimeout(): void {
     this.workTimeout = setTimeout(
       this.takeBreakIfNeeded,
-      minutesToMilliseconds(settingState.settings.shortWorkDuration)
+      minutesToMilliseconds(settingState.value.shortWorkDuration)
     );
   }
 
   private takeBreakIfNeeded = async (): Promise<void> => {
     // if focused window is maximized, skip break and start work again
     if (
-      settingState.settings.doNotDisturb &&
+      settingState.value.doNotDisturb &&
       await invoke('check_focused_window_maximized')
     ) {
       this.startWork();
@@ -68,7 +68,7 @@ class Timer {
   }
 
   private shouldTakeLongBreak(): boolean {
-    if (this.countOfShortWorks >= settingState.settings.countOfShortWorksForLongBreak) {
+    if (this.countOfShortWorks >= settingState.value.countOfShortWorksForLongBreak) {
       this.countOfShortWorks = 0;
       return true;
     }
@@ -78,13 +78,13 @@ class Timer {
   private async takeLongBreak(): Promise<void> {
     await fullscreenBreak.longBreak();
 
-    this.resetBreakTimeout(settingState.settings.longBreakDuration);
+    this.resetBreakTimeout(settingState.value.longBreakDuration);
   }
 
   private async takeShortBreak(): Promise<void> {
     await fullscreenBreak.shortBreak();
 
-    this.resetBreakTimeout(settingState.settings.shortBreakDuration);
+    this.resetBreakTimeout(settingState.value.shortBreakDuration);
   }
 
   private resetBreakTimeout(seconds: Second): void {
@@ -119,8 +119,8 @@ class Timer {
   }
 
   private setPrepareForBreakTimeout(): void {
-    const workTime = minutesToMilliseconds(settingState.settings.shortWorkDuration);
-    const prepareTime = secondsToMilliseconds(settingState.settings.timeToPrepareForBreak);
+    const workTime = minutesToMilliseconds(settingState.value.shortWorkDuration);
+    const prepareTime = secondsToMilliseconds(settingState.value.timeToPrepareForBreak);
     const prepareForBreakTime = workTime - prepareTime;
 
     this.prepareForBreakTimeout = setTimeout(breakNotification.show, prepareForBreakTime);

@@ -71,18 +71,18 @@ class FullscreenBreak {
   async shortBreak(): Promise<void> {
     await this.createFullscreenBreak({
       message: breakMessage.getShortBreakMessage(),
-      timeout: secondsToMilliseconds(settingState.settings.shortBreakDuration),
-      showSkipBtn: !settingState.settings.strictBreak,
-      showPostponeBtn: settingState.settings.allowPostponingBreaks,
+      timeout: secondsToMilliseconds(settingState.value.shortBreakDuration),
+      showSkipBtn: !settingState.value.strictBreak,
+      showPostponeBtn: settingState.value.allowPostponingBreaks,
     });
   }
 
   async longBreak(): Promise<void> {
     await this.createFullscreenBreak({
       message: breakMessage.getLongBreakMessage(),
-      timeout: secondsToMilliseconds(settingState.settings.longBreakDuration),
-      showSkipBtn: !settingState.settings.strictBreak,
-      showPostponeBtn: settingState.settings.allowPostponingBreaks,
+      timeout: secondsToMilliseconds(settingState.value.longBreakDuration),
+      showSkipBtn: !settingState.value.strictBreak,
+      showPostponeBtn: settingState.value.allowPostponingBreaks,
     });
   }
 }

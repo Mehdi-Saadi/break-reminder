@@ -10,7 +10,7 @@ class BreakAudio {
   private preBreakAudioHasBeenPlayed: boolean = false;
 
   async playPreBreakAudio(): Promise<void> {
-    if (settingState.settings.audibleAlert) {
+    if (settingState.value.audibleAlert) {
       await playPreBreakAudio();
       this.preBreakAudioHasBeenPlayed = true;
     }
@@ -18,7 +18,7 @@ class BreakAudio {
 
   async playStopBreakAudio(): Promise<void> {
     if (
-      settingState.settings.audibleAlert &&
+      settingState.value.audibleAlert &&
       this.preBreakAudioHasBeenPlayed
     ) {
       await playStopBreakAudio();
