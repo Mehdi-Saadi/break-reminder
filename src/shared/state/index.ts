@@ -10,7 +10,7 @@ class State<T> {
   }
 
   get value(): T {
-    return this._value;
+    return structuredClone(this._value);
   }
 
   set value(newVal: T) {
