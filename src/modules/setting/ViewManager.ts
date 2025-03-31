@@ -3,7 +3,7 @@ import BreakMessagesView from '@/modules/setting/views/BreakMessagesView.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import Layout from '@/modules/setting/layouts/Layout.ts';
 import SettingsView from '@/modules/setting/views/SettingsView.ts';
-import { NavigationPage, pageNavEventBus } from '@/shared/event/page.ts';
+import { NavigationPage, pageNavEventBus } from '@/modules/setting/events/page';
 
 class ViewManager extends Layout {
   private currentPage: Component;

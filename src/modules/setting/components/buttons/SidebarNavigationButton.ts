@@ -1,4 +1,4 @@
-import { NavigationPage, pageNavEventBus } from '@/shared/event/page.ts';
+import { NavigationPage, pageNavEventBus } from '@/modules/setting/events/page';
 import Component from '@/shared/ui/base/Component.ts';
 
 abstract class SidebarNavigationButton extends Component {
