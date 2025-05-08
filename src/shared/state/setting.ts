@@ -30,6 +30,7 @@ interface ISettings {
 
   shortBreakMessages: BreakMessages;
   longBreakMessages: BreakMessages;
+  language: 'en' | 'fa';
 }
 
 const DEFAULT_SETTINGS = Object.freeze<ISettings>({
@@ -62,6 +63,7 @@ const DEFAULT_SETTINGS = Object.freeze<ISettings>({
     'b077fa44-9219-4bfc-a665-2e3a87a95727': 'Walk for a while',
     'aa88fa9a-51a3-40a7-b8a3-35a7bdf247d0': 'Lean back at your seat and relax',
   },
+  language: 'en',
 });
 
 class SettingState extends State<ISettings> {

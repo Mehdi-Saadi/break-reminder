@@ -3,6 +3,7 @@ import Component from '@/shared/ui/base/Component.ts';
 import SettingItem from '@/modules/setting/components/SettingItem.ts';
 import settingState from '@/shared/state/setting';
 import icon, { IconName } from '@/shared/ui/icons.ts';
+import t from '@/modules/i18n';
 
 class AdvancedView extends Component {
   constructor() {
@@ -13,8 +14,8 @@ class AdvancedView extends Component {
 
   private createSettingItems(): void {
     this.createSettingItem(
-      'Do Not Disturb',
-      'Skip the break if the active window is in fullscreen mode',
+      t('doNotDisturb'),
+      t('doNotDisturbInfo'),
       'doNotDisturbOn',
       settingState.value.doNotDisturb,
       (newValue) => {
@@ -25,8 +26,8 @@ class AdvancedView extends Component {
       }
     );
     this.createSettingItem(
-      'Notification',
-      'Show a system notification before breaks',
+      t('notification'),
+      t('notificationInfo'),
       'notifications',
       settingState.value.notification,
       (newValue) => {
@@ -37,8 +38,8 @@ class AdvancedView extends Component {
       }
     );
     this.createSettingItem(
-      'Audible Alert',
-      'Play an audible alert at the end of breaks',
+      t('audibleAlert'),
+      t('audibleAlertInfo'),
       'musicNote',
       settingState.value.audibleAlert,
       (newValue) => {
@@ -64,7 +65,7 @@ class AdvancedView extends Component {
     //   (newValue) => (settingState.value = { screensaver: newValue })
     // );
     this.createSettingItem(
-      'Dark Mode',
+      t('darkMode'),
       '',
       'darkMode',
       settingState.value.darkMode,
@@ -76,7 +77,7 @@ class AdvancedView extends Component {
       }
     );
     this.createSettingItem(
-      'Run on startup',
+      t('runOnStartup'),
       '',
       'presentToAll',
       settingState.value.autostart,
@@ -111,7 +112,7 @@ class AdvancedView extends Component {
 
   private createLabelContent(label: string, caption: string, iconName: IconName): HTMLElement {
     const wrapper = document.createElement('div');
-    wrapper.setAttribute('class', 'flex items-center space-x-1');
+    wrapper.setAttribute('class', 'flex items-center space-x-1 rtl:space-x-reverse');
 
     wrapper.innerHTML = icon(iconName, 'size-5');
 

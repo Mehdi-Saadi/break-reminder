@@ -2,6 +2,7 @@ import Component from '@/shared/ui/base/Component.ts';
 import BreakMessageItem from '@/modules/setting/components/BreakMessageItem.ts';
 import SettingSection from '@/modules/setting/components/SettingSection.ts';
 import settingState from '@/shared/state/setting';
+import t from '@/modules/i18n';
 import { BreakMessages } from '@/shared/types';
 import { UUID } from '@/shared/crypto';
 
@@ -9,8 +10,8 @@ class BreakMessagesView extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-4');
 
-    this.createMessageSection('Short Breaks', settingState.value.shortBreakMessages);
-    this.createMessageSection('Long Breaks', settingState.value.longBreakMessages);
+    this.createMessageSection(t('shortBreaks'), settingState.value.shortBreakMessages);
+    this.createMessageSection(t('longBreaks'), settingState.value.longBreakMessages);
   }
 
   private createMessageSection(sectionLabel: string, breakMessages: BreakMessages): void {

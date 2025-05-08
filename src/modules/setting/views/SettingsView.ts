@@ -4,6 +4,7 @@ import NumberField from '@/modules/setting/components/fields/NumberField.ts';
 import SettingItem from '@/modules/setting/components/SettingItem.ts';
 import SettingSection from '@/modules/setting/components/SettingSection.ts';
 import settingState from '@/shared/state/setting';
+import t from '@/modules/i18n';
 import { Minute, Second } from '@/shared/time';
 
 class SettingsView extends Component {
@@ -14,9 +15,9 @@ class SettingsView extends Component {
   }
 
   private createSections(): void {
-    this.createSection('Short Breaks', [
+    this.createSection(t('shortBreaks'), [
       this.createNumberItem(
-        'Work Duration (in minutes)',
+        t('workDurationInMinutes'),
         (newValue) => {
           settingState.value = {
             ...settingState.value,
@@ -26,7 +27,7 @@ class SettingsView extends Component {
         settingState.value.shortWorkDuration,
       ),
       this.createNumberItem(
-        'Break Duration (in seconds)',
+        t('breakDurationInSeconds'),
         (newValue) => {
           settingState.value = {
             ...settingState.value,
@@ -37,9 +38,9 @@ class SettingsView extends Component {
       ),
     ]);
 
-    this.createSection('Long Breaks', [
+    this.createSection(t('longBreaks'), [
       this.createNumberItem(
-        'Count of short works for a long break',
+        t('countOfShortWorksForLongBreak'),
         (newValue) => {
           settingState.value = {
             ...settingState.value,
@@ -50,7 +51,7 @@ class SettingsView extends Component {
         1,
       ),
       this.createNumberItem(
-        'Break Duration (in seconds)',
+        t('breakDurationInSeconds'),
         (newValue) => {
           settingState.value = {
             ...settingState.value,
@@ -62,9 +63,9 @@ class SettingsView extends Component {
     ]);
 
     // todo: implement more setting options
-    this.createSection('Options', [
+    this.createSection(t('options'), [
       this.createNumberItem(
-        'Time to prepare for a break (in seconds)',
+        t('timeToPrepareForBreakInSeconds'),
         (newValue) => {
           settingState.value = {
             ...settingState.value,
@@ -74,7 +75,7 @@ class SettingsView extends Component {
         settingState.value.timeToPrepareForBreak,
       ),
       this.createCheckboxItem(
-        'Strict break (No way to skip breaks)',
+        t('strictBreakNoWayToSkip'),
         (newValue) => {
           settingState.value = {
             ...settingState.value,

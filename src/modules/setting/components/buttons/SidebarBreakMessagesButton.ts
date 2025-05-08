@@ -1,12 +1,13 @@
 import SidebarNavigationButton from '@/modules/setting/components/buttons/SidebarNavigationButton.ts';
 import icon from '@/shared/ui/icons.ts';
+import t from '@/modules/i18n';
 
 class SidebarBreakMessagesButton extends SidebarNavigationButton {
   constructor() {
     super(
       'break_messages',
       icon('chatBubble', 'size-5 me-1.5'),
-      'Break Messages',
+      t('breakMessages'),
     );
   }
 }
