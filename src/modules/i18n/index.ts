@@ -16,6 +16,10 @@ settingState.subscribe((newValue): void => {
   }
 });
 
+if (language === 'fa') {
+  document.body.dir = 'rtl';
+}
+
 const t = (key: KeyWord): string => translations[language]?.[key] ?? key;
 
 export default t;
