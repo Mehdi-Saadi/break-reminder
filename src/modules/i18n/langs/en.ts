@@ -23,6 +23,7 @@ const en = {
   language: 'Language',
   skip: 'Skip',
   postpone: 'Postpone',
+  breakSchedule: 'Break Schedule',
 };
 
 export default en;

@@ -25,6 +25,7 @@ const fa: Words = {
   language: 'زبان',
   skip: 'رد کردن',
   postpone: 'به تعویق انداختن',
+  breakSchedule: 'برنامه استراحت',
 };
 
 export default fa;
