@@ -7,7 +7,7 @@ import settingState from '@/shared/state/setting';
 import t from '@/modules/i18n';
 import { Minute, Second } from '@/shared/time';
 
-class SettingsView extends Component {
+class BreakScheduleView extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-4');
 
@@ -140,4 +140,4 @@ class SettingsView extends Component {
   }
 }
 
-export default SettingsView;
+export default BreakScheduleView;

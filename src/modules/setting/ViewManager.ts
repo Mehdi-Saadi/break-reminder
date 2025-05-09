@@ -3,7 +3,7 @@ import BreakMessagesView from '@/modules/setting/views/BreakMessagesView.ts';
 import GeneralView from '@/modules/setting/views/GeneralView.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import Layout from '@/modules/setting/layouts/Layout.ts';
-import SettingsView from '@/modules/setting/views/SettingsView.ts';
+import BreakScheduleView from '@/modules/setting/views/BreakScheduleView.ts';
 import { NavigationPage, pageNavEventBus } from '@/modules/setting/events/page';
 
 class ViewManager extends Layout {
@@ -25,8 +25,8 @@ class ViewManager extends Layout {
         case 'general':
           this.currentPage = new GeneralView();
           break;
-        case 'settings':
-          this.currentPage = new SettingsView();
+        case 'break_schedule':
+          this.currentPage = new BreakScheduleView();
           break;
         case 'advanced':
           this.currentPage = new AdvancedView();
