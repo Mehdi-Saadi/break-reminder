@@ -1,5 +1,6 @@
 import AdvancedView from '@/modules/setting/views/AdvancedView.ts';
 import BreakMessagesView from '@/modules/setting/views/BreakMessagesView.ts';
+import GeneralView from '@/modules/setting/views/GeneralView.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import Layout from '@/modules/setting/layouts/Layout.ts';
 import SettingsView from '@/modules/setting/views/SettingsView.ts';
@@ -11,7 +12,7 @@ class ViewManager extends Layout {
   constructor() {
     super();
 
-    this.currentPage = new SettingsView();
+    this.currentPage = new GeneralView();
     this.displayPage();
     this.initNavigationEvents();
   }
@@ -21,14 +22,17 @@ class ViewManager extends Layout {
       this.currentPage.unmount();
 
       switch (selectedPage) {
+        case 'general':
+          this.currentPage = new GeneralView();
+          break;
         case 'settings':
           this.currentPage = new SettingsView();
           break;
-        case 'break_messages':
-          this.currentPage = new BreakMessagesView();
-          break;
         case 'advanced':
           this.currentPage = new AdvancedView();
+          break;
+        case 'break_messages':
+          this.currentPage = new BreakMessagesView();
           break;
       }
 
