@@ -15,7 +15,7 @@ class BreakScheduleView extends Component {
   }
 
   private createSections(): void {
-    this.createSection(t('shortBreaks'), [
+    this.createSection(t('workSession'), [
       this.createNumberItem(
         t('workDurationInMinutes'),
         (newValue) => {
@@ -26,6 +26,9 @@ class BreakScheduleView extends Component {
         },
         settingState.value.shortWorkDuration,
       ),
+    ]);
+
+    this.createSection(t('shortBreaks'), [
       this.createNumberItem(
         t('breakDurationInSeconds'),
         (newValue) => {
