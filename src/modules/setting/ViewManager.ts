@@ -1,4 +1,5 @@
 import AdvancedView from '@/modules/setting/views/AdvancedView.ts';
+import BehaviorView from '@/modules/setting/views/BehaviorView.ts';
 import BreakMessagesView from '@/modules/setting/views/BreakMessagesView.ts';
 import GeneralView from '@/modules/setting/views/GeneralView.ts';
 import Component from '@/shared/ui/base/Component.ts';
@@ -27,6 +28,9 @@ class ViewManager extends Layout {
           break;
         case 'break_schedule':
           this.currentPage = new BreakScheduleView();
+          break;
+        case 'behavior':
+          this.currentPage = new BehaviorView();
           break;
         case 'advanced':
           this.currentPage = new AdvancedView();
