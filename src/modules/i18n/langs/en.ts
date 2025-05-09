@@ -20,6 +20,7 @@ const en = {
   darkMode: 'Dark Mode',
   runOnStartup: 'Run on startup',
   quit: 'Quit',
+  language: 'Language',
 };
 
 export default en;

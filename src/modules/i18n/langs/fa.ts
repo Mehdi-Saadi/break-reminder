@@ -22,6 +22,7 @@ const fa: Words = {
   darkMode: 'حالت تاریک',
   runOnStartup: 'اجرا در هنگام راه‌اندازی',
   quit: 'ترک کردن',
+  language: 'زبان',
 };
 
 export default fa;
