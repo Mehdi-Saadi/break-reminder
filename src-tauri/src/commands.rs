@@ -1,8 +1,8 @@
 #[cfg(target_os = "windows")]
 #[tauri::command]
-pub fn check_focused_window_maximized() -> bool {
-    use winapi::um::winuser::{GetForegroundWindow, GetSystemMetrics, GetWindowRect, IsZoomed};
-    use winapi::um::winuser::{SM_CXSCREEN, SM_CYSCREEN};
+pub fn check_focused_window_fullscreen() -> bool {
+    use winapi::um::winuser::{GetForegroundWindow, GetWindowRect, MonitorFromWindow, GetMonitorInfoW, MONITORINFO, MONITOR_DEFAULTTONEAREST};
+    use std::mem::zeroed;
 
     unsafe {
         let hwnd = GetForegroundWindow();
@@ -10,30 +10,32 @@ pub fn check_focused_window_maximized() -> bool {
             return false;
         }
 
-        // Check if the window is maximized (Zoomed)
-        if IsZoomed(hwnd) != 0 {
-            return true;
-        }
-
-        // Check if window matches screen dimensions
-        let mut rect = std::mem::zeroed();
-        if GetWindowRect(hwnd, &mut rect) == 0 {
+        let mut window_rect = zeroed();
+        if GetWindowRect(hwnd, &mut window_rect) == 0 {
             return false;
         }
 
-        let screen_width = GetSystemMetrics(SM_CXSCREEN);
-        let screen_height = GetSystemMetrics(SM_CYSCREEN);
+        let monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+        let mut monitor_info: MONITORINFO = zeroed();
+        monitor_info.cbSize = std::mem::size_of::<MONITORINFO>() as u32;
 
-        rect.left == 0
-            && rect.top == 0
-            && rect.right == screen_width
-            && rect.bottom == screen_height
+        if GetMonitorInfoW(monitor, &mut monitor_info) == 0 {
+            return false;
+        }
+
+        // Compare window rect with monitor rect (not work area!)
+        let is_fullscreen = window_rect.left == monitor_info.rcMonitor.left
+            && window_rect.top == monitor_info.rcMonitor.top
+            && window_rect.right == monitor_info.rcMonitor.right
+            && window_rect.bottom == monitor_info.rcMonitor.bottom;
+
+        is_fullscreen
     }
 }
 
 #[cfg(target_os = "linux")]
 #[tauri::command]
-pub fn check_focused_window_maximized() -> bool {
+pub fn check_focused_window_fullscreen() -> bool {
     use std::process::Command;
 
     let active_window_id = Command::new("xdotool").arg("getactivewindow").output();
@@ -46,9 +48,7 @@ pub fn check_focused_window_maximized() -> bool {
         let xprop_output = Command::new("xprop").arg("-id").arg(&window_id).output();
         if let Ok(prop) = xprop_output {
             let output_str = String::from_utf8_lossy(&prop.stdout);
-            return output_str.contains("_NET_WM_STATE_FULLSCREEN")
-                || (output_str.contains("_NET_WM_STATE_MAXIMIZED_VERT")
-                    && output_str.contains("_NET_WM_STATE_MAXIMIZED_HORZ"));
+            return output_str.contains("_NET_WM_STATE_FULLSCREEN");
         }
     }
 
@@ -57,7 +57,7 @@ pub fn check_focused_window_maximized() -> bool {
 
 #[cfg(target_os = "macos")]
 #[tauri::command]
-pub fn check_focused_window_maximized() -> bool {
+pub fn check_focused_window_fullscreen() -> bool {
     use std::process::Command;
 
     let script = r#"

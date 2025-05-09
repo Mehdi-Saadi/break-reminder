@@ -47,7 +47,7 @@ class Timer {
     // if focused window is maximized, skip break and start work again
     if (
       settingState.value.doNotDisturb &&
-      await invoke('check_focused_window_maximized')
+      await invoke('check_focused_window_fullscreen')
     ) {
       this.startWork();
     } else {

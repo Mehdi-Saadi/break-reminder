@@ -3,15 +3,15 @@ import Component from '@/shared/ui/base/Component.ts';
 
 abstract class SidebarNavigationButton extends Component {
   protected activeIcon: HTMLDivElement;
-  private activeClasses: string[] = ['bg-[#eaeaea]', 'dark:bg-[#2d2d2d]', 'hover:bg-[#ededed]', 'hover:dark:bg-[#292929]'];
-  private notActiveClasses: string[] = ['hover:bg-[#eaeaea]', 'hover:dark:bg-[#2d2d2d]'];
+  private activeClasses: string[] = ['bg-[#eaeaea]', 'dark:bg-[#2d2d2d]', 'hover:bg-[#ededed]', 'dark:hover:bg-[#292929]'];
+  private notActiveClasses: string[] = ['hover:bg-[#eaeaea]', 'dark:hover:bg-[#2d2d2d]'];
 
   protected constructor(
     protected page: NavigationPage,
     htmlIcon: string,
     label: string,
   ) {
-    super('button', 'flex items-center pe-4 py-2 rounded-md text-sm w-full');
+    super('button', 'flex items-center pe-4 py-2 rounded-md text-sm w-full cursor-pointer');
 
     this.element.setAttribute('type', 'button');
 

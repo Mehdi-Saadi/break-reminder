@@ -112,7 +112,7 @@ class AdvancedView extends Component {
 
   private createLabelContent(label: string, caption: string, iconName: IconName): HTMLElement {
     const wrapper = document.createElement('div');
-    wrapper.setAttribute('class', 'flex items-center space-x-1 rtl:space-x-reverse');
+    wrapper.setAttribute('class', 'flex items-center space-x-1');
 
     wrapper.innerHTML = icon(iconName, 'size-5');
 
