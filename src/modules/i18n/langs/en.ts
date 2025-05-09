@@ -25,6 +25,7 @@ const en = {
   postpone: 'Postpone',
   breakSchedule: 'Break Schedule',
   workSession: 'Work Session',
+  behavior: 'Behavior',
 };
 
 export default en;
