@@ -1,4 +1,3 @@
-import CheckboxField from '@/modules/setting/components/fields/CheckboxField.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import NumberField from '@/modules/setting/components/fields/NumberField.ts';
 import SettingItem from '@/modules/setting/components/SettingItem.ts';
@@ -64,40 +63,6 @@ class BreakScheduleView extends Component {
         settingState.value.longBreakDuration,
       ),
     ]);
-
-    // todo: implement more setting options
-    this.createSection(t('options'), [
-      this.createNumberItem(
-        t('timeToPrepareForBreakInSeconds'),
-        (newValue) => {
-          settingState.value = {
-            ...settingState.value,
-            timeToPrepareForBreak: newValue as Second
-          };
-        },
-        settingState.value.timeToPrepareForBreak,
-      ),
-      this.createCheckboxItem(
-        t('strictBreakNoWayToSkip'),
-        (newValue) => {
-          settingState.value = {
-            ...settingState.value,
-            strictBreak: newValue
-          };
-        },
-        settingState.value.strictBreak,
-      ),
-      // this.createCheckboxItem(
-      //   'Allow postponing breaks',
-      //   (newValue) => { settingState.value = { allowPostponingBreaks: newValue }; },
-      //   settingState.value.allowPostponingBreaks,
-      // ),
-      // this.createNumberItem(
-      //   'Postpone duration (in minutes)',
-      //   (newValue) => { settingState.value = { postponeDuration: newValue as Minute }; },
-      //   settingState.value.postponeDuration,
-      // ),
-    ]);
   }
 
   private createSection(label: string, settingItems: SettingItem[]): void {
@@ -124,20 +89,6 @@ class BreakScheduleView extends Component {
     const numberField = new NumberField(onChange, step, max, initialValue);
     settingItem.addChild(numberField);
     numberField.mount(settingItem.buttonContainer);
-
-    return settingItem;
-  }
-
-  private createCheckboxItem(
-    label: string,
-    onChange: (newValue: boolean) => void,
-    initialValue: boolean,
-  ): SettingItem {
-    const settingItem = new SettingItem(label);
-
-    const checkboxField = new CheckboxField(onChange, initialValue);
-    settingItem.addChild(checkboxField);
-    checkboxField.mount(settingItem.buttonContainer);
 
     return settingItem;
   }
