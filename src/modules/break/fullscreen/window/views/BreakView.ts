@@ -10,7 +10,7 @@ class BreakView extends Component {
   private windowPayload: IBreakWindowPayload;
 
   constructor() {
-    super('div', 'w-screen h-screen flex items-center justify-center bg-black bg-opacity-80 text-gray-300 select-none');
+    super('div', 'w-screen h-screen flex items-center justify-center bg-black/80 text-gray-300 select-none');
     this.initActionListeners();
 
     this.wrapper = document.createElement('div');
