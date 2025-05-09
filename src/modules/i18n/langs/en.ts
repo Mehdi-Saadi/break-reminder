@@ -21,6 +21,8 @@ const en = {
   runOnStartup: 'Run on startup',
   quit: 'Quit',
   language: 'Language',
+  skip: 'Skip',
+  postpone: 'Postpone',
 };
 
 export default en;

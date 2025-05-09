@@ -23,6 +23,8 @@ const fa: Words = {
   runOnStartup: 'اجرا در هنگام راه‌اندازی',
   quit: 'ترک کردن',
   language: 'زبان',
+  skip: 'رد کردن',
+  postpone: 'به تعویق انداختن',
 };
 
 export default fa;

@@ -1,4 +1,5 @@
 import ActionButton from '@/modules/break/fullscreen/window/components/ActionButton';
+import t from '@/modules/i18n';
 import Component from '@/shared/ui/base/Component.ts';
 import { BREAK_WINDOW_EVENT, IBreakWindowPayload } from '@/modules/break/fullscreen/communication';
 import { emit, listen } from '@tauri-apps/api/event';
@@ -82,14 +83,14 @@ class BreakView extends Component {
     // Todo: implement postpone functionality
     // postpone
     if (this.windowPayload.showPostponeBtn) {
-      const postponeButton = new ActionButton('Postpone');
+      const postponeButton = new ActionButton(t('postpone'));
       postponeButton.mount(actionWrapper);
       this.addChild(postponeButton);
     }
 
     // skip
     if (this.windowPayload.showSkipBtn) {
-      const skipButton = new ActionButton('Skip', this.onSkip);
+      const skipButton = new ActionButton(t('skip'), this.onSkip);
       skipButton.mount(actionWrapper);
       this.addChild(skipButton);
     }
