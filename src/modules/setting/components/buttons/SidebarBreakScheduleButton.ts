@@ -2,14 +2,14 @@ import SidebarNavigationButton from '@/modules/setting/components/buttons/Sideba
 import icon from '@/shared/ui/icons.ts';
 import t from '@/modules/i18n';
 
-class SidebarSettingButton extends SidebarNavigationButton {
+class SidebarBreakScheduleButton extends SidebarNavigationButton {
   constructor() {
     super(
-      'settings',
-      icon('gear', 'size-5 me-1.5'),
-      t('settings'),
+      'break_schedule',
+      icon('timer', 'size-5 me-1.5'),
+      t('breakSchedule'),
     );
   }
 }
 
-export default SidebarSettingButton;
+export default SidebarBreakScheduleButton;
