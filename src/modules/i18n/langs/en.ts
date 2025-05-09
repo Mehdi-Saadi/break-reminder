@@ -1,4 +1,5 @@
 const en = {
+  general: 'General',
   settings: 'Settings',
   breakMessages: 'Break Messages',
   advanced: 'Advanced',

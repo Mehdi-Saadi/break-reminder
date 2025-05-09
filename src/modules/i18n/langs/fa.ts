@@ -1,6 +1,7 @@
 import { Words } from '@/modules/i18n/types';
 
 const fa: Words = {
+  general: 'عمومی',
   settings: 'تنظیمات',
   breakMessages: 'پیام‌های استراحت',
   advanced: 'پیشرفته',
