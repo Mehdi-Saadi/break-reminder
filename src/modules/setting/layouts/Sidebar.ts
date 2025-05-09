@@ -1,3 +1,4 @@
+import SidebarBehaviorButton from '@/modules/setting/components/buttons/SidebarBehaviorButton.ts';
 import SidebarGeneralButton from '@/modules/setting/components/buttons/SidebarGeneralButton.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import SidebarAdvancedButton from '@/modules/setting/components/buttons/SidebarAdvancedButton.ts';
@@ -10,6 +11,7 @@ class Sidebar extends Component {
 
     new SidebarGeneralButton().mount(this);
     new SidebarBreakScheduleButton().mount(this);
+    new SidebarBehaviorButton().mount(this);
     new SidebarAdvancedButton().mount(this);
     new SidebarBreakMessagesButton().mount(this);
   }
