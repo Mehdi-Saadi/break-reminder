@@ -24,6 +24,7 @@ const en = {
   skip: 'Skip',
   postpone: 'Postpone',
   breakSchedule: 'Break Schedule',
+  workSession: 'Work Session',
 };
 
 export default en;

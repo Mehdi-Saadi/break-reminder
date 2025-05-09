@@ -26,6 +26,7 @@ const fa: Words = {
   skip: 'رد کردن',
   postpone: 'به تعویق انداختن',
   breakSchedule: 'برنامه استراحت',
+  workSession: 'جلسه کاری',
 };
 
 export default fa;
