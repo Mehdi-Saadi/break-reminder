@@ -8,7 +8,7 @@ class BreakNotification {
       settingState.value.notification &&
       !(
         settingState.value.doNotDisturb &&
-        await invoke('check_focused_window_maximized')
+        await invoke('check_focused_window_fullscreen')
       )
     ) {
       await notify(`Take a break in ${settingState.value.timeToPrepareForBreak} seconds.`);
