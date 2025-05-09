@@ -64,30 +64,6 @@ class AdvancedView extends Component {
     //   settingState.value.screensaver,
     //   (newValue) => (settingState.value = { screensaver: newValue })
     // );
-    this.createSettingItem(
-      t('darkMode'),
-      '',
-      'darkMode',
-      settingState.value.darkMode,
-      (newValue) => {
-        settingState.value = {
-          ...settingState.value,
-          darkMode: newValue
-        };
-      }
-    );
-    this.createSettingItem(
-      t('runOnStartup'),
-      '',
-      'presentToAll',
-      settingState.value.autostart,
-      (newValue) => {
-        settingState.value = {
-          ...settingState.value,
-          autostart: newValue
-        };
-      }
-    );
   }
 
   private createSettingItem(
