@@ -1,3 +1,4 @@
+import AboutView from '@/modules/setting/views/AboutView.ts';
 import NotificationAlertView from '@/modules/setting/views/NotificationAlertView.ts';
 import BehaviorView from '@/modules/setting/views/BehaviorView.ts';
 import BreakMessagesView from '@/modules/setting/views/BreakMessagesView.ts';
@@ -37,6 +38,9 @@ class ViewManager extends Layout {
           break;
         case 'break_messages':
           this.currentPage = new BreakMessagesView();
+          break;
+        case 'about':
+          this.currentPage = new AboutView();
           break;
       }
 
