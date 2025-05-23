@@ -40,6 +40,8 @@ const fa: Words = {
   orVisit: 'یا به سایت زیر مراجعه کنید',
   checkForUpdates: 'بررسی به‌روزرسانی‌ها',
   currentVersion: 'نسخه فعلی',
+  newVersionAvailable: 'یک نسخه جدید موجود است!',
+  newVersionAvailableInfo: 'می‌توانید به‌روزرسانی‌ها را از بخش «درباره نرم‌افزار» نصب کنید.',
 };
 
 export default fa;

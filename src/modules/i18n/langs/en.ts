@@ -38,6 +38,8 @@ const en = {
   orVisit: 'Or visit',
   checkForUpdates: 'Check for Updates',
   currentVersion: 'Current version',
+  newVersionAvailable: 'A new version is available!',
+  newVersionAvailableInfo: 'You can install updates from the "About Software" section.',
 };
 
 export default en;
