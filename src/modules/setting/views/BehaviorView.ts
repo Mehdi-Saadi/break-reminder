@@ -16,17 +16,7 @@ class BehaviorView extends Component {
 
   private createSettingItems(): void {
     // todo: implement more setting options
-    this.createNumberItem(
-      t('timeToPrepareForBreakInSeconds'),
-      (newValue) => {
-        settingState.value = {
-          ...settingState.value,
-          timeToPrepareForBreak: newValue as Second
-        };
-      },
-      settingState.value.timeToPrepareForBreak,
-    );
-    this.createSettingItem(
+    this.createCheckboxSettingItem(
       t('strictBreak'),
       t('strictBreakInfo'),
       'lock',
@@ -38,7 +28,7 @@ class BehaviorView extends Component {
         };
       },
     );
-    this.createSettingItem(
+    this.createCheckboxSettingItem(
       t('doNotDisturb'),
       t('doNotDisturbInfo'),
       'doNotDisturbOn',
@@ -49,6 +39,18 @@ class BehaviorView extends Component {
           doNotDisturb: newValue
         };
       }
+    );
+    this.createNumberSettingItem(
+      t('timeToPrepareForBreakInSeconds'),
+      '',
+      'hourglassTop',
+      settingState.value.timeToPrepareForBreak,
+      (newValue) => {
+        settingState.value = {
+          ...settingState.value,
+          timeToPrepareForBreak: newValue as Second
+        };
+      },
     );
     // this.createCheckboxItem(
     //   'Allow postponing breaks',
@@ -62,24 +64,29 @@ class BehaviorView extends Component {
     // );
   }
 
-  private createNumberItem(
+  private createNumberSettingItem(
     label: string,
+    caption: string,
+    iconName: IconName,
+    initialState: number,
     onChange: (newValue: number) => void,
-    initialValue: number,
     step: number = 5,
     max: number = 900,
   ): void {
-    const settingItem = new SettingItem(label);
+    const item = new SettingItem();
+    this.addChild(item);
 
-    const numberField = new NumberField(onChange, step, max, initialValue);
-    settingItem.addChild(numberField);
-    numberField.mount(settingItem.buttonContainer);
+    const labelWrapper = this.createLabelContent(label, caption, iconName);
+    item.labelContainer.appendChild(labelWrapper);
 
-    this.addChild(settingItem);
-    settingItem.mount(this);
+    const numberField = new NumberField(onChange, step, max, initialState);
+    this.addChild(numberField);
+
+    numberField.mount(item.buttonContainer);
+    item.mount(this);
   }
 
-  private createSettingItem(
+  private createCheckboxSettingItem(
     label: string,
     caption: string,
     iconName: IconName,
