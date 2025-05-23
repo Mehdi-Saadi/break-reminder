@@ -2,9 +2,10 @@ import CheckboxField from '@/modules/setting/components/fields/CheckboxField.ts'
 import Component from '@/shared/ui/base/Component.ts';
 import NumberField from '@/modules/setting/components/fields/NumberField.ts';
 import SettingItem from '@/modules/setting/components/SettingItem.ts';
+import icon, { IconName } from '@/shared/ui/icons.ts';
 import settingState from '@/shared/state/setting';
-import t from '@/modules/i18n';
 import { Second } from '@/shared/time';
+import t from '@/modules/i18n';
 
 class BehaviorView extends Component {
   constructor() {
@@ -25,15 +26,29 @@ class BehaviorView extends Component {
       },
       settingState.value.timeToPrepareForBreak,
     );
-    this.createCheckboxItem(
-      t('strictBreakNoWayToSkip'),
+    this.createSettingItem(
+      t('strictBreak'),
+      t('strictBreakInfo'),
+      'lock',
+      settingState.value.strictBreak,
       (newValue) => {
         settingState.value = {
           ...settingState.value,
           strictBreak: newValue
         };
       },
-      settingState.value.strictBreak,
+    );
+    this.createSettingItem(
+      t('doNotDisturb'),
+      t('doNotDisturbInfo'),
+      'doNotDisturbOn',
+      settingState.value.doNotDisturb,
+      (newValue) => {
+        settingState.value = {
+          ...settingState.value,
+          doNotDisturb: newValue
+        };
+      }
     );
     // this.createCheckboxItem(
     //   'Allow postponing breaks',
@@ -64,19 +79,48 @@ class BehaviorView extends Component {
     settingItem.mount(this);
   }
 
-  private createCheckboxItem(
+  private createSettingItem(
     label: string,
-    onChange: (newValue: boolean) => void,
-    initialValue: boolean,
+    caption: string,
+    iconName: IconName,
+    initialState: boolean,
+    onChange: (newValue: boolean) => void
   ): void {
-    const settingItem = new SettingItem(label);
+    const item = new SettingItem();
+    this.addChild(item);
 
-    const checkboxField = new CheckboxField(onChange, initialValue);
-    settingItem.addChild(checkboxField);
-    checkboxField.mount(settingItem.buttonContainer);
+    const labelWrapper = this.createLabelContent(label, caption, iconName);
+    item.labelContainer.appendChild(labelWrapper);
 
-    this.addChild(settingItem);
-    settingItem.mount(this);
+    const checkbox = new CheckboxField(onChange, initialState);
+    this.addChild(checkbox);
+
+    checkbox.mount(item.buttonContainer);
+    item.mount(this);
+  }
+
+  private createLabelContent(label: string, caption: string, iconName: IconName): HTMLElement {
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('class', 'flex items-center space-x-1');
+
+    wrapper.innerHTML = icon(iconName, 'size-5');
+
+    const textWrapper = document.createElement('div');
+    textWrapper.setAttribute('class', 'flex flex-col');
+
+    const labelElement = document.createElement('div');
+    labelElement.setAttribute('class', 'font-semibold');
+    labelElement.innerText = label;
+
+    const captionElement = document.createElement('div');
+    captionElement.setAttribute('class', 'text-xs text-[#5c5c5c] dark:text-[#cccccc]');
+    captionElement.innerText = caption;
+
+    textWrapper.appendChild(labelElement);
+    textWrapper.appendChild(captionElement);
+
+    wrapper.appendChild(textWrapper);
+    return wrapper;
   }
 }
 

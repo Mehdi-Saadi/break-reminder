@@ -14,18 +14,6 @@ class AdvancedView extends Component {
 
   private createSettingItems(): void {
     this.createSettingItem(
-      t('doNotDisturb'),
-      t('doNotDisturbInfo'),
-      'doNotDisturbOn',
-      settingState.value.doNotDisturb,
-      (newValue) => {
-        settingState.value = {
-          ...settingState.value,
-          doNotDisturb: newValue
-        };
-      }
-    );
-    this.createSettingItem(
       t('notification'),
       t('notificationInfo'),
       'notifications',
