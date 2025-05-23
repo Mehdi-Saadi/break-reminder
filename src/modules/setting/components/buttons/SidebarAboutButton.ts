@@ -9,9 +9,6 @@ class SidebarAboutButton extends SidebarNavigationButton {
       icon('info', 'size-5 me-1.5'),
       t('about'),
     );
-
-    // activate default page
-    this.setActive();
   }
 }
 
