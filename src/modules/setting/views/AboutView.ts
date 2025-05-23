@@ -1,6 +1,9 @@
 import Component from '@/shared/ui/base/Component.ts';
+import t from '@/modules/i18n';
 
 class BehaviorView extends Component {
+  private appVersion: string = 'v0.3.0';
+
   constructor() {
     super('div', 'space-y-5');
 
@@ -14,17 +17,17 @@ class BehaviorView extends Component {
     const sectionEl = document.createElement('section');
 
     const headerEl = document.createElement('h2');
-    headerEl.innerHTML = 'About Break Reminder';
+    headerEl.innerText = t('aboutSoftware');
     headerEl.setAttribute('class', 'text-base font-semibold mb-3');
 
     const paragraphWrapper = document.createElement('div');
     paragraphWrapper.setAttribute('class', 'text-sm space-y-2');
 
     const firstParagraph = document.createElement('p');
-    firstParagraph.innerHTML = 'Break Reminder helps you stay healthy and focused by encouraging regular breaks during your work or study sessions.';
+    firstParagraph.innerText = t('aboutSoftwareFirstInfo');
 
     const secondParagraph = document.createElement('p');
-    secondParagraph.innerHTML = 'It runs quietly in the background, gently reminding you to pause — without interrupting fullscreen activities like games or videos.';
+    secondParagraph.innerText = t('aboutSoftwareSecondInfo');
 
     paragraphWrapper.appendChild(firstParagraph);
     paragraphWrapper.appendChild(secondParagraph);
@@ -39,14 +42,14 @@ class BehaviorView extends Component {
     const sectionEl = document.createElement('section');
 
     const headerEl = document.createElement('h2');
-    headerEl.innerHTML = 'Designed with Care';
+    headerEl.innerText = t('designedWithCare');
     headerEl.setAttribute('class', 'text-base font-semibold mb-3');
 
     const paragraphWrapper = document.createElement('div');
     paragraphWrapper.setAttribute('class', 'text-sm space-y-2');
 
     const firstParagraph = document.createElement('p');
-    firstParagraph.innerHTML = 'Break Reminder is built with user focus and health in mind. We respect your workflow, privacy, and device performance — no tracking, no ads, just helpful reminders to step away when it’s time.';
+    firstParagraph.innerText = t('designedWithCareFirstInfo');
 
     paragraphWrapper.appendChild(firstParagraph);
 
@@ -60,7 +63,7 @@ class BehaviorView extends Component {
     const sectionEl = document.createElement('section');
 
     const headerEl = document.createElement('h2');
-    headerEl.innerHTML = 'Feedback & Support';
+    headerEl.innerText = t('feedbackAndSupport');
     headerEl.setAttribute('class', 'text-base font-semibold mb-3');
 
     const paragraphWrapper = document.createElement('div');
@@ -68,7 +71,7 @@ class BehaviorView extends Component {
 
     // first paragraph start
     const firstParagraph = document.createElement('p');
-    firstParagraph.innerHTML = 'Have an idea or found a bug? We’d love to hear from you!';
+    firstParagraph.innerText = t('feedbackAndSupportFirstInfo');
     // first paragraph end
 
     // second paragraph start
@@ -76,7 +79,7 @@ class BehaviorView extends Component {
 
     const secondPTitleEl = document.createElement('span');
     secondPTitleEl.setAttribute('class', 'me-1');
-    secondPTitleEl.innerText = 'Reach out at:';
+    secondPTitleEl.innerText = `${t('support')}:`;
 
     const emailEl = document.createElement('a');
     emailEl.setAttribute('href', 'mailto:mehdi.0.saadi@gmail.com');
@@ -90,9 +93,9 @@ class BehaviorView extends Component {
     // third paragraph start
     const thirdParagraph = document.createElement('p');
 
-    const thirdTitleEl = document.createElement('span');
+    const thirdTitleEl = document.createElement('div');
     thirdTitleEl.setAttribute('class', 'me-1');
-    thirdTitleEl.innerText = 'Or visit:';
+    thirdTitleEl.innerText = `${t('orVisit')}:`;
 
     const addressEl = document.createElement('a');
     addressEl.setAttribute('href', 'https://github.com/Mehdi-Saadi/break-reminder/issues');
@@ -118,19 +121,19 @@ class BehaviorView extends Component {
     const sectionEl = document.createElement('section');
 
     const headerEl = document.createElement('h2');
-    headerEl.innerHTML = 'Check for Updates';
+    headerEl.innerText = t('checkForUpdates');
     headerEl.setAttribute('class', 'text-base font-semibold mb-3');
 
     const paragraphWrapper = document.createElement('div');
     paragraphWrapper.setAttribute('class', 'text-sm space-y-5');
 
     const firstParagraph = document.createElement('p');
-    firstParagraph.innerHTML = 'You\'re currently using version v0.3.0.';
+    firstParagraph.innerText = `${t('currentVersion')}: ${this.appVersion}`;
 
     const checkForUpdatesBtn = document.createElement('button');
     checkForUpdatesBtn.setAttribute('class', 'cursor-pointer border border-gray-300 rounded-md px-5 py-3');
     checkForUpdatesBtn.setAttribute('type', 'button');
-    checkForUpdatesBtn.innerText = 'Check for Updates';
+    checkForUpdatesBtn.innerText = t('checkForUpdates');
 
     paragraphWrapper.appendChild(firstParagraph);
     paragraphWrapper.appendChild(checkForUpdatesBtn);
