@@ -42,6 +42,9 @@ const fa: Words = {
   currentVersion: 'نسخه فعلی',
   newVersionAvailable: 'یک نسخه جدید موجود است!',
   newVersionAvailableInfo: 'می‌توانید به‌روزرسانی‌ها را از بخش «درباره نرم‌افزار» نصب کنید.',
+  youAreUsingTheLatestVersion: 'شما از آخرین نسخه استفاده می‌کنید!',
+  update: 'به‌روزرسانی',
+  pleaseWait: 'لطفا صبر کنید..',
 };
 
 export default fa;

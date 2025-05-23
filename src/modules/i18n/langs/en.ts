@@ -40,6 +40,9 @@ const en = {
   currentVersion: 'Current version',
   newVersionAvailable: 'A new version is available!',
   newVersionAvailableInfo: 'You can install updates from the "About Software" section.',
+  youAreUsingTheLatestVersion: 'You are using the latest version!',
+  update: 'Update',
+  pleaseWait: 'Please wait..',
 };
 
 export default en;
