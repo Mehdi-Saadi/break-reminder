@@ -8,7 +8,7 @@ import SidebarBreakScheduleButton from '@/modules/setting/components/buttons/Sid
 
 class Sidebar extends Component {
   constructor() {
-    super('div', 'h-full w-full bg-inherit p-5 flex flex-col justify-between');
+    super('div', 'h-full w-1/3 fixed bg-inherit p-5 flex flex-col justify-between');
 
     const mainButtonWrapper = document.createElement('div');
     mainButtonWrapper.setAttribute('class', 'space-y-1 w-full');
