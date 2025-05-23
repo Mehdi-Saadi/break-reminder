@@ -5,7 +5,7 @@ import settingState from '@/shared/state/setting';
 import icon, { IconName } from '@/shared/ui/icons.ts';
 import t from '@/modules/i18n';
 
-class AdvancedView extends Component {
+class NotificationAlertView extends Component {
   constructor() {
     super('div', 'flex flex-col space-y-5 p-4 text-sm');
 
@@ -99,4 +99,4 @@ class AdvancedView extends Component {
   }
 }
 
-export default AdvancedView;
+export default NotificationAlertView;

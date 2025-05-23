@@ -1,4 +1,4 @@
-import AdvancedView from '@/modules/setting/views/AdvancedView.ts';
+import NotificationAlertView from '@/modules/setting/views/NotificationAlertView.ts';
 import BehaviorView from '@/modules/setting/views/BehaviorView.ts';
 import BreakMessagesView from '@/modules/setting/views/BreakMessagesView.ts';
 import GeneralView from '@/modules/setting/views/GeneralView.ts';
@@ -32,8 +32,8 @@ class ViewManager extends Layout {
         case 'behavior':
           this.currentPage = new BehaviorView();
           break;
-        case 'advanced':
-          this.currentPage = new AdvancedView();
+        case 'notification':
+          this.currentPage = new NotificationAlertView();
           break;
         case 'break_messages':
           this.currentPage = new BreakMessagesView();

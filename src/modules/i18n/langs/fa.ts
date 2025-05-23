@@ -4,7 +4,7 @@ const fa: Words = {
   general: 'عمومی',
   settings: 'تنظیمات',
   breakMessages: 'پیام‌های استراحت',
-  advanced: 'پیشرفته',
+  notificationsAndAlerts: 'اعلان‌ها و هشدارها',
   shortBreaks: 'استراحت‌های کوتاه',
   longBreaks: 'استراحت‌های طولانی',
   options: 'گزینه‌ها',

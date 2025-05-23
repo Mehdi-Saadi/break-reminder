@@ -2,7 +2,7 @@ const en = {
   general: 'General',
   settings: 'Settings',
   breakMessages: 'Break Messages',
-  advanced: 'Advanced',
+  notificationsAndAlerts: 'Notifications & Alerts',
   shortBreaks: 'Short Breaks',
   longBreaks: 'Long Breaks',
   options: 'Options',
