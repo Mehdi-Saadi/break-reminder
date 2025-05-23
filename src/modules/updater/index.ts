@@ -4,15 +4,20 @@ import notify from '@/shared/notification';
 import t from '@/modules/i18n';
 
 class Updater {
-  async checkForUpdate(): Promise<Update | null> {
-    const [checkError, update] = await promiseHandler(check());
+  private newUpdate: Update | null = null;
 
-    if (checkError) {
-      await notify(checkError.message);
-      return null;
+  async checkForUpdate(): Promise<Update | null> {
+    if (!this.newUpdate) {
+      const [checkError, update] = await promiseHandler(check());
+
+      if (checkError) {
+        await notify(checkError.message);
+      }
+
+      this.newUpdate = update || null;
     }
 
-    return update;
+    return this.newUpdate;
   }
 
   private checkForUpdateOnOnlineHandler = async (): Promise<void> => {
@@ -30,6 +35,20 @@ class Updater {
 
   checkForUpdateOnOnline(): void {
     window.addEventListener('online', this.checkForUpdateOnOnlineHandler, { once: true });
+  }
+
+  async update(): Promise<void> {
+    const update = await this.checkForUpdate();
+
+    if (!update) {
+      return;
+    }
+
+    const [error] = await promiseHandler(update.downloadAndInstall());
+
+    if (error) {
+      await notify(error.message);
+    }
   }
 }
 
