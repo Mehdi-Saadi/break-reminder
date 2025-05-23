@@ -85,7 +85,7 @@ class BehaviorView extends Component {
 
     const emailEl = document.createElement('a');
     emailEl.setAttribute('href', `mailto:${this.supportEmail}`);
-    emailEl.setAttribute('class', 'text-blue-300 underline');
+    emailEl.setAttribute('class', 'text-blue-500 dark:text-blue-300 underline');
     emailEl.innerText = this.supportEmail;
 
     secondParagraph.appendChild(secondPTitleEl);
@@ -102,7 +102,7 @@ class BehaviorView extends Component {
     const addressEl = document.createElement('a');
     addressEl.setAttribute('href', this.supportPage);
     addressEl.setAttribute('target', '_blank');
-    addressEl.setAttribute('class', 'text-blue-300 underline');
+    addressEl.setAttribute('class', 'text-blue-500 dark:text-blue-300 underline');
     addressEl.innerText = this.supportPage;
 
     thirdParagraph.appendChild(thirdTitleEl);
