@@ -1,26 +1,38 @@
-import { check } from '@tauri-apps/plugin-updater';
+import { check, Update } from '@tauri-apps/plugin-updater';
 import { promiseHandler } from '@/shared/promise';
 import notify from '@/shared/notification';
+import t from '@/modules/i18n';
 
-const installUpdateIfAvailable = async (): Promise<void> => {
-  const [checkError, update] = await promiseHandler(check());
+class Updater {
+  async checkForUpdate(): Promise<Update | null> {
+    const [checkError, update] = await promiseHandler(check());
 
-  if (checkError) {
-    notify('There was an error while checking for updates..');
-    console.error(checkError);
-    return;
+    if (checkError) {
+      await notify(checkError.message);
+      return null;
+    }
+
+    return update;
   }
 
-  if (!update) {
-    return;
+  private checkForUpdateOnOnlineHandler = async (): Promise<void> => {
+    const update = await this.checkForUpdate();
+
+    if (update) {
+      await notify({
+        title: t('newVersionAvailable'),
+        body: t('newVersionAvailableInfo'),
+      });
+    }
+
+    window.removeEventListener('online', this.checkForUpdateOnOnlineHandler);
+  };
+
+  checkForUpdateOnOnline(): void {
+    window.addEventListener('online', this.checkForUpdateOnOnlineHandler, { once: true });
   }
+}
 
-  const [downloadAndInstallError] = await promiseHandler(update.downloadAndInstall());
+const updater = new Updater();
 
-  if (downloadAndInstallError) {
-    notify('There was an error while downloading updates..');
-    console.error(downloadAndInstallError);
-  }
-};
-
-installUpdateIfAvailable();
+export default updater;
