@@ -27,7 +27,17 @@ const en = {
   breakSchedule: 'Break Schedule',
   workSession: 'Work Session',
   behavior: 'Behavior',
-  about: 'About',
+  aboutSoftware: 'About Software',
+  aboutSoftwareFirstInfo: 'Break Reminder helps you stay healthy and focused by encouraging regular breaks during your work or study sessions.',
+  aboutSoftwareSecondInfo: 'It runs quietly in the background, gently reminding you to pause — without interrupting fullscreen activities like games or videos.',
+  designedWithCare: 'Designed with Care',
+  designedWithCareFirstInfo: 'Break Reminder is built with user focus and health in mind. We respect your workflow, privacy, and device performance — no tracking, no ads, just helpful reminders to step away when it’s time.',
+  feedbackAndSupport: 'Feedback & Support',
+  feedbackAndSupportFirstInfo: 'Have an idea or found a bug? We’d love to hear from you!',
+  support: 'Support',
+  orVisit: 'Or visit',
+  checkForUpdates: 'Check for Updates',
+  currentVersion: 'Current version',
 };
 
 export default en;
