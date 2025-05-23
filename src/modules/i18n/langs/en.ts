@@ -27,6 +27,7 @@ const en = {
   breakSchedule: 'Break Schedule',
   workSession: 'Work Session',
   behavior: 'Behavior',
+  about: 'About',
 };
 
 export default en;

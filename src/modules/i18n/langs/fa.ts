@@ -29,6 +29,7 @@ const fa: Words = {
   breakSchedule: 'برنامه استراحت',
   workSession: 'جلسه کاری',
   behavior: 'رفتار',
+  about: 'درباره ما',
 };
 
 export default fa;
