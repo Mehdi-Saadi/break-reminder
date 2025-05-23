@@ -7,7 +7,7 @@ class SidebarAboutButton extends SidebarNavigationButton {
     super(
       'about',
       icon('info', 'size-5 me-1.5'),
-      t('about'),
+      t('aboutSoftware'),
     );
   }
 }
