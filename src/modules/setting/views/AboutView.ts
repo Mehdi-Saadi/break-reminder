@@ -3,6 +3,8 @@ import t from '@/modules/i18n';
 
 class BehaviorView extends Component {
   private appVersion: string = 'v0.3.0';
+  private supportEmail: string = 'mehdi.0.saadi@gmail.com';
+  private supportPage: string = 'https://github.com/Mehdi-Saadi/break-reminder/issues';
 
   constructor() {
     super('div', 'space-y-5');
@@ -82,9 +84,9 @@ class BehaviorView extends Component {
     secondPTitleEl.innerText = `${t('support')}:`;
 
     const emailEl = document.createElement('a');
-    emailEl.setAttribute('href', 'mailto:mehdi.0.saadi@gmail.com');
+    emailEl.setAttribute('href', `mailto:${this.supportEmail}`);
     emailEl.setAttribute('class', 'text-blue-300 underline');
-    emailEl.innerText = 'mehdi.0.saadi@gmail.com';
+    emailEl.innerText = this.supportEmail;
 
     secondParagraph.appendChild(secondPTitleEl);
     secondParagraph.appendChild(emailEl);
@@ -98,10 +100,10 @@ class BehaviorView extends Component {
     thirdTitleEl.innerText = `${t('orVisit')}:`;
 
     const addressEl = document.createElement('a');
-    addressEl.setAttribute('href', 'https://github.com/Mehdi-Saadi/break-reminder/issues');
+    addressEl.setAttribute('href', this.supportPage);
     addressEl.setAttribute('target', '_blank');
     addressEl.setAttribute('class', 'text-blue-300 underline');
-    addressEl.innerText = 'https://github.com/Mehdi-Saadi/break-reminder/issues';
+    addressEl.innerText = this.supportPage;
 
     thirdParagraph.appendChild(thirdTitleEl);
     thirdParagraph.appendChild(addressEl);
