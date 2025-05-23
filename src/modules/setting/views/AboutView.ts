@@ -1,3 +1,5 @@
+import updater from '@/modules/updater';
+import notify from '@/shared/notification.ts';
 import Component from '@/shared/ui/base/Component.ts';
 import t from '@/modules/i18n';
 
@@ -5,6 +7,8 @@ class BehaviorView extends Component {
   private appVersion: string = 'v0.3.0';
   private supportEmail: string = 'mehdi.0.saadi@gmail.com';
   private supportPage: string = 'https://github.com/Mehdi-Saadi/break-reminder/issues';
+  private checkForUpdatesBtn: HTMLButtonElement | null = null;
+  private updateBtn: HTMLButtonElement | null = null;
 
   constructor() {
     super('div', 'space-y-5');
@@ -132,18 +136,71 @@ class BehaviorView extends Component {
     const firstParagraph = document.createElement('p');
     firstParagraph.innerText = `${t('currentVersion')}: ${this.appVersion}`;
 
-    const checkForUpdatesBtn = document.createElement('button');
-    checkForUpdatesBtn.setAttribute('class', 'cursor-pointer border border-gray-300 rounded-md px-5 py-3');
-    checkForUpdatesBtn.setAttribute('type', 'button');
-    checkForUpdatesBtn.innerText = t('checkForUpdates');
+    this.checkForUpdatesBtn = document.createElement('button');
+    this.checkForUpdatesBtn.setAttribute('class', 'cursor-pointer border border-gray-300 rounded-md px-5 py-3 disabled:opacity-50 disabled:cursor-auto');
+    this.checkForUpdatesBtn.setAttribute('type', 'button');
+    this.checkForUpdatesBtn.innerText = t('checkForUpdates');
+
+    this.updateBtn = document.createElement('button');
+    this.updateBtn.setAttribute('class', 'cursor-pointer border border-gray-300 rounded-md px-5 py-3 disabled:opacity-50 disabled:cursor-auto hidden');
+    this.updateBtn.setAttribute('type', 'button');
+    this.updateBtn.innerText = t('update');
 
     paragraphWrapper.appendChild(firstParagraph);
-    paragraphWrapper.appendChild(checkForUpdatesBtn);
+    paragraphWrapper.appendChild(this.checkForUpdatesBtn);
+    paragraphWrapper.appendChild(this.updateBtn);
 
     sectionEl.appendChild(headerEl);
     sectionEl.appendChild(paragraphWrapper);
 
     this.element.appendChild(sectionEl);
+  }
+
+  private handleCheckForUpdatesBtnClick = async (): Promise<void> => {
+    if (!this.checkForUpdatesBtn || !this.updateBtn) {
+      return;
+    }
+
+    this.checkForUpdatesBtn.innerText = t('pleaseWait');
+    this.checkForUpdatesBtn.disabled = true;
+
+    const update = await updater.checkForUpdate();
+
+    this.checkForUpdatesBtn.innerText = t('checkForUpdates');
+    this.checkForUpdatesBtn.disabled = false;
+
+    if (!update) {
+      return await notify(t('youAreUsingTheLatestVersion'));
+    }
+
+    this.checkForUpdatesBtn.classList.add('hidden');
+    this.updateBtn.classList.remove('hidden');
+  };
+
+  private handleUpdateBtnClick = async (): Promise<void> => {
+    if (!this.checkForUpdatesBtn || !this.updateBtn) {
+      return;
+    }
+
+    this.updateBtn.innerText = t('pleaseWait');
+    this.updateBtn.disabled = true;
+
+    await updater.update();
+
+    this.updateBtn.innerText = t('update');
+    this.updateBtn.disabled = false;
+    this.updateBtn.classList.add('hidden');
+    this.checkForUpdatesBtn.classList.remove('hidden');
+  };
+
+  protected onMounted(): void {
+    this.checkForUpdatesBtn?.addEventListener('click', this.handleCheckForUpdatesBtnClick);
+    this.updateBtn?.addEventListener('click', this.handleUpdateBtnClick);
+  }
+
+  protected onUnmounted(): void {
+    this.checkForUpdatesBtn?.removeEventListener('click', this.handleCheckForUpdatesBtnClick);
+    this.updateBtn?.removeEventListener('click', this.handleUpdateBtnClick);
   }
 }
 
