@@ -1,8 +1,11 @@
 #[cfg(target_os = "windows")]
 #[tauri::command]
 pub fn check_focused_window_fullscreen() -> bool {
-    use winapi::um::winuser::{GetForegroundWindow, GetWindowRect, MonitorFromWindow, GetMonitorInfoW, MONITORINFO, MONITOR_DEFAULTTONEAREST};
     use std::mem::zeroed;
+    use winapi::um::winuser::{
+        GetForegroundWindow, GetMonitorInfoW, GetWindowRect, MonitorFromWindow, MONITORINFO,
+        MONITOR_DEFAULTTONEAREST,
+    };
 
     unsafe {
         let hwnd = GetForegroundWindow();
@@ -78,10 +81,7 @@ pub fn check_focused_window_fullscreen() -> bool {
         end tell
     "#;
 
-    let result = Command::new("osascript")
-        .arg("-e")
-        .arg(script)
-        .output();
+    let result = Command::new("osascript").arg("-e").arg(script).output();
 
     if let Ok(output) = result {
         let stdout = String::from_utf8_lossy(&output.stdout)
