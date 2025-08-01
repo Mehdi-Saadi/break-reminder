@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "lint": "npx eslint ./src --fix",
+    "test": "vitest"
   },
   "dependencies": {
     "vue": "^3.5.13",
