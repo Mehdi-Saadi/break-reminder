@@ -4,6 +4,11 @@ import { useRoute } from 'vue-router';
 
 const props = defineProps<{
   to: { name: string };
+  icon: string;
+  title: string;
+  ui?: {
+    icon?: string;
+  };
 }>();
 
 const route = useRoute();
@@ -27,7 +32,14 @@ const notActiveClasses = 'hover:bg-[#eaeaea] dark:hover:bg-[#2d2d2d]';
     />
 
     <span class="flex items-center ps-1">
-      <slot />
+      <UIcon
+        :name="icon"
+        :class="ui?.icon"
+      />
+
+      <span class="pb-0.5">
+        {{ title }}
+      </span>
     </span>
   </RouterLink>
 </template>
