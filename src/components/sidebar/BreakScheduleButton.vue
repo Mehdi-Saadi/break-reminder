@@ -2,7 +2,6 @@
   <NavButton
     :to="{ name: 'break-schedule' }"
     :title="t('breakSchedule')"
-    :ui="{ icon: 'size-5 me-1.5' }"
     icon="lucide:alarm-clock"
   />
 </template>

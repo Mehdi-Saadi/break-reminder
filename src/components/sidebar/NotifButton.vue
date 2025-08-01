@@ -2,7 +2,6 @@
   <NavButton
     :to="{ name: 'notification-alerts' }"
     :title="t('notificationsAndAlerts')"
-    :ui="{ icon: 'size-5 me-1.5' }"
     icon="lucide:bell"
   />
 </template>

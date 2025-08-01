@@ -2,7 +2,6 @@
   <NavButton
     :to="{ name: 'behavior' }"
     :title="t('behavior')"
-    :ui="{ icon: 'size-5 me-1.5' }"
     icon="lucide:brain"
   />
 </template>

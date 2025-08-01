@@ -2,7 +2,6 @@
   <NavButton
     :to="{ name: 'break-messages' }"
     :title="t('breakMessages')"
-    :ui="{ icon: 'size-5 me-1.5' }"
     icon="lucide:message-circle"
   />
 </template>
