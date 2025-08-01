@@ -1,16 +1,86 @@
-# Tauri + Vue + TypeScript
+# Break Reminder
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Break Reminder is a highly customizable, open-source application designed to help you stay productive while taking necessary breaks. With flexible work and break durations, notification options, and strict break enforcement, this app ensures you maintain a healthy work routine.
 
-## Recommended IDE Setup
+## Features
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+- **Customizable Work & Break Durations**
 
-## Type Support For `.vue` Imports in TS
+  - Set work duration.
+  - Set short break duration.
+  - Set long break duration.
+  - Configure the number of work sessions before a long break.
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+- **Break Notifications & Alerts**
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+  - Set a preparation time to notify before breaks.
+  - Enable audible alerts.
+  - Enable notifications before breaks.
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+- **Break Control Options**
+
+  - Enable strict break mode (no skipping allowed).
+  - Edit or delete custom break messages.
+
+- **Appearance & Accessibility**
+
+  - Toggle between dark and light mode.
+
+- **Startup & System Integration**
+  - Enable run on startup.
+
+## Installation
+
+### Prerequisites
+
+- Windows, macOS, or Linux
+- [Tauri](https://tauri.app) runtime installed (if building from source)
+
+### Download & Install
+
+1. Download the latest release from [GitHub Releases](https://github.com/Mehdi-Saadi/break-reminder/releases).
+2. Run the installer and follow the setup instructions.
+
+## Usage
+
+1. Open the application.
+2. Configure your work and break durations in the settings.
+3. Enable any additional preferences such as notifications, alerts, or strict mode.
+4. Start your work session and receive timely break reminders.
+
+## Development & Contribution
+
+Make sure you've installed [Tauri](https://tauri.app) on your system
+
+### Clone the Repository
+
+```sh
+git clone https://github.com/Mehdi-Saadi/break-reminder.git
+cd break-reminder
+```
+
+### Install Dependencies
+
+```sh
+bun install
+```
+
+### Run in Development Mode
+
+```sh
+bun run tauri dev
+```
+
+### Build for Production
+
+```sh
+bun run tauri build
+```
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For issues and feature requests, please create an issue on [GitHub Issues](https://github.com/Mehdi-Saadi/break-reminder/issues).
