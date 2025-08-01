@@ -12,7 +12,7 @@ const checkPermission = async (): Promise<boolean> => {
   return true;
 };
 
-const notify = async (options: Options | string): Promise<void> => {
+export const notify = async (options: Options | string): Promise<void> => {
   if (!(await checkPermission())) {
     const message: string = typeof options === 'string' ? options : options.title;
 
@@ -21,5 +21,3 @@ const notify = async (options: Options | string): Promise<void> => {
 
   sendNotification(options);
 };
-
-export default notify;
