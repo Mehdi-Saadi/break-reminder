@@ -3,7 +3,7 @@
     :to="{ name: 'general' }"
     :title="t('general')"
     :ui="{ icon: 'size-5 me-1.5' }"
-    icon="ic:baseline-settings"
+    icon="lucide:settings"
   />
 </template>
 
