@@ -12,9 +12,11 @@
     "test": "vitest"
   },
   "dependencies": {
-    "vue": "^3.5.13",
+    "@tailwindcss/vite": "^4.1.11",
     "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-opener": "^2"
+    "@tauri-apps/plugin-opener": "^2",
+    "tailwindcss": "^4.1.11",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
