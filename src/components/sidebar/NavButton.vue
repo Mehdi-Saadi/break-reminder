@@ -6,9 +6,6 @@ const props = defineProps<{
   to: { name: string };
   icon: string;
   title: string;
-  ui?: {
-    icon?: string;
-  };
 }>();
 
 const route = useRoute();
@@ -34,7 +31,7 @@ const notActiveClasses = 'hover:bg-[#eaeaea] dark:hover:bg-[#2d2d2d]';
     <span class="flex items-center ps-1">
       <UIcon
         :name="icon"
-        :class="ui?.icon"
+        class="size-5 me-1.5"
       />
 
       <span class="pb-0.5">
