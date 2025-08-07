@@ -12,7 +12,11 @@ export default defineConfig(async () => ({
   plugins: [
     vue(),
     tailwindcss(),
-    ui(),
+    ui({
+      components: {
+        dirs: [], // disable auto import of app components
+      },
+    }),
   ],
   resolve: {
     alias: {
