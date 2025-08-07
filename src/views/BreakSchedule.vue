@@ -1,0 +1,28 @@
+<script setup lang="ts">
+import Item from '@/components/setting/Item.vue';
+import SectionBorder from '@/components/setting/SectionBorder.vue';
+import { useT } from '@/composables/t';
+import { useSettingStore } from '@/stores/setting';
+import { storeToRefs } from 'pinia';
+
+const t = useT();
+
+const { settings } = storeToRefs(useSettingStore());
+</script>
+
+<template>
+  <div class="flex flex-col space-y-4">
+    <SectionBorder :label="t('workSession')">
+      <Item
+        :title="t('workDurationInMinutes')"
+      >
+        <UInputNumber
+          v-model="settings.shortWorkDuration"
+          :max="900"
+          :min="1"
+          class="max-w-32"
+        />
+      </Item>
+    </SectionBorder>
+  </div>
+</template>
