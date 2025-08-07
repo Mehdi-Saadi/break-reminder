@@ -11,7 +11,7 @@ const darkMode = computed(() => settingStore.settings.darkMode);
 <template>
   <div
     :class="{ dark: darkMode }"
-    class="size-full min-h-screen grid grid-cols-3 bg-[#f3f3f3] text-gray-800 dark:bg-[#202020] dark:text-white select-none"
+    class="size-full min-h-screen grid grid-cols-3 select-none"
   >
     <div class="col-span-1">
       <Sidebar />
