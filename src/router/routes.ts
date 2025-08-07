@@ -1,4 +1,5 @@
 import App from '@/layouts/App.vue';
+import BreakSchedule from '@/views/BreakSchedule.vue';
 import General from '@/views/General.vue';
 import { RouteRecordRaw } from 'vue-router';
 
@@ -16,7 +17,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'break-schedule',
         name: 'break-schedule',
-        component: General,
+        component: BreakSchedule,
       },
       {
         path: 'behavior',
