@@ -4,7 +4,6 @@ import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 import { Settings } from '@/types/setting';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
 
 const t = useT();
 
@@ -15,7 +14,7 @@ interface LanguageOption {
   value: Settings['language'];
 }
 
-const languageOptions = ref<LanguageOption[]>([
+const languageOptions: LanguageOption[] = [
   {
     label: 'English',
     value: 'en',
@@ -24,7 +23,7 @@ const languageOptions = ref<LanguageOption[]>([
     label: 'فارسی',
     value: 'fa',
   },
-]);
+];
 </script>
 
 <template>
@@ -38,6 +37,17 @@ const languageOptions = ref<LanguageOption[]>([
         v-model="settings.language"
         :items="languageOptions"
         class="min-w-20"
+      />
+    </SettingItemWithIcon>
+
+    <!-- dark mode -->
+    <SettingItemWithIcon
+      :title="t('darkMode')"
+      icon="lucide:moon"
+    >
+      <UCheckbox
+        v-model="settings.darkMode"
+        size="xl"
       />
     </SettingItemWithIcon>
   </div>
