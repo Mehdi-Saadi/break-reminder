@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import Sidebar from '@/layouts/Sidebar.vue';
+import { useSettingStore } from '@/stores/setting';
+import { computed } from 'vue';
+
+const settingStore = useSettingStore();
+
+const darkMode = computed(() => settingStore.settings.darkMode);
+</script>
+
 <template>
   <div
     :class="{ dark: darkMode }"
@@ -12,13 +22,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import Sidebar from '@/layouts/Sidebar.vue';
-import { useSettingStore } from '@/stores/setting';
-import { computed } from 'vue';
-
-const settingStore = useSettingStore();
-
-const darkMode = computed(() => settingStore.settings.darkMode);
-</script>
