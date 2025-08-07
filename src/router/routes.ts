@@ -1,4 +1,5 @@
 import App from '@/layouts/App.vue';
+import Behavior from '@/views/Behavior.vue';
 import BreakSchedule from '@/views/BreakSchedule.vue';
 import General from '@/views/General.vue';
 import { RouteRecordRaw } from 'vue-router';
@@ -22,7 +23,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'behavior',
         name: 'behavior',
-        component: General,
+        component: Behavior,
       },
       {
         path: 'notification-alerts',
