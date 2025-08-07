@@ -50,5 +50,16 @@ const languageOptions: LanguageOption[] = [
         size="xl"
       />
     </SettingItemWithIcon>
+
+    <!-- run on startup -->
+    <SettingItemWithIcon
+      :title="t('runOnStartup')"
+      icon="lucide:arrow-up-from-line"
+    >
+      <UCheckbox
+        v-model="settings.autostart"
+        size="xl"
+      />
+    </SettingItemWithIcon>
   </div>
 </template>
