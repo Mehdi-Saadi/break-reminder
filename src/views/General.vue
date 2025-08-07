@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SettingItemWithIcon from '@/components/SettingItemWithIcon.vue';
+import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 import { Settings } from '@/types/setting';
@@ -29,7 +29,7 @@ const languageOptions: LanguageOption[] = [
 <template>
   <div class="flex flex-col space-y-5 p-4 text-sm">
     <!-- language -->
-    <SettingItemWithIcon
+    <Item
       :title="t('language')"
       icon="lucide:languages"
     >
@@ -38,10 +38,10 @@ const languageOptions: LanguageOption[] = [
         :items="languageOptions"
         class="min-w-20"
       />
-    </SettingItemWithIcon>
+    </Item>
 
     <!-- dark mode -->
-    <SettingItemWithIcon
+    <Item
       :title="t('darkMode')"
       icon="lucide:moon"
     >
@@ -49,10 +49,10 @@ const languageOptions: LanguageOption[] = [
         v-model="settings.darkMode"
         size="xl"
       />
-    </SettingItemWithIcon>
+    </Item>
 
     <!-- run on startup -->
-    <SettingItemWithIcon
+    <Item
       :title="t('runOnStartup')"
       icon="lucide:arrow-up-from-line"
     >
@@ -60,6 +60,6 @@ const languageOptions: LanguageOption[] = [
         v-model="settings.autostart"
         size="xl"
       />
-    </SettingItemWithIcon>
+    </Item>
   </div>
 </template>
