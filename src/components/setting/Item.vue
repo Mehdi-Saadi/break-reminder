@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   title: string;
-  icon: string;
+  icon?: string;
   description?: string;
 }>();
 </script>
@@ -11,6 +11,7 @@ defineProps<{
     <!-- label -->
     <div class="grow pe-4 pb-0.5 flex items-center space-x-1">
       <UIcon
+        v-if="icon"
         :name="icon"
         class="size-5"
       />
