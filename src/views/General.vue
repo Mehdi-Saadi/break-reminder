@@ -3,6 +3,8 @@ import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 import { Settings } from '@/types/setting';
+import { useColorMode } from '@vueuse/core';
+import { watchEffect } from 'vue';
 
 const t = useT();
 
@@ -23,6 +25,14 @@ const languageOptions: LanguageOption[] = [
     value: 'fa',
   },
 ];
+
+const mode = useColorMode();
+
+watchEffect(() => {
+  mode.value = settingStore.settings.darkMode
+    ? 'dark'
+    : 'light';
+});
 </script>
 
 <template>

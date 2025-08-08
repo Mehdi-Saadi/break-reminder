@@ -16,6 +16,7 @@ export default defineConfig(async () => ({
       components: {
         dirs: [], // disable auto import of app components
       },
+      colorMode: false,
     }),
   ],
   resolve: {
