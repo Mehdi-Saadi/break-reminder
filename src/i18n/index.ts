@@ -1,6 +1,6 @@
 import en from '@/i18n/langs/en';
 import fa from '@/i18n/langs/fa';
-import { LanguageOption } from '@/types/setting.ts';
+import { Language } from '@/types/setting.ts';
 import { createI18n } from 'vue-i18n';
 
 const i18n = createI18n({
@@ -15,7 +15,7 @@ const i18n = createI18n({
 
 export default i18n;
 
-export const directions: Readonly<Record<LanguageOption, 'auto' | 'ltr' | 'rtl'>> = {
+export const directions: Readonly<Record<Language, 'auto' | 'ltr' | 'rtl'>> = {
   en: 'ltr',
   fa: 'rtl',
 };
