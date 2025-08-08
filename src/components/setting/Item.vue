@@ -20,7 +20,7 @@ defineProps<{
         <div class="font-semibold">
           {{ title }}
         </div>
-        <div class="text-xs text-[#5c5c5c] dark:text-[#cccccc]">
+        <div class="text-xs text-default/75">
           {{ description }}
         </div>
       </div>
