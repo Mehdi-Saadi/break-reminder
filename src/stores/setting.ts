@@ -1,7 +1,7 @@
 import { Settings } from '@/types/setting';
 import { Minute, Second } from '@/types/time';
 import { defineStore } from 'pinia';
-import { ref, watchEffect } from 'vue';
+import { ref, watch } from 'vue';
 
 export const useSettingStore = defineStore('setting', () => {
   const  STORAGE_KEY = 'settings';
@@ -66,7 +66,7 @@ export const useSettingStore = defineStore('setting', () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings.value));
   };
 
-  watchEffect(saveSettingsToStorage);
+  watch(settings, saveSettingsToStorage, { deep: true });
 
   return {
     settings,
