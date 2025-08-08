@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Item from '@/components/setting/Item.vue';
-import SectionBorder from '@/components/setting/SectionBorder.vue';
+import Section from '@/components/setting/Section.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 
@@ -11,7 +11,7 @@ const settingStore = useSettingStore();
 
 <template>
   <div class="flex flex-col space-y-4">
-    <SectionBorder :label="t('workSession')">
+    <Section :label="t('workSession')">
       <Item :title="t('workDurationInMinutes')">
         <UInputNumber
           v-model="settingStore.settings.shortWorkDuration"
@@ -20,9 +20,9 @@ const settingStore = useSettingStore();
           class="max-w-32"
         />
       </Item>
-    </SectionBorder>
+    </Section>
 
-    <SectionBorder :label="t('shortBreaks')">
+    <Section :label="t('shortBreaks')">
       <Item :title="t('breakDurationInSeconds')">
         <UInputNumber
           v-model="settingStore.settings.shortBreakDuration"
@@ -31,9 +31,9 @@ const settingStore = useSettingStore();
           class="max-w-32"
         />
       </Item>
-    </SectionBorder>
+    </Section>
 
-    <SectionBorder :label="t('longBreaks')">
+    <Section :label="t('longBreaks')">
       <Item :title="t('countOfShortWorksForLongBreak')">
         <UInputNumber
           v-model="settingStore.settings.countOfShortWorksForLongBreak"
@@ -51,6 +51,6 @@ const settingStore = useSettingStore();
           class="max-w-32"
         />
       </Item>
-    </SectionBorder>
+    </Section>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BreakMessageItem from '@/components/BreakMessageItem.vue';
-import SectionBorder from '@/components/setting/SectionBorder.vue';
+import Section from '@/components/setting/Section.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 import { computed } from 'vue';
@@ -38,7 +38,7 @@ const onAddNewLongBreakMessage = (): void => {
 
 <template>
   <div class="flex flex-col space-y-4">
-    <SectionBorder :label="t('shortBreaks')">
+    <Section :label="t('shortBreaks')">
       <BreakMessageItem
         v-for="(_, key) in shortBreakMessages"
         :key="key"
@@ -52,9 +52,9 @@ const onAddNewLongBreakMessage = (): void => {
         class="justify-center"
         @click="onAddNewShortBreakMessage"
       />
-    </SectionBorder>
+    </Section>
 
-    <SectionBorder :label="t('longBreaks')">
+    <Section :label="t('longBreaks')">
       <BreakMessageItem
         v-for="(_, key) in longBreakMessages"
         :key="key"
@@ -68,6 +68,6 @@ const onAddNewLongBreakMessage = (): void => {
         class="justify-center"
         @click="onAddNewLongBreakMessage"
       />
-    </SectionBorder>
+    </Section>
   </div>
 </template>
