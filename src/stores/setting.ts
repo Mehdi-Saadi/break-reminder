@@ -2,7 +2,7 @@ import { Settings } from '@/types/setting';
 import { Minute, Second } from '@/types/time';
 import { UUID } from 'node:crypto';
 import { defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 export const useSettingStore = defineStore('setting', () => {
   const  STORAGE_KEY = 'settings';
@@ -81,11 +81,11 @@ export const useSettingStore = defineStore('setting', () => {
     }
   };
 
-  const saveSettingsToStorage = (newSettings: Settings): void => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newSettings));
+  const saveSettingsToStorage = (): void => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings.value));
   };
 
-  watch(settings, saveSettingsToStorage);
+  watchEffect(saveSettingsToStorage);
 
   return {
     settings,
