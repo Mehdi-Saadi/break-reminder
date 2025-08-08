@@ -3,8 +3,10 @@ import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 import { Settings } from '@/types/setting';
+import { window } from '@tauri-apps/api';
 import { useColorMode } from '@vueuse/core';
 import { watchEffect } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const t = useT();
 
@@ -32,6 +34,18 @@ watchEffect(() => {
   mode.value = settingStore.settings.darkMode
     ? 'dark'
     : 'light';
+});
+
+const { locale } = useI18n();
+
+watchEffect(() => {
+  const { language } = settingStore.settings;
+
+  locale.value = language;
+
+  document.documentElement.dir = language === 'en'
+    ? 'ltr'
+    : 'rtl';
 });
 </script>
 
