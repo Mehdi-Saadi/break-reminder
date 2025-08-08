@@ -1,10 +1,12 @@
-import { notify } from '@/utils/notification.ts';
+import { useNotification } from '@/composables/notification.ts';
 import { handlePromise } from '@/utils/promise.ts';
 import { check, Update } from '@tauri-apps/plugin-updater';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
 export const useUpdaterStore = defineStore('updater', () => {
+  const { notify } = useNotification();
+
   const update = ref<Update | null>(null);
   const checkForUpdateLoading = ref(false);
   const updateAvailable = computed(() => update.value !== null);
