@@ -53,7 +53,7 @@ const secondaryButtons = computed(() => [
       />
     </div>
 
-    <!-- about software -->
+    <!-- secondary buttons -->
     <div class="w-full">
       <NavButton
         v-for="button in secondaryButtons"
