@@ -2,9 +2,11 @@
 import Sidebar from '@/components/layout/Sidebar.vue';
 import { disableBrowserContextmenuInProd } from '@/composables/browser.ts';
 import { initSettingWatchers } from '@/composables/setting.ts';
+import { checkForUpdatesOnOnline } from '@/composables/updater.ts';
 
 initSettingWatchers();
 disableBrowserContextmenuInProd();
+checkForUpdatesOnOnline();
 </script>
 
 <template>
