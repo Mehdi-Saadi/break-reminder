@@ -3,10 +3,12 @@ import Sidebar from '@/components/layout/Sidebar.vue';
 import { useBrowser } from '@/composables/browser.ts';
 import { useSetting } from '@/composables/setting.ts';
 import { useUpdater } from '@/composables/updater.ts';
+import { useWindow } from '@/composables/window.ts';
 
 useSetting().initWatchers();
 useBrowser().disableContextmenuInProd();
 useUpdater().checkForUpdatesOnOnline();
+useWindow().hideOnClose();
 </script>
 
 <template>
