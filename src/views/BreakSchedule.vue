@@ -3,11 +3,10 @@ import Item from '@/components/setting/Item.vue';
 import SectionBorder from '@/components/setting/SectionBorder.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
-import { storeToRefs } from 'pinia';
 
 const t = useT();
 
-const { settings } = storeToRefs(useSettingStore());
+const settingStore = useSettingStore();
 </script>
 
 <template>
@@ -15,7 +14,7 @@ const { settings } = storeToRefs(useSettingStore());
     <SectionBorder :label="t('workSession')">
       <Item :title="t('workDurationInMinutes')">
         <UInputNumber
-          v-model="settings.shortWorkDuration"
+          v-model="settingStore.settings.shortWorkDuration"
           :max="900"
           :min="1"
           class="max-w-32"
@@ -26,7 +25,7 @@ const { settings } = storeToRefs(useSettingStore());
     <SectionBorder :label="t('shortBreaks')">
       <Item :title="t('breakDurationInSeconds')">
         <UInputNumber
-          v-model="settings.shortBreakDuration"
+          v-model="settingStore.settings.shortBreakDuration"
           :max="900"
           :min="1"
           class="max-w-32"
@@ -37,7 +36,7 @@ const { settings } = storeToRefs(useSettingStore());
     <SectionBorder :label="t('longBreaks')">
       <Item :title="t('countOfShortWorksForLongBreak')">
         <UInputNumber
-          v-model="settings.countOfShortWorksForLongBreak"
+          v-model="settingStore.settings.countOfShortWorksForLongBreak"
           :max="900"
           :min="1"
           class="max-w-32"
@@ -46,7 +45,7 @@ const { settings } = storeToRefs(useSettingStore());
 
       <Item :title="t('breakDurationInSeconds')">
         <UInputNumber
-          v-model="settings.longBreakDuration"
+          v-model="settingStore.settings.longBreakDuration"
           :max="900"
           :min="1"
           class="max-w-32"

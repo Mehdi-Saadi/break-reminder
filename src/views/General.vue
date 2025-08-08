@@ -3,11 +3,10 @@ import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 import { Settings } from '@/types/setting';
-import { storeToRefs } from 'pinia';
 
 const t = useT();
 
-const { settings } = storeToRefs(useSettingStore());
+const settingStore = useSettingStore();
 
 interface LanguageOption {
   label: string;
@@ -34,7 +33,7 @@ const languageOptions: LanguageOption[] = [
       icon="lucide:languages"
     >
       <USelect
-        v-model="settings.language"
+        v-model="settingStore.settings.language"
         :items="languageOptions"
         class="min-w-20"
       />
@@ -46,7 +45,7 @@ const languageOptions: LanguageOption[] = [
       icon="lucide:moon"
     >
       <UCheckbox
-        v-model="settings.darkMode"
+        v-model="settingStore.settings.darkMode"
         size="xl"
       />
     </Item>
@@ -57,7 +56,7 @@ const languageOptions: LanguageOption[] = [
       icon="lucide:arrow-up-from-line"
     >
       <UCheckbox
-        v-model="settings.autostart"
+        v-model="settingStore.settings.autostart"
         size="xl"
       />
     </Item>

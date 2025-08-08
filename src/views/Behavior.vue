@@ -2,11 +2,10 @@
 import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
-import { storeToRefs } from 'pinia';
 
 const t = useT();
 
-const { settings } = storeToRefs(useSettingStore());
+const settingStore = useSettingStore();
 </script>
 
 <template>
@@ -18,7 +17,7 @@ const { settings } = storeToRefs(useSettingStore());
       icon="lucide:lock"
     >
       <UCheckbox
-        v-model="settings.strictBreak"
+        v-model="settingStore.settings.strictBreak"
         size="xl"
       />
     </Item>
@@ -30,7 +29,7 @@ const { settings } = storeToRefs(useSettingStore());
       icon="lucide:octagon-x"
     >
       <UCheckbox
-        v-model="settings.doNotDisturb"
+        v-model="settingStore.settings.doNotDisturb"
         size="xl"
       />
     </Item>
@@ -41,7 +40,7 @@ const { settings } = storeToRefs(useSettingStore());
       icon="lucide:hourglass"
     >
       <UInputNumber
-        v-model="settings.timeToPrepareForBreak"
+        v-model="settingStore.settings.timeToPrepareForBreak"
         :max="900"
         :min="1"
         class="max-w-32"

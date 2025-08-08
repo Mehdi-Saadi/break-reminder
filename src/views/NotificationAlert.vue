@@ -2,11 +2,10 @@
 import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
-import { storeToRefs } from 'pinia';
 
 const t = useT();
 
-const { settings } = storeToRefs(useSettingStore());
+const settingStore = useSettingStore();
 </script>
 
 <template>
@@ -18,7 +17,7 @@ const { settings } = storeToRefs(useSettingStore());
       icon="lucide:bell"
     >
       <UCheckbox
-        v-model="settings.notification"
+        v-model="settingStore.settings.notification"
         size="xl"
       />
     </Item>
@@ -30,7 +29,7 @@ const { settings } = storeToRefs(useSettingStore());
       icon="lucide:music-2"
     >
       <UCheckbox
-        v-model="settings.audibleAlert"
+        v-model="settingStore.settings.audibleAlert"
         size="xl"
       />
     </Item>
