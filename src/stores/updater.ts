@@ -1,0 +1,51 @@
+import { notify } from '@/utils/notification.ts';
+import { handlePromise } from '@/utils/promise.ts';
+import { check, Update } from '@tauri-apps/plugin-updater';
+import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
+
+export const useUpdaterStore = defineStore('updater', () => {
+  const update = ref<Update | null>(null);
+  const checkForUpdateLoading = ref(false);
+  const updateAvailable = computed(() => update.value !== null);
+
+  const downloadLoading = ref(false);
+
+  const checkForUpdates = async (): Promise<void> => {
+    checkForUpdateLoading.value = true;
+
+    const { error, response } = await handlePromise(check());
+
+    if (error) {
+      await notify(error.message);
+    }
+
+    update.value = response;
+    checkForUpdateLoading.value = false;
+  };
+
+  const downloadAndInstall = async (): Promise<void> => {
+    if (!update.value) {
+      return;
+    }
+
+    downloadLoading.value = true;
+
+    const { error } = await handlePromise(update.value.downloadAndInstall());
+
+    if (error) {
+      await notify(error.message);
+    }
+
+    downloadLoading.value = false;
+  };
+
+  return {
+    updateAvailable,
+    checkForUpdateLoading,
+    downloadLoading,
+
+    checkForUpdates,
+    downloadAndInstall,
+  };
+});
