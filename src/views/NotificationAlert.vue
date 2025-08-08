@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Item from '@/components/setting/Item.vue';
+import CheckboxItem from '@/components/setting/CheckboxItem.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 
@@ -11,29 +11,19 @@ const settingStore = useSettingStore();
 <template>
   <div class="flex flex-col space-y-5 p-4 text-sm">
     <!-- notification -->
-    <Item
+    <CheckboxItem
+      v-model="settingStore.settings.notification"
       :title="t('notification')"
       :description="t('notificationInfo')"
       icon="lucide:bell"
-    >
-      <UCheckbox
-        v-model="settingStore.settings.notification"
-        size="xl"
-        color="neutral"
-      />
-    </Item>
+    />
 
     <!-- audible alert -->
-    <Item
+    <CheckboxItem
+      v-model="settingStore.settings.audibleAlert"
       :title="t('audibleAlert')"
       :description="t('audibleAlertInfo')"
       icon="lucide:music-2"
-    >
-      <UCheckbox
-        v-model="settingStore.settings.audibleAlert"
-        size="xl"
-        color="neutral"
-      />
-    </Item>
+    />
   </div>
 </template>
