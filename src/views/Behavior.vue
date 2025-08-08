@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CheckboxItem from '@/components/setting/CheckboxItem.vue';
 import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
@@ -11,30 +12,20 @@ const settingStore = useSettingStore();
 <template>
   <div class="flex flex-col space-y-5 p-4 text-sm">
     <!-- strick break -->
-    <Item
+    <CheckboxItem
+      v-model="settingStore.settings.strictBreak"
       :title="t('strictBreak')"
       :description="t('strictBreakInfo')"
       icon="lucide:lock"
-    >
-      <UCheckbox
-        v-model="settingStore.settings.strictBreak"
-        size="xl"
-        color="neutral"
-      />
-    </Item>
+    />
 
     <!-- do not disturb -->
-    <Item
+    <CheckboxItem
+      v-model="settingStore.settings.doNotDisturb"
       :title="t('doNotDisturb')"
       :description="t('doNotDisturbInfo')"
       icon="lucide:octagon-x"
-    >
-      <UCheckbox
-        v-model="settingStore.settings.doNotDisturb"
-        size="xl"
-        color="neutral"
-      />
-    </Item>
+    />
 
     <!-- time to prepare for a break -->
     <Item
