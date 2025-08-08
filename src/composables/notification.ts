@@ -20,7 +20,10 @@ export const useNotification = () => {
     if (!(await checkPermission())) {
       const message: string = typeof options === 'string' ? options : options.title;
 
-      toast.add({ title: message });
+      toast.add({
+        title: message,
+        color: 'neutral',
+      });
 
       return;
     }
