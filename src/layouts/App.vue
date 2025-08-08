@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Sidebar from '@/components/layout/Sidebar.vue';
+import { initSettingWatchers } from '@/composables/setting.ts';
+
+initSettingWatchers();
 </script>
 
 <template>

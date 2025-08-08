@@ -2,12 +2,8 @@
 import CheckboxItem from '@/components/setting/CheckboxItem.vue';
 import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
-import { directions } from '@/i18n';
 import { useSettingStore } from '@/stores/setting';
 import { Settings } from '@/types/setting';
-import { useColorMode } from '@vueuse/core';
-import { watchEffect } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 const t = useT();
 
@@ -28,24 +24,6 @@ const languageOptions: LanguageOption[] = [
     value: 'fa',
   },
 ];
-
-const mode = useColorMode();
-
-watchEffect(() => {
-  mode.value = settingStore.settings.darkMode
-    ? 'dark'
-    : 'light';
-});
-
-const { locale } = useI18n();
-
-watchEffect(() => {
-  const { language } = settingStore.settings;
-
-  locale.value = language;
-
-  document.documentElement.dir = directions[language];
-});
 </script>
 
 <template>
