@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import Sidebar from '@/components/layout/Sidebar.vue';
+import { disableBrowserContextmenuInProd } from '@/composables/browser.ts';
 import { initSettingWatchers } from '@/composables/setting.ts';
 
 initSettingWatchers();
+disableBrowserContextmenuInProd();
 </script>
 
 <template>
