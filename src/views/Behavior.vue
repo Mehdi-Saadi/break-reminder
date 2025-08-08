@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CheckboxItem from '@/components/setting/CheckboxItem.vue';
-import Item from '@/components/setting/Item.vue';
+import InputNumberItem from '@/components/setting/InputNumberItem.vue';
 import { useT } from '@/composables/t';
 import { useSettingStore } from '@/stores/setting';
 
@@ -28,17 +28,10 @@ const settingStore = useSettingStore();
     />
 
     <!-- time to prepare for a break -->
-    <Item
+    <InputNumberItem
+      v-model="settingStore.settings.timeToPrepareForBreak"
       :title="t('timeToPrepareForBreakInSeconds')"
       icon="lucide:hourglass"
-    >
-      <UInputNumber
-        v-model="settingStore.settings.timeToPrepareForBreak"
-        :max="900"
-        :min="1"
-        class="max-w-32"
-        color="neutral"
-      />
-    </Item>
+    />
   </div>
 </template>
