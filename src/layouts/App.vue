@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Sidebar from '@/layouts/Sidebar.vue';
+import Sidebar from '@/components/layout/Sidebar.vue';
 import { useSettingStore } from '@/stores/setting';
 import { computed } from 'vue';
 
