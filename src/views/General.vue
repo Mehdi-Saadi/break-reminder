@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CheckboxItem from '@/components/setting/CheckboxItem.vue';
 import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
 import { directions } from '@/i18n';
@@ -63,27 +64,17 @@ watchEffect(() => {
     </Item>
 
     <!-- dark mode -->
-    <Item
+    <CheckboxItem
+      v-model="settingStore.settings.darkMode"
       :title="t('darkMode')"
       icon="lucide:moon"
-    >
-      <UCheckbox
-        v-model="settingStore.settings.darkMode"
-        color="neutral"
-        size="xl"
-      />
-    </Item>
+    />
 
     <!-- run on startup -->
-    <Item
+    <CheckboxItem
+      v-model="settingStore.settings.autostart"
       :title="t('runOnStartup')"
       icon="lucide:arrow-up-from-line"
-    >
-      <UCheckbox
-        v-model="settingStore.settings.autostart"
-        color="neutral"
-        size="xl"
-      />
-    </Item>
+    />
   </div>
 </template>
