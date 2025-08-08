@@ -4,23 +4,30 @@ import { useColorMode } from '@vueuse/core';
 import { watchEffect } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-export const initSettingWatchers = (): void => {
+export const useSetting = () => {
   const settingStore = useSettingStore();
   const mode = useColorMode();
-
-  watchEffect(() => {
-    mode.value = settingStore.settings.darkMode
-      ? 'dark'
-      : 'light';
-  });
-
   const { locale } = useI18n();
 
-  watchEffect(() => {
-    const { language } = settingStore.settings;
+  const initWatchers = (): void => {
+    // dark mode watcher
+    watchEffect(() => {
+      mode.value = settingStore.settings.darkMode
+        ? 'dark'
+        : 'light';
+    });
 
-    locale.value = language;
+    // language watcher
+    watchEffect(() => {
+      const { language } = settingStore.settings;
 
-    document.documentElement.dir = directions[language];
-  });
+      locale.value = language;
+
+      document.documentElement.dir = directions[language];
+    });
+  };
+
+  return {
+    initWatchers,
+  };
 };
