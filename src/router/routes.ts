@@ -1,5 +1,6 @@
 import App from '@/layouts/App.vue';
 import Behavior from '@/views/Behavior.vue';
+import BreakMessages from '@/views/BreakMessages.vue';
 import BreakSchedule from '@/views/BreakSchedule.vue';
 import General from '@/views/General.vue';
 import NotificationAlert from '@/views/NotificationAlert.vue';
@@ -34,7 +35,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'break-messages',
         name: 'break-messages',
-        component: General,
+        component: BreakMessages,
       },
       {
         path: 'about',
