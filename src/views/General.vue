@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Item from '@/components/setting/Item.vue';
 import { useT } from '@/composables/t';
+import { directions } from '@/i18n';
 import { useSettingStore } from '@/stores/setting';
 import { Settings } from '@/types/setting';
-import { window } from '@tauri-apps/api';
 import { useColorMode } from '@vueuse/core';
 import { watchEffect } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -43,9 +43,7 @@ watchEffect(() => {
 
   locale.value = language;
 
-  document.documentElement.dir = language === 'en'
-    ? 'ltr'
-    : 'rtl';
+  document.documentElement.dir = directions[language];
 });
 </script>
 

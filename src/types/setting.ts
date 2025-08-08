@@ -28,7 +28,8 @@ export interface Settings {
 
   shortBreakMessages: BreakMessages;
   longBreakMessages: BreakMessages;
-  language: 'en' | 'fa';
+  language: LanguageOption;
 }
 
 export type BreakMessages = Record<UUID, string>;
+export type LanguageOption = 'en' | 'fa';
