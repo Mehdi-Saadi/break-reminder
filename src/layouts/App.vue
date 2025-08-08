@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import Sidebar from '@/components/layout/Sidebar.vue';
-import { disableBrowserContextmenuInProd } from '@/composables/browser.ts';
+import { useBrowser } from '@/composables/browser.ts';
 import { initSettingWatchers } from '@/composables/setting.ts';
 import { checkForUpdatesOnOnline } from '@/composables/updater.ts';
 
 initSettingWatchers();
-disableBrowserContextmenuInProd();
+useBrowser().disableContextmenuInProd();
 checkForUpdatesOnOnline();
 </script>
 
