@@ -1,6 +1,5 @@
 import { Settings } from '@/types/setting';
 import { Minute, Second } from '@/types/time';
-import { UUID } from 'node:crypto';
 import { defineStore } from 'pinia';
 import { ref, watchEffect } from 'vue';
 
@@ -63,24 +62,6 @@ export const useSettingStore = defineStore('setting', () => {
 
   const settings = ref<Settings>(getSettings());
 
-  const getBreakMessageById = (id: UUID): string => settings.value.shortBreakMessages[id] || settings.value.longBreakMessages[id] || '';
-
-  const updateBreakMessageById = (id: UUID, newValue: string): void => {
-    if (settings.value.shortBreakMessages[id]) {
-      settings.value.shortBreakMessages[id] = newValue;
-    } else if (settings.value.longBreakMessages[id]) {
-      settings.value.longBreakMessages[id] = newValue;
-    }
-  };
-
-  const removeBreakMessageById = (id: UUID): void => {
-    if (settings.value.shortBreakMessages[id]) {
-      delete settings.value.shortBreakMessages[id];
-    } else if (settings.value.longBreakMessages[id]) {
-      delete settings.value.longBreakMessages[id];
-    }
-  };
-
   const saveSettingsToStorage = (): void => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings.value));
   };
@@ -89,9 +70,5 @@ export const useSettingStore = defineStore('setting', () => {
 
   return {
     settings,
-
-    getBreakMessageById,
-    updateBreakMessageById,
-    removeBreakMessageById,
   };
 });
