@@ -1,4 +1,5 @@
 import App from '@/layouts/App.vue';
+import About from '@/views/About.vue';
 import Behavior from '@/views/Behavior.vue';
 import BreakMessages from '@/views/BreakMessages.vue';
 import BreakSchedule from '@/views/BreakSchedule.vue';
@@ -40,7 +41,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'about',
         name: 'about',
-        component: General,
+        component: About,
       },
     ],
   },
