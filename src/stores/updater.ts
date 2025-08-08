@@ -26,6 +26,14 @@ export const useUpdaterStore = defineStore('updater', () => {
     checkForUpdateLoading.value = false;
   };
 
+  const checkAndNotifyUpdates = async (): Promise<void> => {
+    await checkForUpdates();
+
+    if (update.value) {
+      await notify('A new version is available!');
+    }
+  };
+
   const downloadAndInstall = async (): Promise<void> => {
     if (!update.value) {
       return;
@@ -48,6 +56,7 @@ export const useUpdaterStore = defineStore('updater', () => {
     downloadLoading,
 
     checkForUpdates,
+    checkAndNotifyUpdates,
     downloadAndInstall,
   };
 });
