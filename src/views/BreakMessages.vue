@@ -26,6 +26,14 @@ const longBreakMessages = computed({
     settingStore.settings.longBreakMessages = newValue;
   },
 });
+
+const onAddNewShortBreakMessage = (): void => {
+  shortBreakMessages.value[crypto.randomUUID()] = '';
+};
+
+const onAddNewLongBreakMessage = (): void => {
+  longBreakMessages.value[crypto.randomUUID()] = '';
+};
 </script>
 
 <template>
@@ -37,6 +45,13 @@ const longBreakMessages = computed({
         v-model="shortBreakMessages[key]"
         @delete="delete shortBreakMessages[key]"
       />
+
+      <UButton
+        :label="t('addNewMessage')"
+        variant="subtle"
+        class="justify-center"
+        @click="onAddNewShortBreakMessage"
+      />
     </SectionBorder>
 
     <SectionBorder :label="t('longBreaks')">
@@ -45,6 +60,13 @@ const longBreakMessages = computed({
         :key="key"
         v-model="longBreakMessages[key]"
         @delete="delete longBreakMessages[key]"
+      />
+
+      <UButton
+        :label="t('addNewMessage')"
+        variant="subtle"
+        class="justify-center"
+        @click="onAddNewLongBreakMessage"
       />
     </SectionBorder>
   </div>
