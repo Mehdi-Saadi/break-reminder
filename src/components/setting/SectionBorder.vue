@@ -6,15 +6,15 @@ defineProps<{
 
 <template>
   <div class="relative pt-2">
-    <div class="border border-gray-300 rounded-md p-4 text-sm">
+    <UCard :ui="{ body: 'sm:p-4 text-sm' }">
       <!-- label -->
-      <span class="absolute top-0 start-2 text-xs font-semibold bg-[#f3f3f3] dark:bg-[#202020] px-1">
+      <span class="absolute top-0 start-2 text-xs font-semibold bg-default px-1">
         {{ label }}
       </span>
 
       <div class="flex flex-col space-y-3">
         <slot />
       </div>
-    </div>
+    </UCard>
   </div>
 </template>
