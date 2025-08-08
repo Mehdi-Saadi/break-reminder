@@ -19,6 +19,7 @@ const settingStore = useSettingStore();
       <UCheckbox
         v-model="settingStore.settings.strictBreak"
         size="xl"
+        color="neutral"
       />
     </Item>
 
@@ -31,6 +32,7 @@ const settingStore = useSettingStore();
       <UCheckbox
         v-model="settingStore.settings.doNotDisturb"
         size="xl"
+        color="neutral"
       />
     </Item>
 
@@ -44,6 +46,7 @@ const settingStore = useSettingStore();
         :max="900"
         :min="1"
         class="max-w-32"
+        color="neutral"
       />
     </Item>
   </div>

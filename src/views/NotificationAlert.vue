@@ -19,6 +19,7 @@ const settingStore = useSettingStore();
       <UCheckbox
         v-model="settingStore.settings.notification"
         size="xl"
+        color="neutral"
       />
     </Item>
 
@@ -31,6 +32,7 @@ const settingStore = useSettingStore();
       <UCheckbox
         v-model="settingStore.settings.audibleAlert"
         size="xl"
+        color="neutral"
       />
     </Item>
   </div>

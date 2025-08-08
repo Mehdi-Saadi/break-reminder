@@ -50,6 +50,7 @@ const onAddNewLongBreakMessage = (): void => {
         :label="t('addNewMessage')"
         variant="subtle"
         class="justify-center"
+        color="neutral"
         @click="onAddNewShortBreakMessage"
       />
     </Section>
@@ -66,6 +67,7 @@ const onAddNewLongBreakMessage = (): void => {
         :label="t('addNewMessage')"
         variant="subtle"
         class="justify-center"
+        color="neutral"
         @click="onAddNewLongBreakMessage"
       />
     </Section>

@@ -92,6 +92,7 @@ const supportPage = 'https://github.com/Mehdi-Saadi/break-reminder/issues';
         <UButton
           :label="t('checkForUpdates')"
           variant="subtle"
+          color="neutral"
         />
       </div>
     </section>

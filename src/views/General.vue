@@ -45,6 +45,7 @@ watchEffect(() => {
       <USelect
         v-model="settingStore.settings.language"
         :items="languageOptions"
+        color="neutral"
         class="min-w-20"
       />
     </Item>
@@ -56,6 +57,7 @@ watchEffect(() => {
     >
       <UCheckbox
         v-model="settingStore.settings.darkMode"
+        color="neutral"
         size="xl"
       />
     </Item>
@@ -67,6 +69,7 @@ watchEffect(() => {
     >
       <UCheckbox
         v-model="settingStore.settings.autostart"
+        color="neutral"
         size="xl"
       />
     </Item>

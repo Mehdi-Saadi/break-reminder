@@ -23,6 +23,7 @@ const isActive = computed(() => route.name === props.button.to.name);
     :label="button.label"
     :to="button.to"
     :variant="isActive ? 'subtle' : 'ghost'"
+    color="neutral"
     class="w-full"
     size="lg"
   />

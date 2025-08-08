@@ -11,6 +11,7 @@ const emit = defineEmits<{
     <UInput
       v-model="model"
       class="grow"
+      color="neutral"
     />
 
     <UButton

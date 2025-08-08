@@ -18,6 +18,7 @@ const settingStore = useSettingStore();
           :max="900"
           :min="1"
           class="max-w-32"
+          color="neutral"
         />
       </Item>
     </Section>
@@ -29,6 +30,7 @@ const settingStore = useSettingStore();
           :max="900"
           :min="1"
           class="max-w-32"
+          color="neutral"
         />
       </Item>
     </Section>
@@ -40,6 +42,7 @@ const settingStore = useSettingStore();
           :max="900"
           :min="1"
           class="max-w-32"
+          color="neutral"
         />
       </Item>
 
@@ -49,6 +52,7 @@ const settingStore = useSettingStore();
           :max="900"
           :min="1"
           class="max-w-32"
+          color="neutral"
         />
       </Item>
     </Section>
