@@ -1,8 +1,14 @@
 import { useUpdaterStore } from '@/stores/updater.ts';
 import { useEventListener } from '@vueuse/core';
 
-export const checkForUpdatesOnOnline = (): void => {
+export const useUpdater = () => {
   const { checkForUpdates } = useUpdaterStore();
 
-  useEventListener('online', checkForUpdates);
+  const checkForUpdatesOnOnline = (): void => {
+    useEventListener('online', checkForUpdates, { once: true });
+  };
+
+  return {
+    checkForUpdatesOnOnline,
+  };
 };
