@@ -4,6 +4,7 @@ import { useAutostart } from '@/composables/autostart.ts';
 import { useBrowser } from '@/composables/browser.ts';
 import { useDarkMode } from '@/composables/darkMode.ts';
 import { useLanguage } from '@/composables/language.ts';
+import { useTray } from '@/composables/tray.ts';
 import { useUpdater } from '@/composables/updater.ts';
 import { useWindow } from '@/composables/window.ts';
 
@@ -13,6 +14,7 @@ useAutostart().setBasedOnStore();
 useBrowser().disableContextmenuInProd();
 useUpdater().checkForUpdatesOnOnline();
 useWindow().hideOnClose();
+useTray().getOrCreate();
 </script>
 
 <template>
