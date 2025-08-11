@@ -2,12 +2,12 @@
 import Sidebar from '@/components/layout/Sidebar.vue';
 import { useBrowser } from '@/composables/browser.ts';
 import { useDarkMode } from '@/composables/darkMode.ts';
-import { useSetting } from '@/composables/setting.ts';
+import { useLanguage } from '@/composables/language.ts';
 import { useUpdater } from '@/composables/updater.ts';
 import { useWindow } from '@/composables/window.ts';
 
 useDarkMode().setBasedOnStore();
-useSetting().initWatchers();
+useLanguage().setBasedOnStore();
 useBrowser().disableContextmenuInProd();
 useUpdater().checkForUpdatesOnOnline();
 useWindow().hideOnClose();
