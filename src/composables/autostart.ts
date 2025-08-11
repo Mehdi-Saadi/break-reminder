@@ -4,7 +4,7 @@ import { disable, enable, isEnabled as checkIsEnabled } from '@tauri-apps/plugin
 export const useAutostart = () => {
   const settingStore = useSettingStore();
 
-  const enableIfNeeded = async (): Promise<void> => {
+  const enableOrDisableBasedOnSetting = async (): Promise<void> => {
     const isEnabled = await checkIsEnabled();
     const shouldEnable = settingStore.settings.autostart;
 
@@ -14,6 +14,6 @@ export const useAutostart = () => {
   };
 
   return {
-    enableIfNeeded,
+    enableOrDisableBasedOnSetting,
   };
 };
