@@ -2,13 +2,14 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 
 export const useWindow = () => {
   const hideOnClose = async (): Promise<void> => {
-    await getCurrentWindow()
-      .onCloseRequested(
-        async (e): Promise<void> => {
-          e.preventDefault();
-          await getCurrentWindow().hide();
-        }
-      );
+    const currentWindow = getCurrentWindow();
+
+    await currentWindow.onCloseRequested(
+      async (e): Promise<void> => {
+        e.preventDefault();
+        await currentWindow.hide();
+      }
+    );
   };
 
   return {
