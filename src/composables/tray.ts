@@ -5,9 +5,14 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 
 export const useTray = () => {
   const TRAY_ID = 'break-reminder-tray';
+  const TRAY_STATUS_ITEM_ID = 'break-reminder-tray-status-item';
   const currentWindow = getCurrentWindow();
 
   const createMenuItems = async (): Promise<(MenuItem | PredefinedMenuItem)[]> => [
+    await MenuItem.new({
+      id: TRAY_STATUS_ITEM_ID,
+      text: 'Next break in: 13:58',
+    }),
     await MenuItem.new({
       text: 'Settings',
       action: (): Promise<void> => currentWindow.show(),
