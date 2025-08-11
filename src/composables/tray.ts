@@ -1,6 +1,5 @@
 import { defaultWindowIcon } from '@tauri-apps/api/app';
-import { Menu } from '@tauri-apps/api/menu/menu';
-import { MenuItem } from '@tauri-apps/api/menu/menuItem';
+import { Menu, MenuItem, PredefinedMenuItem } from '@tauri-apps/api/menu';
 import { TrayIcon } from '@tauri-apps/api/tray';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
@@ -8,23 +7,22 @@ export const useTray = () => {
   const TRAY_ID = 'break-reminder-tray';
   const currentWindow = getCurrentWindow();
 
-  const createMenuItems = async (): Promise<MenuItem[]> => [
-    // show settings
+  const createMenuItems = async (): Promise<(MenuItem | PredefinedMenuItem)[]> => [
     await MenuItem.new({
-      id: 'show-break-reminder-app',
       text: 'Settings',
       action: (): Promise<void> => currentWindow.show(),
     }),
-    // quit the app
+    await PredefinedMenuItem.new({
+      text: 'separator',
+      item: 'Separator',
+    }),
     await MenuItem.new({
-      id: 'quit-break-reminder-app',
       text: 'Quit',
       action: (): Promise<void> => currentWindow.destroy(),
     }),
   ];
 
   const createMenu = async (): Promise<Menu> => Menu.new({
-      id: 'break-reminder-tray-menu',
       items: await createMenuItems(),
     });
 
