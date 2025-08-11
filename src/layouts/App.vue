@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Sidebar from '@/components/layout/Sidebar.vue';
+import { useAutostart } from '@/composables/autostart.ts';
 import { useBrowser } from '@/composables/browser.ts';
 import { useDarkMode } from '@/composables/darkMode.ts';
 import { useLanguage } from '@/composables/language.ts';
@@ -8,6 +9,7 @@ import { useWindow } from '@/composables/window.ts';
 
 useDarkMode().setBasedOnStore();
 useLanguage().setBasedOnStore();
+useAutostart().setBasedOnStore();
 useBrowser().disableContextmenuInProd();
 useUpdater().checkForUpdatesOnOnline();
 useWindow().hideOnClose();
