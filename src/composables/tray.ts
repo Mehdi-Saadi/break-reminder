@@ -8,7 +8,7 @@ export const useTray = () => {
   const TRAY_ID = 'break-reminder-tray';
   const currentWindow = getCurrentWindow();
 
-  const createTrayMenuItems = async (): Promise<MenuItem[]> => [
+  const createMenuItems = async (): Promise<MenuItem[]> => [
     // show settings
     await MenuItem.new({
       id: 'show-break-reminder-app',
@@ -23,30 +23,30 @@ export const useTray = () => {
     }),
   ];
 
-  const createTrayMenu = async (): Promise<Menu> => Menu.new({
+  const createMenu = async (): Promise<Menu> => Menu.new({
       id: 'break-reminder-tray-menu',
-      items: await createTrayMenuItems(),
+      items: await createMenuItems(),
     });
 
-  const createTray = async (): Promise<TrayIcon> => TrayIcon.new({
+  const create = async (): Promise<TrayIcon> => TrayIcon.new({
       id: TRAY_ID,
       icon: await defaultWindowIcon() || undefined,
-      menu: await createTrayMenu(),
+      menu: await createMenu(),
       tooltip: 'Break Reminder',
       showMenuOnLeftClick: false,
     });
 
-  const getOrCreateTray = async (): Promise<TrayIcon> => {
+  const getOrCreate = async (): Promise<TrayIcon> => {
     const tray = await TrayIcon.getById(TRAY_ID);
 
     if (tray) {
       return tray;
     }
 
-    return createTray();
+    return create();
   };
 
   return {
-    getOrCreateTray,
+    getOrCreate,
   };
 };
