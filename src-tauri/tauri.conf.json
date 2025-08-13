@@ -12,7 +12,9 @@
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "Break Reminder",
+        "url": "/src/main/index.html",
         "width": 768,
         "height": 480,
         "fullscreen": false,
