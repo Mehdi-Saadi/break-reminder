@@ -9,10 +9,11 @@ export const useTray = () => {
   const currentWindow = getCurrentWindow();
 
   const createMenuItems = async (): Promise<(MenuItem | PredefinedMenuItem)[]> => [
-    await MenuItem.new({
-      id: TRAY_STATUS_ITEM_ID,
-      text: 'Next break in: 13:58',
-    }),
+    // todo: implement next break time
+    // await MenuItem.new({
+    //   id: TRAY_STATUS_ITEM_ID,
+    //   text: 'Next break in: 13:58',
+    // }),
     await MenuItem.new({
       text: 'Settings',
       action: (): Promise<void> => currentWindow.show(),
