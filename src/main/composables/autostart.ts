@@ -1,5 +1,9 @@
-import { useSettingStore } from '@/stores/setting.ts';
-import { disable, enable, isEnabled as checkIsEnabled } from '@tauri-apps/plugin-autostart';
+import {
+  disable,
+  enable,
+  isEnabled as checkIsEnabled,
+} from '@tauri-apps/plugin-autostart';
+import { useSettingStore } from '@/main/stores/setting.ts';
 import { watchEffect } from 'vue';
 
 export const useAutostart = () => {

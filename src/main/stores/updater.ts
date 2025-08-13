@@ -1,5 +1,5 @@
-import { useNotification } from '@/composables/notification.ts';
-import { handlePromise } from '@/utils/promise.ts';
+import { useNotification } from '@/main/composables/notification.ts';
+import { handlePromise } from '@/main/utils/promise.ts';
 import { check, Update } from '@tauri-apps/plugin-updater';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';

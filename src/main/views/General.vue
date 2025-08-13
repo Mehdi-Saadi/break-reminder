@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import CheckboxItem from '@/components/setting/CheckboxItem.vue';
-import Item from '@/components/setting/Item.vue';
-import { useT } from '@/composables/t';
-import { useSettingStore } from '@/stores/setting';
-import { Settings } from '@/types/setting';
+import CheckboxItem from '@/main/components/setting/CheckboxItem.vue';
+import Item from '@/main/components/setting/Item.vue';
+import { useSettingStore } from '@/main/stores/setting';
+import { Settings } from '@/main/types/setting';
+import { useT } from '@/main/composables/t';
 
 const t = useT();
 

@@ -1,4 +1,4 @@
-import { KeyWord } from '@/i18n/types';
+import { KeyWord } from '@/main/i18n/types';
 import { useI18n } from 'vue-i18n';
 
 export const useT = () => {

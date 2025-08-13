@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import BreakMessageItem from '@/components/BreakMessageItem.vue';
-import Section from '@/components/setting/Section.vue';
-import { useT } from '@/composables/t';
-import { useSettingStore } from '@/stores/setting';
+import BreakMessageItem from '@/main/components/BreakMessageItem.vue';
+import Section from '@/main/components/setting/Section.vue';
+import { useSettingStore } from '@/main/stores/setting';
+import { useT } from '@/main/composables/t';
 import { computed } from 'vue';
 
 const t = useT();

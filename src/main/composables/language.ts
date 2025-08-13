@@ -1,5 +1,5 @@
-import { directions } from '@/i18n';
-import { useSettingStore } from '@/stores/setting.ts';
+import { directions } from '@/main/i18n';
+import { useSettingStore } from '@/main/stores/setting.ts';
 import { watchEffect } from 'vue';
 import { useI18n } from 'vue-i18n';
 

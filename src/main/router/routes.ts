@@ -1,10 +1,10 @@
-import App from '@/layouts/App.vue';
-import About from '@/views/About.vue';
-import Behavior from '@/views/Behavior.vue';
-import BreakMessages from '@/views/BreakMessages.vue';
-import BreakSchedule from '@/views/BreakSchedule.vue';
-import General from '@/views/General.vue';
-import NotificationAlert from '@/views/NotificationAlert.vue';
+import App from '@/main/layouts/App.vue';
+import About from '@/main/views/About.vue';
+import Behavior from '@/main/views/Behavior.vue';
+import BreakMessages from '@/main/views/BreakMessages.vue';
+import BreakSchedule from '@/main/views/BreakSchedule.vue';
+import General from '@/main/views/General.vue';
+import NotificationAlert from '@/main/views/NotificationAlert.vue';
 import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [

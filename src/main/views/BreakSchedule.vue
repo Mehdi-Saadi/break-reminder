@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import InputNumberItem from '@/components/setting/InputNumberItem.vue';
-import Section from '@/components/setting/Section.vue';
-import { useT } from '@/composables/t';
-import { useSettingStore } from '@/stores/setting';
+import InputNumberItem from '@/main/components/setting/InputNumberItem.vue';
+import Section from '@/main/components/setting/Section.vue';
+import { useSettingStore } from '@/main/stores/setting';
+import { useT } from '@/main/composables/t';
 
 const t = useT();
 

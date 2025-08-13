@@ -5,7 +5,6 @@ import {
   sendNotification,
 } from '@tauri-apps/plugin-notification';
 
-
 export const useNotification = () => {
   const toast = useToast();
 

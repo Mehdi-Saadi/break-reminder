@@ -1,4 +1,4 @@
-import { Minute, Second } from '@/types/time';
+import { Minute, Second } from '@/main/types/time';
 import { UUID } from 'node:crypto';
 
 export interface Settings {

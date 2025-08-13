@@ -1,4 +1,4 @@
-import { useUpdaterStore } from '@/stores/updater.ts';
+import { useUpdaterStore } from '@/main/stores/updater.ts';
 import { useEventListener } from '@vueuse/core';
 
 export const useUpdater = () => {

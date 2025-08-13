@@ -1,9 +1,9 @@
 import '@/assets/styles/main.css';
 
-import App from '@/App.vue';
-import i18n from '@/i18n';
-import router from '@/router';
-import store from '@/stores';
+import App from '@/main/App.vue';
+import i18n from '@/main/i18n';
+import router from '@/main/router';
+import store from '@/main/stores';
 import ui from '@nuxt/ui/vue-plugin';
 import { createApp } from 'vue';
 

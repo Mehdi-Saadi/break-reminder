@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import NavButton from '@/components/layout/NavButton.vue';
-import { useT } from '@/composables/t.ts';
+import NavButton from '@/main/components/layout/NavButton.vue';
+import { useT } from '@/main/composables/t';
 import { computed } from 'vue';
 
 const t = useT();

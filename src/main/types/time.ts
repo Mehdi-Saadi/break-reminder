@@ -1,4 +1,4 @@
-import { Branded } from '@/types/common';
+import { Branded } from '@/main/types/common';
 
 export type Minute = Branded<number, 'Minute'>;
 export type Second = Branded<number, 'Second'>;

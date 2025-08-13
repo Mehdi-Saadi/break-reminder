@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Item from '@/components/setting/Item.vue';
+import Item from '@/main/components/setting/Item.vue';
 
 defineProps<{
   title: string;

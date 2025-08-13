@@ -1,4 +1,4 @@
-import { Words } from '@/i18n/types';
+import { Words } from '@/main/i18n/types';
 
 const fa: Words = {
   general: 'عمومی',

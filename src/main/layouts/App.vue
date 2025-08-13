@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Sidebar from '@/components/layout/Sidebar.vue';
-import { useAutostart } from '@/composables/autostart.ts';
-import { useBrowser } from '@/composables/browser.ts';
-import { useDarkMode } from '@/composables/darkMode.ts';
-import { useLanguage } from '@/composables/language.ts';
-import { useTray } from '@/composables/tray.ts';
-import { useUpdater } from '@/composables/updater.ts';
-import { useWindow } from '@/composables/window.ts';
+import Sidebar from '@/main/components/layout/Sidebar.vue';
+import { useAutostart } from '@/main/composables/autostart.ts';
+import { useBrowser } from '@/main/composables/browser.ts';
+import { useDarkMode } from '@/main/composables/darkMode.ts';
+import { useLanguage } from '@/main/composables/language.ts';
+import { useTray } from '@/main/composables/tray.ts';
+import { useUpdater } from '@/main/composables/updater.ts';
+import { useWindow } from '@/main/composables/window.ts';
 
 useDarkMode().setBasedOnStore();
 useLanguage().setBasedOnStore();

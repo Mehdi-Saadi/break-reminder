@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import CheckboxItem from '@/components/setting/CheckboxItem.vue';
-import InputNumberItem from '@/components/setting/InputNumberItem.vue';
-import { useT } from '@/composables/t';
-import { useSettingStore } from '@/stores/setting';
+import CheckboxItem from '@/main/components/setting/CheckboxItem.vue';
+import InputNumberItem from '@/main/components/setting/InputNumberItem.vue';
+import { useSettingStore } from '@/main/stores/setting';
+import { useT } from '@/main/composables/t';
 
 const t = useT();
 
