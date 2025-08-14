@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { useT } from '@/shared/composables/t';
 import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/shared/types/break';
-import { Second } from '@/shared/types/time';
 import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time';
-import { emit, listen } from '@tauri-apps/api/event';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { computed, onBeforeMount, onMounted } from 'vue';
+import { emit, listen } from '@tauri-apps/api/event';
+import { useT } from '@/shared/composables/t';
+import { Second } from '@/shared/types/time';
 import { useCountdown } from '@vueuse/core';
-import { computed, onMounted } from 'vue';
 
 const t = useT();
 
 const getBreakWindowPayloadFromUrl = (): BreakWindowPayload => {
-  const searchParams = new URLSearchParams(window.location.search);
+  const searchParams = new URLSearchParams(location.search);
 
   return {
     message: searchParams.get('message') || undefined,
@@ -40,11 +40,16 @@ const destroyCurrentWindowOnSkip = async (): Promise<void> => {
   await listen(BREAK_WINDOW_EVENT.skip, destroyCurrentWindow);
 };
 
+const setBodyStyles = (): void => {
+  document.body.classList.add('bg-black/80');
+};
+
+onBeforeMount(setBodyStyles);
 onMounted(destroyCurrentWindowOnSkip);
 </script>
 
 <template>
-  <div class="min-w-dvw min-h-dvh flex items-center justify-center bg-black/80 text-gray-300 select-none">
+  <div class="min-w-dvw min-h-dvh flex items-center justify-center text-gray-300 select-none">
     <!-- wrapper -->
     <div class="flex flex-col items-center space-y-5">
       <div class="font-semibold text-4xl">
@@ -57,18 +62,19 @@ onMounted(destroyCurrentWindowOnSkip);
 
       <div class="flex items-center text-xs space-x-2">
         <UButton
+          v-if="windowPayload.showPostponeBtn"
           :label="t('postpone')"
-          class="w-24 rounded-3xl items-center"
+          class="w-24 h-10 rounded-3xl justify-center"
           color="neutral"
-          variant="outline"
+          variant="soft"
         />
 
         <UButton
           v-if="windowPayload.showSkipBtn"
           :label="t('skip')"
-          class="w-24 rounded-3xl items-center"
+          class="w-24 h-10 rounded-3xl justify-center"
           color="neutral"
-          variant="outline"
+          variant="soft"
           @click="skip"
         />
       </div>
