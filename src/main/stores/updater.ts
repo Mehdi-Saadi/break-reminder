@@ -1,11 +1,13 @@
 import { useNotification } from '@/main/composables/notification';
-import { handlePromise } from '@/main/utils/promise';
 import { check, Update } from '@tauri-apps/plugin-updater';
+import { handlePromise } from '@/main/utils/promise';
+import { useT } from '@/shared/composables/t';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
 export const useUpdaterStore = defineStore('updater', () => {
   const { notify } = useNotification();
+  const t = useT();
 
   const update = ref<Update | null>(null);
   const checkForUpdateLoading = ref(false);
@@ -25,7 +27,12 @@ export const useUpdaterStore = defineStore('updater', () => {
     update.value = response;
 
     if (update.value) {
-      await notify('A new version is available!');
+      await notify({
+        title: t('newVersionAvailable'),
+        body: t('newVersionAvailableInfo')
+      });
+    } else {
+      await notify(t('youAreUsingTheLatestVersion'));
     }
 
     checkForUpdateLoading.value = false;
