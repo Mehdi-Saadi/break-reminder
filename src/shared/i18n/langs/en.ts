@@ -44,6 +44,7 @@ const en = {
   youAreUsingTheLatestVersion: 'You are using the latest version!',
   update: 'Update',
   pleaseWait: 'Please wait..',
+  takeBreakInfo: 'Break coming up in {count} seconds',
 };
 
 export default en;

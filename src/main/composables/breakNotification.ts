@@ -1,11 +1,13 @@
 import { useNotification } from '@/main/composables/notification';
 import { useSettingStore } from '@/main/stores/setting';
+import { useT } from '@/shared/composables/t.ts';
 import { invoke } from '@tauri-apps/api/core';
 import { storeToRefs } from 'pinia';
 
 export const useBreakNotification = () => {
   const { settings } = storeToRefs(useSettingStore());
   const { notify } = useNotification();
+  const t = useT();
 
   const show = async (): Promise<void> => {
     const {
@@ -24,7 +26,7 @@ export const useBreakNotification = () => {
       return;
     }
 
-    await notify(`Take a break in ${timeToPrepareForBreak} seconds.`);
+    await notify(t('takeBreakInfo', timeToPrepareForBreak));
   };
 
   return {

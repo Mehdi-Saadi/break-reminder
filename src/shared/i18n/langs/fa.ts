@@ -46,6 +46,7 @@ const fa: Words = {
   youAreUsingTheLatestVersion: 'شما از آخرین نسخه استفاده می‌کنید!',
   update: 'به‌روزرسانی',
   pleaseWait: 'لطفا صبر کنید..',
+  takeBreakInfo: '{count} ثانیه مانده تا استراحت',
 };
 
 export default fa;
