@@ -7,7 +7,7 @@ export interface BreakWindowPayload {
   showPostponeBtn: boolean;
 }
 
-export const BREAK_WINDOW_EVENT = Object.freeze({
+export const BREAK_WINDOW_EVENT = {
   skip: 'break-window-skip',
   postpone: 'break-window-postpone',
-});
+} as const;
