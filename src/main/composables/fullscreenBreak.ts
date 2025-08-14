@@ -37,13 +37,15 @@ export const useFullscreenBreak = () => {
     const windowUniqueLabel = `break-window-${generateRandomAlphabeticId()}`;
     const queryParams = params.query ? objectToQuery(params.query) : '';
 
+    const IN_PRODUCTION = import.meta.env.VITE_PRODUCTION === 'true';
+
     return new WebviewWindow(windowUniqueLabel, {
       x: params.monitor.position.x,
       y: params.monitor.position.y,
       fullscreen: true,
-      decorations: import.meta.env.VITE_PRODUCTION === 'false',
+      decorations: !IN_PRODUCTION,
       alwaysOnTop: true,
-      skipTaskbar: import.meta.env.VITE_PRODUCTION === 'true',
+      skipTaskbar: IN_PRODUCTION,
       resizable: false,
       focus: true,
       visible: false,
