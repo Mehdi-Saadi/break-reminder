@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { useT } from '@/shared/composables/t';
+import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/shared/types/break';
 import { Second } from '@/shared/types/time';
 import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time';
+import { emit, listen } from '@tauri-apps/api/event';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useCountdown } from '@vueuse/core';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const t = useT();
 
-const getBreakWindowPayloadFromUrl = () => {
+const getBreakWindowPayloadFromUrl = (): BreakWindowPayload => {
   const searchParams = new URLSearchParams(window.location.search);
 
   return {
@@ -31,6 +33,14 @@ const {
 });
 
 const remainingTime = computed(() => formatSecondsToMinutesAndSeconds(remainingSeconds.value as Second));
+
+const skip = (): Promise<void> => emit(BREAK_WINDOW_EVENT.skip);
+
+const destroyCurrentWindowOnSkip = async (): Promise<void> => {
+  await listen(BREAK_WINDOW_EVENT.skip, destroyCurrentWindow);
+};
+
+onMounted(destroyCurrentWindowOnSkip);
 </script>
 
 <template>
@@ -46,10 +56,23 @@ const remainingTime = computed(() => formatSecondsToMinutesAndSeconds(remainingS
           {{ remainingTime }}
         </div>
 
-        <div class="flex items-center text-xs">
+        <div class="flex items-center text-xs space-x-2">
+          <UButton
+            :label="t('postpone')"
+            class="w-24 rounded-3xl"
+            color="neutral"
+            variant="outline"
+          />
+
+          <UButton
+            :label="t('skip')"
+            class="w-24 rounded-3xl"
+            color="neutral"
+            variant="outline"
+            @click="skip"
+          />
         </div>
       </div>
-      Hey there!
     </div>
   </UApp>
 </template>
