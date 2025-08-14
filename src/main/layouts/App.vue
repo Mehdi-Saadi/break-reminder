@@ -4,6 +4,7 @@ import { useAutostart } from '@/main/composables/autostart';
 import { useBrowser } from '@/main/composables/browser';
 import { useDarkMode } from '@/main/composables/darkMode';
 import { useLanguage } from '@/main/composables/language';
+import { useTimer } from '@/main/composables/timer';
 import { useTray } from '@/main/composables/tray';
 import { useUpdater } from '@/main/composables/updater';
 import { useWindow } from '@/main/composables/window';
@@ -15,6 +16,7 @@ useBrowser().disableContextmenuInProd();
 useUpdater().checkForUpdatesOnOnline();
 useWindow().hideOnClose();
 useTray().getOrCreate();
+useTimer();
 </script>
 
 <template>
