@@ -1,7 +1,20 @@
 <script setup lang="ts">
+import { useUpdaterStore } from '@/main/stores/updater';
 import { useT } from '@/shared/composables/t';
+import { storeToRefs } from 'pinia';
 
 const t = useT();
+
+const updaterStore = useUpdaterStore();
+const {
+  downloadLoading,
+  checkForUpdateLoading,
+  updateAvailable,
+} = storeToRefs(updaterStore);
+const {
+  checkAndNotify,
+  downloadAndInstall,
+} = updaterStore;
 
 const appVersion = 'v0.3.0';
 const supportEmail = 'mehdi.0.saadi@gmail.com';
@@ -90,9 +103,21 @@ const supportPage = 'https://github.com/Mehdi-Saadi/break-reminder/issues';
         </p>
 
         <UButton
-          :label="t('checkForUpdates')"
+          v-if="updateAvailable"
+          :label="t('update')"
+          :loading="downloadLoading"
           variant="subtle"
           color="neutral"
+          @click="downloadAndInstall"
+        />
+
+        <UButton
+          v-else
+          :label="t('checkForUpdates')"
+          :loading="checkForUpdateLoading"
+          variant="subtle"
+          color="neutral"
+          @click="checkAndNotify"
         />
       </div>
     </section>
