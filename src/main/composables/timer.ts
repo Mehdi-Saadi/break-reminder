@@ -1,6 +1,6 @@
 import { useBreakAudio } from '@/main/composables/breakAudio';
 import { useBreakNotification } from '@/main/composables/breakNotification';
-import { useFullscreenBreak } from '@/main/composables/fullscreenBreak.ts';
+import { useFullscreenBreak } from '@/main/composables/fullscreenBreak';
 import { useSettingStore } from '@/main/stores/setting';
 import { minutesToMilliseconds, secondsToMilliseconds } from '@/shared/utils/time';
 import { listen } from '@tauri-apps/api/event';

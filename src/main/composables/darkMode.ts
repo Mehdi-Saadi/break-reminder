@@ -1,4 +1,4 @@
-import { useSettingStore } from '@/main/stores/setting.ts';
+import { useSettingStore } from '@/main/stores/setting';
 import { useColorMode } from '@vueuse/core';
 import { watchEffect } from 'vue';
 

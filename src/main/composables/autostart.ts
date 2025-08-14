@@ -3,7 +3,7 @@ import {
   enable,
   isEnabled as checkIsEnabled,
 } from '@tauri-apps/plugin-autostart';
-import { useSettingStore } from '@/main/stores/setting.ts';
+import { useSettingStore } from '@/main/stores/setting';
 import { watchEffect } from 'vue';
 
 export const useAutostart = () => {
