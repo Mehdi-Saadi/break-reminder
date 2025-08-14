@@ -6,8 +6,8 @@ import { ref, watch } from 'vue';
 export const useSettingStore = defineStore('setting', () => {
   const  STORAGE_KEY = 'settings';
   const DEFAULT_SETTINGS: Readonly<Settings> = {
+    workDuration: 20 as Minute,
     shortBreakDuration: 20 as Second,
-    shortWorkDuration: 20 as Minute,
     longBreakDuration: 120 as Second,
     countOfShortWorksForLongBreak: 3,
     timeToPrepareForBreak: 10 as Second,

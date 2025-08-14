@@ -13,7 +13,7 @@ const settingStore = useSettingStore();
   <div class="flex flex-col space-y-4">
     <Section :label="t('workSession')">
       <InputNumberItem
-        v-model="settingStore.settings.shortWorkDuration"
+        v-model="settingStore.settings.workDuration"
         :title="t('workDurationInMinutes')"
       />
     </Section>

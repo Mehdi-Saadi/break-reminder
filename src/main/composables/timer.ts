@@ -3,7 +3,7 @@ import { useBreakNotification } from '@/main/composables/breakNotification';
 import { useFullscreenBreak } from '@/main/composables/fullscreenBreak.ts';
 import { useSettingStore } from '@/main/stores/setting';
 import { minutesToMilliseconds, secondsToMilliseconds } from '@/shared/utils/time';
-import { listen, UnlistenFn } from '@tauri-apps/api/event';
+import { listen } from '@tauri-apps/api/event';
 import { BREAK_WINDOW_EVENT } from '@/shared/types/break';
 import { storeToRefs } from 'pinia';
 import { onMounted, onBeforeUnmount } from 'vue';
@@ -21,12 +21,10 @@ export const useTimer = (): void => {
   let breakTimeout: NodeJS.Timeout | null = null;
   let countOfShortWorks = 0;
 
-  let unlistenSkip: UnlistenFn | null = null;
-
-  const startWork = (): void => {
+  const startWork = async (): Promise<void> => {
     resetWorkTimeout();
     resetPrepareForBreakTimeout();
-    playStopBreakAudio();
+    await playStopBreakAudio();
   };
 
   const resetWorkTimeout = (): void => {
@@ -44,7 +42,7 @@ export const useTimer = (): void => {
   const setWorkTimeout = (): void => {
     workTimeout = setTimeout(
       takeBreakIfNeeded,
-      minutesToMilliseconds(settings.value.shortWorkDuration)
+      minutesToMilliseconds(settings.value.workDuration)
     );
   };
 
@@ -52,7 +50,7 @@ export const useTimer = (): void => {
     const focusedWindowIsFullscreen = await invoke('check_focused_window_fullscreen');
 
     if (settings.value.doNotDisturb && focusedWindowIsFullscreen) {
-      startWork();
+      await startWork();
     } else {
       await takeBreak();
     }
@@ -120,7 +118,7 @@ export const useTimer = (): void => {
   };
 
   const setPrepareForBreakTimeout = (): void => {
-    const workTime = minutesToMilliseconds(settings.value.shortWorkDuration);
+    const workTime = minutesToMilliseconds(settings.value.workDuration);
     const prepareTime = secondsToMilliseconds(settings.value.timeToPrepareForBreak);
     const prepareForBreakTime = workTime - prepareTime;
 
@@ -128,22 +126,20 @@ export const useTimer = (): void => {
   };
 
   const initBreakWindowListeners = async (): Promise<void> => {
-    unlistenSkip = await listen(BREAK_WINDOW_EVENT.skip, () => {
+    await listen(BREAK_WINDOW_EVENT.skip, () => {
       clearBreakTimeout();
       startWork();
     });
   };
 
-  onMounted(() => {
-    startWork();
-    initBreakWindowListeners();
+  onMounted(async () => {
+    await startWork();
+    await initBreakWindowListeners();
   });
 
   onBeforeUnmount(() => {
     clearWorkTimeout();
     clearBreakTimeout();
     clearPrepareForBreakTimeout();
-
-    unlistenSkip?.();
   });
 };

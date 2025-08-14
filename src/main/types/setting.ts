@@ -2,9 +2,10 @@ import { Minute, Second } from '@/shared/types/time';
 import { UUID } from 'node:crypto';
 
 export interface Settings {
+  workDuration: Minute;
+
   // short break
   shortBreakDuration: Second;
-  shortWorkDuration: Minute;
 
   // long break
   longBreakDuration: Second;
