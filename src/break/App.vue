@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Language } from '@/shared/types/setting.ts';
 import { useBrowser } from '@/shared/composables/browser';
 import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/shared/types/break';
 import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time';
@@ -8,6 +9,7 @@ import { emit, listen } from '@tauri-apps/api/event';
 import { useT } from '@/shared/composables/t';
 import { Second } from '@/shared/types/time';
 import { useCountdown } from '@vueuse/core';
+import { useI18n } from 'vue-i18n';
 
 useBrowser().disableContextmenuInProd();
 
@@ -21,6 +23,7 @@ const getBreakWindowPayloadFromUrl = (): BreakWindowPayload => {
     timeout: parseInt(searchParams.get('timeout') || '20') as Second,
     showSkipBtn: searchParams.get('showSkipBtn') !== 'false',
     showPostponeBtn: searchParams.get('showPostponeBtn') !== 'false',
+    language: searchParams.get('language') as Language || 'en',
   };
 };
 
@@ -43,11 +46,20 @@ const destroyCurrentWindowOnSkip = async (): Promise<void> => {
   await listen(BREAK_WINDOW_EVENT.skip, destroyCurrentWindow);
 };
 
+const { locale } = useI18n();
+
+const setLocale = (): void => {
+  locale.value = windowPayload.language;
+};
+
 const setBodyStyles = (): void => {
   document.body.classList.add('bg-black/80');
 };
 
-onBeforeMount(setBodyStyles);
+onBeforeMount(() => {
+  setLocale();
+  setBodyStyles();
+});
 onMounted(destroyCurrentWindowOnSkip);
 </script>
 

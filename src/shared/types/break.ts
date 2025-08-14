@@ -1,3 +1,4 @@
+import { Language } from '@/shared/types/setting';
 import { Second } from '@/shared/types/time';
 
 export interface BreakWindowPayload {
@@ -5,6 +6,7 @@ export interface BreakWindowPayload {
   timeout: Second;
   showSkipBtn: boolean;
   showPostponeBtn: boolean;
+  language: Language;
 }
 
 export const BREAK_WINDOW_EVENT = {

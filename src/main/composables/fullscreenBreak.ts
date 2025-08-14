@@ -79,6 +79,7 @@ export const useFullscreenBreak = () => {
       timeout: settings.value.shortBreakDuration,
       showSkipBtn: !settings.value.strictBreak,
       showPostponeBtn: settings.value.allowPostponingBreaks,
+      language: settings.value.language,
     });
   };
 
@@ -88,6 +89,7 @@ export const useFullscreenBreak = () => {
       timeout: settings.value.longBreakDuration,
       showSkipBtn: !settings.value.strictBreak,
       showPostponeBtn: settings.value.allowPostponingBreaks,
+      language: settings.value.language,
     });
   };
 
