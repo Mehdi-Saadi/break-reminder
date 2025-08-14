@@ -21,7 +21,7 @@ export const useSettingStore = defineStore('setting', () => {
     selectedAudio: null,
     smartPause: true,
     screensaver: true,
-    darkMode: false,
+    darkMode: true,
     shortBreakMessages: {
       '88027327-d0a0-42c3-a990-363e865d49e3': 'Tightly close your eyes',
       'db36bc4b-6d4f-42d2-a10f-f31f8fd8fe8d': 'Roll your eyes a few times to each side',
