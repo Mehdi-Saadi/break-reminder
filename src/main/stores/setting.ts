@@ -1,5 +1,5 @@
 import { Settings } from '@/main/types/setting';
-import { Minute, Second } from '@/main/types/time';
+import { Minute, Second } from '@/shared/types/time';
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 
