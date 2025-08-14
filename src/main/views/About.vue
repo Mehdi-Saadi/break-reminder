@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useUpdaterStore } from '@/main/stores/updater';
 import { useT } from '@/shared/composables/t';
+import { getVersion } from '@tauri-apps/api/app';
+import { onMounted, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
 const t = useT();
@@ -16,9 +18,16 @@ const {
   downloadAndInstall,
 } = updaterStore;
 
-const appVersion = 'v0.3.0';
 const supportEmail = 'mehdi.0.saadi@gmail.com';
 const supportPage = 'https://github.com/Mehdi-Saadi/break-reminder/issues';
+
+const appVersion = ref<string>('-');
+
+const setVersion = async (): Promise<void> => {
+  appVersion.value = await getVersion();
+};
+
+onMounted(setVersion);
 </script>
 
 <template>
