@@ -15,7 +15,7 @@ export const useUpdaterStore = defineStore('updater', () => {
 
   const downloadLoading = ref(false);
 
-  const checkAndNotify = async (): Promise<void> => {
+  const checkAndNotifyIfNewVersionAvailable = async (): Promise<void> => {
     checkForUpdateLoading.value = true;
 
     const { error, response } = await handlePromise(check());
@@ -31,11 +31,17 @@ export const useUpdaterStore = defineStore('updater', () => {
         title: t('newVersionAvailable'),
         body: t('newVersionAvailableInfo')
       });
-    } else {
-      await notify(t('youAreUsingTheLatestVersion'));
     }
 
     checkForUpdateLoading.value = false;
+  };
+
+  const checkAndNotify = async (): Promise<void> => {
+    await checkAndNotifyIfNewVersionAvailable();
+
+    if (!update.value) {
+      await notify(t('youAreUsingTheLatestVersion'));
+    }
   };
 
   const downloadAndInstall = async (): Promise<void> => {
@@ -59,6 +65,7 @@ export const useUpdaterStore = defineStore('updater', () => {
     checkForUpdateLoading,
     downloadLoading,
 
+    checkAndNotifyIfNewVersionAvailable,
     checkAndNotify,
     downloadAndInstall,
   };
