@@ -2,13 +2,13 @@ import { useUpdaterStore } from '@/main/stores/updater';
 import { useEventListener } from '@vueuse/core';
 
 export const useUpdater = () => {
-  const { checkAndNotifyUpdates } = useUpdaterStore();
+  const { checkAndNotify } = useUpdaterStore();
 
   const checkForUpdatesOnOnline = async (): Promise<void> => {
     if (navigator.onLine) {
-      await checkAndNotifyUpdates();
+      await checkAndNotify();
     } else {
-      useEventListener('online', checkAndNotifyUpdates, { once: true });
+      useEventListener('online', checkAndNotify, { once: true });
     }
   };
 
