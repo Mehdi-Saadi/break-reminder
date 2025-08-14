@@ -1,23 +1,36 @@
 <script setup lang="ts">
-import { Millisecond } from '@/shared/types/time';
+import { useT } from '@/shared/composables/t';
+import { Second } from '@/shared/types/time';
+import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useCountdown } from '@vueuse/core';
+import { computed } from 'vue';
+
+const t = useT();
 
 const getBreakWindowPayloadFromUrl = () => {
   const searchParams = new URLSearchParams(window.location.search);
 
   return {
     message: searchParams.get('message') || undefined,
-    timeout: parseInt(searchParams.get('timeout') || '20000') as Millisecond,
+    timeout: parseInt(searchParams.get('timeout') || '20') as Second,
     showSkipBtn: searchParams.get('showSkipBtn') !== 'false',
-    showPostponeBtn: searchParams.get('showPostponeBtn') !== 'false'
+    showPostponeBtn: searchParams.get('showPostponeBtn') !== 'false',
   };
 };
 
 const windowPayload = getBreakWindowPayloadFromUrl();
 
-const { remaining } = useCountdown(windowPayload.timeout, {
+const destroyCurrentWindow = (): Promise<void> => getCurrentWindow().destroy();
+
+const {
+  remaining: remainingSeconds,
+} = useCountdown(windowPayload.timeout, {
   immediate: true,
+  onComplete: destroyCurrentWindow,
 });
+
+const remainingTime = computed(() => formatSecondsToMinutesAndSeconds(remainingSeconds.value as Second));
 </script>
 
 <template>
@@ -30,7 +43,7 @@ const { remaining } = useCountdown(windowPayload.timeout, {
         </div>
 
         <div class="text-sm">
-          {{ remaining }}
+          {{ remainingTime }}
         </div>
 
         <div class="flex items-center text-xs">
