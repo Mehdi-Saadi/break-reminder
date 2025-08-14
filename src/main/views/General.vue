@@ -3,7 +3,7 @@ import CheckboxItem from '@/main/components/setting/CheckboxItem.vue';
 import Item from '@/main/components/setting/Item.vue';
 import { useSettingStore } from '@/main/stores/setting';
 import { Settings } from '@/main/types/setting';
-import { useT } from '@/main/composables/t';
+import { useT } from '@/shared/composables/t';
 
 const t = useT();
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useT } from '@/main/composables/t';
+import { useT } from '@/shared/composables/t';
 
 const t = useT();
 

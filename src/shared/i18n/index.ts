@@ -1,6 +1,6 @@
-import en from '@/main/i18n/langs/en';
-import fa from '@/main/i18n/langs/fa';
-import { Language } from '@/main/types/setting.ts';
+import en from '@/shared/i18n/langs/en';
+import fa from '@/shared/i18n/langs/fa';
+import { Language } from '@/main/types/setting';
 import { createI18n } from 'vue-i18n';
 
 const i18n = createI18n({

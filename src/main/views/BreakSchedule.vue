@@ -2,7 +2,7 @@
 import InputNumberItem from '@/main/components/setting/InputNumberItem.vue';
 import Section from '@/main/components/setting/Section.vue';
 import { useSettingStore } from '@/main/stores/setting';
-import { useT } from '@/main/composables/t';
+import { useT } from '@/shared/composables/t';
 
 const t = useT();
 

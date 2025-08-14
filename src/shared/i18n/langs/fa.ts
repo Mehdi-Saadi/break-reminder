@@ -1,4 +1,4 @@
-import { Words } from '@/main/i18n/types';
+import { Words } from '@/shared/i18n/types';
 
 const fa: Words = {
   general: 'عمومی',

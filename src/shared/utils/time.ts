@@ -1,4 +1,4 @@
-import { Millisecond, Minute, Second } from '@/shared/types/time.ts';
+import { Millisecond, Minute, Second } from '@/shared/types/time';
 
 export const minutesToSeconds = (minutes: Minute): Second => minutes * 60 as Second;
 

@@ -2,7 +2,7 @@
 import BreakMessageItem from '@/main/components/BreakMessageItem.vue';
 import Section from '@/main/components/setting/Section.vue';
 import { useSettingStore } from '@/main/stores/setting';
-import { useT } from '@/main/composables/t';
+import { useT } from '@/shared/composables/t';
 import { computed } from 'vue';
 
 const t = useT();

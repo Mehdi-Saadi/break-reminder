@@ -2,7 +2,7 @@
 import CheckboxItem from '@/main/components/setting/CheckboxItem.vue';
 import InputNumberItem from '@/main/components/setting/InputNumberItem.vue';
 import { useSettingStore } from '@/main/stores/setting';
-import { useT } from '@/main/composables/t';
+import { useT } from '@/shared/composables/t';
 
 const t = useT();
 
