@@ -44,35 +44,34 @@ onMounted(destroyCurrentWindowOnSkip);
 </script>
 
 <template>
-  <UApp>
-    <div class="min-w-dvw min-h-dvh flex items-center justify-center bg-black/80 text-gray-300 select-none">
-      <!-- wrapper -->
-      <div class="flex flex-col items-center space-y-5">
-        <div class="font-semibold text-4xl">
-          {{ windowPayload.message }}
-        </div>
+  <div class="min-w-dvw min-h-dvh flex items-center justify-center bg-black/80 text-gray-300 select-none">
+    <!-- wrapper -->
+    <div class="flex flex-col items-center space-y-5">
+      <div class="font-semibold text-4xl">
+        {{ windowPayload.message }}
+      </div>
 
-        <div class="text-sm">
-          {{ remainingTime }}
-        </div>
+      <div class="text-sm">
+        {{ remainingTime }}
+      </div>
 
-        <div class="flex items-center text-xs space-x-2">
-          <UButton
-            :label="t('postpone')"
-            class="w-24 rounded-3xl"
-            color="neutral"
-            variant="outline"
-          />
+      <div class="flex items-center text-xs space-x-2">
+        <UButton
+          :label="t('postpone')"
+          class="w-24 rounded-3xl items-center"
+          color="neutral"
+          variant="outline"
+        />
 
-          <UButton
-            :label="t('skip')"
-            class="w-24 rounded-3xl"
-            color="neutral"
-            variant="outline"
-            @click="skip"
-          />
-        </div>
+        <UButton
+          v-if="windowPayload.showSkipBtn"
+          :label="t('skip')"
+          class="w-24 rounded-3xl items-center"
+          color="neutral"
+          variant="outline"
+          @click="skip"
+        />
       </div>
     </div>
-  </UApp>
+  </div>
 </template>
