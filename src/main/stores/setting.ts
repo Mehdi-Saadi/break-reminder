@@ -1,4 +1,4 @@
-import { Settings } from '@/main/types/setting';
+import { Settings } from '@/shared/types/setting';
 import { Minute, Second } from '@/shared/types/time';
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
