@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Language } from '@/shared/types/setting.ts';
+import { Language } from '@/shared/types/setting';
 import { useBrowser } from '@/shared/composables/browser';
 import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/shared/types/break';
 import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time';
