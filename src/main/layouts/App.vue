@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Sidebar from '@/main/components/layout/Sidebar.vue';
 import { useAutostart } from '@/main/composables/autostart';
-import { useBrowser } from '@/main/composables/browser';
+import { useBrowser } from '@/shared/composables/browser';
 import { useDarkMode } from '@/main/composables/darkMode';
 import { useLanguage } from '@/main/composables/language';
 import { useTimer } from '@/main/composables/timer';

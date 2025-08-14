@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useBrowser } from '@/shared/composables/browser';
 import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/shared/types/break';
 import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time';
 import { getCurrentWindow } from '@tauri-apps/api/window';
@@ -7,6 +8,8 @@ import { emit, listen } from '@tauri-apps/api/event';
 import { useT } from '@/shared/composables/t';
 import { Second } from '@/shared/types/time';
 import { useCountdown } from '@vueuse/core';
+
+useBrowser().disableContextmenuInProd();
 
 const t = useT();
 
