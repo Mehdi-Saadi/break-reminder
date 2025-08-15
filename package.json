@@ -5,31 +5,38 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
     "lint": "npx eslint ./src --fix",
     "test": "vitest"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.5",
+    "@nuxt/ui": "^3.3.0",
+    "@tailwindcss/vite": "^4.1.11",
     "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-autostart": "^2.3.0",
-    "@tauri-apps/plugin-notification": "^2.2.2",
+    "@tauri-apps/plugin-autostart": "~2",
+    "@tauri-apps/plugin-notification": "~2",
     "@tauri-apps/plugin-opener": "^2",
-    "@tauri-apps/plugin-updater": "^2.7.1",
-    "tailwindcss": "^4.1.5"
+    "@tauri-apps/plugin-updater": "~2",
+    "pinia": "^3.0.3",
+    "tailwindcss": "^4.1.11",
+    "vue": "^3.5.13",
+    "vue-i18n": "11",
+    "vue-router": "4"
   },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
+    "@eslint/js": "^9.32.0",
     "@tauri-apps/cli": "^2",
-    "@types/node": "^22.15.17",
-    "eslint": "^9.26.0",
-    "globals": "^16.1.0",
+    "@types/node": "^24.1.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "eslint-plugin-vue": "^10.4.0",
+    "globals": "^16.3.0",
     "jsdom": "^26.1.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.32.0",
-    "vite": "^6.3.5",
-    "vitest": "^3.1.3"
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.38.0",
+    "vite": "^6.0.3",
+    "vitest": "^3.2.4",
+    "vue-tsc": "^2.1.10"
   }
 }

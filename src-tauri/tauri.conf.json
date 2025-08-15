@@ -1,18 +1,20 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Break Reminder",
-  "version": "0.2.0",
-  "identifier": "com.break-reminder.app",
+  "version": "1.0.0",
+  "identifier": "com.break-reminder",
   "build": {
-    "beforeDevCommand": "npm run dev",
+    "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "npm run build",
+    "beforeBuildCommand": "bun run build",
     "frontendDist": "../dist"
   },
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "Break Reminder",
+        "url": "/src/main/index.html",
         "width": 768,
         "height": 480,
         "fullscreen": false,

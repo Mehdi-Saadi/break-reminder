@@ -62,19 +62,19 @@ cd break-reminder
 ### Install Dependencies
 
 ```sh
-npm install
+bun install
 ```
 
 ### Run in Development Mode
 
 ```sh
-npm run tauri dev
+bun run tauri dev
 ```
 
 ### Build for Production
 
 ```sh
-npm run tauri build
+bun run tauri build
 ```
 
 ## License

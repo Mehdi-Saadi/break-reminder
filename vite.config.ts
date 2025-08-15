@@ -1,7 +1,9 @@
-import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath, URL } from 'node:url';
-import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import tailwindcss from '@tailwindcss/vite';
+import ui from '@nuxt/ui/vite';
 
 // @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
@@ -9,7 +11,14 @@ const host = process.env.TAURI_DEV_HOST;
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
   plugins: [
+    vue(),
     tailwindcss(),
+    ui({
+      components: {
+        dirs: [], // disable auto import of app components
+      },
+      colorMode: false,
+    }),
   ],
   resolve: {
     alias: {
@@ -42,8 +51,8 @@ export default defineConfig(async () => ({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'), // Main window
-        breakWindow: resolve(__dirname, 'src/modules/break/fullscreen/window/index.html'), // Break window
+        main: resolve(__dirname, 'src/main/index.html'), // Main window
+        break: resolve(__dirname, 'src/break/index.html'), // Break window
       },
     },
   },
