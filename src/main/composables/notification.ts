@@ -54,7 +54,7 @@ export const useNotification = () => {
   };
 
   const errorToast = (error: Error | string): void => {
-    const msg = typeof error === 'string' ? error : error.message;
+    const msg = typeof error === 'string' ? error : error?.message || 'Unexpected Error!';
 
     toast.add({
       title: msg,
@@ -64,6 +64,5 @@ export const useNotification = () => {
 
   return {
     notify,
-    errorToast,
   };
 };
