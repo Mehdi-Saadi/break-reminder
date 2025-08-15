@@ -47,18 +47,7 @@
             "autostart:allow-disable",
             "autostart:allow-is-enabled",
             "updater:allow-check",
-            "updater:allow-download-and-install",
-            {
-              "identifier": "opener:allow-open-url",
-              "allow": [
-                {
-                  "url": "https://github.com/Mehdi-Saadi/break-reminder/issues"
-                },
-                {
-                  "url": "mailto:mehdi.0.saadi@gmail.com"
-                }
-              ]
-            }
+            "updater:allow-download-and-install"
           ]
         }
       ]
