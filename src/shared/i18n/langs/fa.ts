@@ -47,6 +47,7 @@ const fa: Words = {
   update: 'به‌روزرسانی',
   pleaseWait: 'لطفا صبر کنید..',
   takeBreakInfo: '{count} ثانیه مانده تا استراحت',
+  copied: 'کپی شد',
 };
 
 export default fa;

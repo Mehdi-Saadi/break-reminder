@@ -99,7 +99,7 @@ onBeforeMount(setVersion);
 
             <template #content>
               <div class="px-4 py-3 select-none">
-                Copied!
+                {{ t('copied') }}!
               </div>
             </template>
           </UPopover>
@@ -127,7 +127,7 @@ onBeforeMount(setVersion);
 
             <template #content>
               <div class="px-4 py-3 select-none">
-                Copied!
+                {{ t('copied') }}!
               </div>
             </template>
           </UPopover>

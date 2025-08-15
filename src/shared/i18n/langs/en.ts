@@ -45,6 +45,7 @@ const en = {
   update: 'Update',
   pleaseWait: 'Please wait..',
   takeBreakInfo: 'Break coming up in {count} seconds',
+  copied: 'Copied',
 };
 
 export default en;
