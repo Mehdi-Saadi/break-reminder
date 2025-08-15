@@ -1,3 +1,4 @@
+import { handlePromise } from '@/main/utils/promise';
 import {
   Options,
   isPermissionGranted,
@@ -9,25 +10,35 @@ export const useNotification = () => {
   const toast = useToast();
 
   const checkPermission = async (): Promise<boolean> => {
-    if (!(await isPermissionGranted())) {
-      return (await requestPermission()) === 'granted';
+    const {
+      response: checkPermissionResp,
+    } = await handlePromise(isPermissionGranted());
+
+    if (checkPermissionResp) {
+      return true;
     }
-    return true;
+
+    const {
+      response: requestPermissionResp,
+    } = await handlePromise(requestPermission());
+
+    return requestPermissionResp === 'granted';
   };
 
   const notify = async (options: Options | string): Promise<void> => {
-    if (!(await checkPermission())) {
-      const message: string = typeof options === 'string' ? options : options.title;
+    const permissionGranted = await checkPermission();
 
-      toast.add({
-        title: message,
-        color: 'neutral',
-      });
-
+    if (permissionGranted) {
+      sendNotification(options);
       return;
     }
 
-    sendNotification(options);
+    const message: string = typeof options === 'string' ? options : options.title;
+
+    toast.add({
+      title: message,
+      color: 'neutral',
+    });
   };
 
   return {
