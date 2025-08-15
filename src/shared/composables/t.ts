@@ -8,6 +8,6 @@ export const useT = () => {
 
   return (
     key: KeyWord,
-    ...params: Partial<Rest>
+    ...params: any[]
   ): string => t(key, ...(params as Rest));
 };
