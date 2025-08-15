@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useUpdaterStore } from '@/main/stores/updater';
 import { useT } from '@/shared/composables/t';
+import { useClipboard } from '@vueuse/core';
 import { getVersion } from '@tauri-apps/api/app';
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
 const t = useT();
@@ -21,13 +22,16 @@ const {
 const supportEmail = 'mehdi.0.saadi@gmail.com';
 const supportPage = 'https://github.com/Mehdi-Saadi/break-reminder/issues';
 
+const { copy: copyEmail, copied: emailCopied } = useClipboard({ source: supportEmail });
+const { copy: copySupportPage, copied: supportPageCopied } = useClipboard({ source: supportPage });
+
 const appVersion = ref<string>('-');
 
 const setVersion = async (): Promise<void> => {
   appVersion.value = await getVersion();
 };
 
-onMounted(setVersion);
+onBeforeMount(setVersion);
 </script>
 
 <template>
@@ -73,29 +77,60 @@ onMounted(setVersion);
           {{ t('feedbackAndSupportFirstInfo') }}
         </p>
 
+        <!-- email -->
         <div>
           <span class="me-1">
             {{ t('support') }}:
           </span>
-          <a
-            :href="`mailto:${supportEmail}`"
-            class="text-blue-500 dark:text-blue-300 underline"
+
+          <UPopover
+            v-model:open="emailCopied"
+            arrow
           >
-            {{ supportEmail }}
-          </a>
+            <template #anchor>
+              <UButton
+                :label="supportEmail"
+                class="underline"
+                variant="ghost"
+                color="info"
+                @click="copyEmail()"
+              />
+            </template>
+
+            <template #content>
+              <div class="px-4 py-3 select-none">
+                Copied!
+              </div>
+            </template>
+          </UPopover>
         </div>
 
+        <!-- page -->
         <div>
-          <div class="me-1">
+          <span class="me-3">
             {{ t('orVisit') }}:
-          </div>
-          <a
-            :href="supportPage"
-            target="_blank"
-            class="text-blue-500 dark:text-blue-300 underline"
+          </span>
+
+          <UPopover
+            v-model:open="supportPageCopied"
+            arrow
           >
-            {{ supportPage }}
-          </a>
+            <template #anchor>
+              <UButton
+                :label="supportPage"
+                class="underline"
+                variant="ghost"
+                color="info"
+                @click="copySupportPage()"
+              />
+            </template>
+
+            <template #content>
+              <div class="px-4 py-3 select-none">
+                Copied!
+              </div>
+            </template>
+          </UPopover>
         </div>
       </div>
     </section>
