@@ -11,16 +11,28 @@ export const useNotification = () => {
 
   const checkPermission = async (): Promise<boolean> => {
     const {
+      error: checkPermissionError,
       response: checkPermissionResp,
     } = await handlePromise(isPermissionGranted());
+
+    if (checkPermissionError) {
+      errorToast(checkPermissionError);
+      return false;
+    }
 
     if (checkPermissionResp) {
       return true;
     }
 
     const {
+      error: requestPermissionError,
       response: requestPermissionResp,
     } = await handlePromise(requestPermission());
+
+    if (requestPermissionError) {
+      errorToast(requestPermissionError);
+      return false;
+    }
 
     return requestPermissionResp === 'granted';
   };
@@ -41,7 +53,17 @@ export const useNotification = () => {
     });
   };
 
+  const errorToast = (error: Error | string): void => {
+    const msg = typeof error === 'string' ? error : error.message;
+
+    toast.add({
+      title: msg,
+      color: 'error',
+    });
+  };
+
   return {
     notify,
+    errorToast,
   };
 };
