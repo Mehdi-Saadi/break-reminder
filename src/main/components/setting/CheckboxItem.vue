@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import Item from '@/main/components/setting/Item.vue';
+import Item from '@/main/components/setting/Item.vue'
 
 defineProps<{
-  title: string;
-  description?: string;
-  icon?: string;
-}>();
+  title: string
+  description?: string
+  icon?: string
+}>()
 
-const model = defineModel<boolean>();
+const model = defineModel<boolean>()
 </script>
 
 <template>

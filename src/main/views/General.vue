@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import CheckboxItem from '@/main/components/setting/CheckboxItem.vue';
-import Item from '@/main/components/setting/Item.vue';
-import { useSettingStore } from '@/main/stores/setting';
-import { Settings } from '@/shared/types/setting';
-import { useT } from '@/shared/composables/t';
+import type { Settings } from '@/shared/types/setting'
+import CheckboxItem from '@/main/components/setting/CheckboxItem.vue'
+import Item from '@/main/components/setting/Item.vue'
+import { useSettingStore } from '@/main/stores/setting'
+import { useT } from '@/shared/composables/t'
 
-const t = useT();
+const t = useT()
 
-const settingStore = useSettingStore();
+const settingStore = useSettingStore()
 
 interface LanguageOption {
-  label: string;
-  value: Settings['language'];
+  label: string
+  value: Settings['language']
 }
 
 const languageOptions: LanguageOption[] = [
@@ -23,7 +23,7 @@ const languageOptions: LanguageOption[] = [
     label: 'فارسی',
     value: 'fa',
   },
-];
+]
 </script>
 
 <template>

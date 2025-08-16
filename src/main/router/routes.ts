@@ -1,11 +1,11 @@
-import App from '@/main/layouts/App.vue';
-import About from '@/main/views/About.vue';
-import Behavior from '@/main/views/Behavior.vue';
-import BreakMessages from '@/main/views/BreakMessages.vue';
-import BreakSchedule from '@/main/views/BreakSchedule.vue';
-import General from '@/main/views/General.vue';
-import NotificationAlert from '@/main/views/NotificationAlert.vue';
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
+import App from '@/main/layouts/App.vue'
+import About from '@/main/views/About.vue'
+import Behavior from '@/main/views/Behavior.vue'
+import BreakMessages from '@/main/views/BreakMessages.vue'
+import BreakSchedule from '@/main/views/BreakSchedule.vue'
+import General from '@/main/views/General.vue'
+import NotificationAlert from '@/main/views/NotificationAlert.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -45,6 +45,6 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-];
+]
 
-export default routes;
+export default routes

@@ -1,4 +1,4 @@
-import en from '@/shared/i18n/langs/en';
+import type en from '@/shared/i18n/langs/en'
 
-export type Words = typeof en;
-export type KeyWord = keyof Words;
+export type Words = typeof en
+export type KeyWord = keyof Words

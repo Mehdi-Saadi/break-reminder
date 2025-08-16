@@ -1,39 +1,39 @@
 <script setup lang="ts">
-import BreakMessageItem from '@/main/components/BreakMessageItem.vue';
-import Section from '@/main/components/setting/Section.vue';
-import { useSettingStore } from '@/main/stores/setting';
-import { useT } from '@/shared/composables/t';
-import { computed } from 'vue';
+import { computed } from 'vue'
+import BreakMessageItem from '@/main/components/BreakMessageItem.vue'
+import Section from '@/main/components/setting/Section.vue'
+import { useSettingStore } from '@/main/stores/setting'
+import { useT } from '@/shared/composables/t'
 
-const t = useT();
+const t = useT()
 
-const settingStore = useSettingStore();
+const settingStore = useSettingStore()
 
 const shortBreakMessages = computed({
   get() {
-    return settingStore.settings.shortBreakMessages;
+    return settingStore.settings.shortBreakMessages
   },
   set(newValue) {
-    settingStore.settings.shortBreakMessages = newValue;
+    settingStore.settings.shortBreakMessages = newValue
   },
-});
+})
 
 const longBreakMessages = computed({
   get() {
-    return settingStore.settings.longBreakMessages;
+    return settingStore.settings.longBreakMessages
   },
   set(newValue) {
-    settingStore.settings.longBreakMessages = newValue;
+    settingStore.settings.longBreakMessages = newValue
   },
-});
+})
 
-const onAddNewShortBreakMessage = (): void => {
-  shortBreakMessages.value[crypto.randomUUID()] = '';
-};
+function onAddNewShortBreakMessage(): void {
+  shortBreakMessages.value[crypto.randomUUID()] = ''
+}
 
-const onAddNewLongBreakMessage = (): void => {
-  longBreakMessages.value[crypto.randomUUID()] = '';
-};
+function onAddNewLongBreakMessage(): void {
+  longBreakMessages.value[crypto.randomUUID()] = ''
+}
 </script>
 
 <template>

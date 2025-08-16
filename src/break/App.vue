@@ -1,66 +1,67 @@
 <script setup lang="ts">
-import { Language } from '@/shared/types/setting';
-import { useBrowser } from '@/shared/composables/browser';
-import { BREAK_WINDOW_EVENT, BreakWindowPayload } from '@/shared/types/break';
-import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time';
-import { getCurrentWindow } from '@tauri-apps/api/window';
-import { computed, onBeforeMount, onMounted } from 'vue';
-import { emit, listen } from '@tauri-apps/api/event';
-import { useT } from '@/shared/composables/t';
-import { Second } from '@/shared/types/time';
-import { useCountdown } from '@vueuse/core';
-import { useI18n } from 'vue-i18n';
+import type { BreakWindowPayload } from '@/shared/types/break'
+import type { Language } from '@/shared/types/setting'
+import type { Second } from '@/shared/types/time'
+import { emit, listen } from '@tauri-apps/api/event'
+import { getCurrentWindow } from '@tauri-apps/api/window'
+import { useCountdown } from '@vueuse/core'
+import { computed, onBeforeMount, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useBrowser } from '@/shared/composables/browser'
+import { useT } from '@/shared/composables/t'
+import { BREAK_WINDOW_EVENT } from '@/shared/types/break'
+import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time'
 
-useBrowser().disableContextmenuInProd();
+useBrowser().disableContextmenuInProd()
 
-const t = useT();
+const t = useT()
 
-const getBreakWindowPayloadFromUrl = (): BreakWindowPayload => {
-  const searchParams = new URLSearchParams(location.search);
+function getBreakWindowPayloadFromUrl(): BreakWindowPayload {
+  const searchParams = new URLSearchParams(location.search)
 
   return {
     message: searchParams.get('message') || undefined,
-    timeout: parseInt(searchParams.get('timeout') || '20') as Second,
+    timeout: Number.parseInt(searchParams.get('timeout') || '20') as Second,
     showSkipBtn: searchParams.get('showSkipBtn') !== 'false',
     showPostponeBtn: searchParams.get('showPostponeBtn') !== 'false',
     language: searchParams.get('language') as Language || 'en',
-  };
-};
+  }
+}
 
-const windowPayload = getBreakWindowPayloadFromUrl();
+const windowPayload = getBreakWindowPayloadFromUrl()
 
-const destroyCurrentWindow = (): Promise<void> => getCurrentWindow().destroy();
+const destroyCurrentWindow = (): Promise<void> => getCurrentWindow().destroy()
 
 const {
   remaining: remainingSeconds,
 } = useCountdown(windowPayload.timeout, {
   immediate: true,
   onComplete: destroyCurrentWindow,
-});
+})
 
-const remainingTime = computed(() => formatSecondsToMinutesAndSeconds(remainingSeconds.value as Second));
+const remainingTime = computed(() => formatSecondsToMinutesAndSeconds(remainingSeconds.value as Second))
 
-const skip = (): Promise<void> => emit(BREAK_WINDOW_EVENT.skip);
+const skip = (): Promise<void> => emit(BREAK_WINDOW_EVENT.skip)
 
-const destroyCurrentWindowOnSkip = async (): Promise<void> => {
-  await listen(BREAK_WINDOW_EVENT.skip, destroyCurrentWindow);
-};
+async function destroyCurrentWindowOnSkip(): Promise<void> {
+  await listen(BREAK_WINDOW_EVENT.skip, destroyCurrentWindow)
+}
 
-const { locale } = useI18n();
+const { locale } = useI18n()
 
-const setLocale = (): void => {
-  locale.value = windowPayload.language;
-};
+function setLocale(): void {
+  locale.value = windowPayload.language
+}
 
-const setBodyStyles = (): void => {
-  document.body.classList.add('bg-black/80');
-};
+function setBodyStyles(): void {
+  document.body.classList.add('bg-black/80')
+}
 
 onBeforeMount(() => {
-  setLocale();
-  setBodyStyles();
-});
-onMounted(destroyCurrentWindowOnSkip);
+  setLocale()
+  setBodyStyles()
+})
+onMounted(destroyCurrentWindowOnSkip)
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import NavButton from '@/main/components/layout/NavButton.vue';
-import { useT } from '@/shared/composables/t';
-import { computed } from 'vue';
+import { computed } from 'vue'
+import NavButton from '@/main/components/layout/NavButton.vue'
+import { useT } from '@/shared/composables/t'
 
-const t = useT();
+const t = useT()
 
 const mainButtons = computed(() => [
   {
@@ -31,7 +31,7 @@ const mainButtons = computed(() => [
     label: t('breakMessages'),
     icon: 'lucide:message-circle',
   },
-]);
+])
 
 const secondaryButtons = computed(() => [
   {
@@ -39,7 +39,7 @@ const secondaryButtons = computed(() => [
     label: t('aboutSoftware'),
     icon: 'lucide:info',
   },
-]);
+])
 </script>
 
 <template>

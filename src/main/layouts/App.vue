@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import Sidebar from '@/main/components/layout/Sidebar.vue';
-import { useAutostart } from '@/main/composables/autostart';
-import { useBrowser } from '@/shared/composables/browser';
-import { useDarkMode } from '@/main/composables/darkMode';
-import { useLanguage } from '@/main/composables/language';
-import { useTimer } from '@/main/composables/timer';
-import { useTray } from '@/main/composables/tray';
-import { useUpdater } from '@/main/composables/updater';
-import { useWindow } from '@/main/composables/window';
+import Sidebar from '@/main/components/layout/Sidebar.vue'
+import { useAutostart } from '@/main/composables/autostart'
+import { useDarkMode } from '@/main/composables/darkMode'
+import { useLanguage } from '@/main/composables/language'
+import { useTimer } from '@/main/composables/timer'
+import { useTray } from '@/main/composables/tray'
+import { useUpdater } from '@/main/composables/updater'
+import { useWindow } from '@/main/composables/window'
+import { useBrowser } from '@/shared/composables/browser'
 
-useDarkMode().setBasedOnStore();
-useLanguage().setBasedOnStore();
-useAutostart().setBasedOnStore();
-useBrowser().disableContextmenuInProd();
-useUpdater().checkForUpdatesOnOnline();
-useWindow().hideOnClose();
-useTray().getOrCreate();
-useTimer();
+useDarkMode().setBasedOnStore()
+useLanguage().setBasedOnStore()
+useAutostart().setBasedOnStore()
+useBrowser().disableContextmenuInProd()
+useUpdater().checkForUpdatesOnOnline()
+useWindow().hideOnClose()
+useTray().getOrCreate()
+useTimer()
 </script>
 
 <template>

@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const props = defineProps<{
   button: {
-    icon: string;
-    label: string;
+    icon: string
+    label: string
     to: {
-      name: string;
-    };
-  };
-}>();
+      name: string
+    }
+  }
+}>()
 
-const route = useRoute();
+const route = useRoute()
 
-const isActive = computed(() => route.name === props.button.to.name);
+const isActive = computed(() => route.name === props.button.to.name)
 </script>
 
 <template>

@@ -1,47 +1,47 @@
-import { useSettingStore } from '@/main/stores/setting';
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
+import { useSettingStore } from '@/main/stores/setting'
 
-export const useBreakMessage = () => {
-  const { settings } = storeToRefs(useSettingStore());
+export function useBreakMessage() {
+  const { settings } = storeToRefs(useSettingStore())
 
-  let shortBreakMessageIndex = 0;
-  let longBreakMessageIndex = 0;
+  let shortBreakMessageIndex = 0
+  let longBreakMessageIndex = 0
 
-  const getMessage = (messages: string[], index: number): [string, number] => {
+  function getMessage(messages: string[], index: number): [string, number] {
     if (messages.length < (index + 1)) {
-      index = 0;
+      index = 0
     }
 
-    const message = messages[index] || '';
-    index++;
+    const message = messages[index] || ''
+    index++
 
-    return [message, index];
-  };
+    return [message, index]
+  }
 
-  const getShortBreakMessage = (): string => {
+  function getShortBreakMessage(): string {
     const [message, newIndex] = getMessage(
       Object.values(settings.value.shortBreakMessages),
       shortBreakMessageIndex,
-    );
+    )
 
-    shortBreakMessageIndex = newIndex;
+    shortBreakMessageIndex = newIndex
 
-    return message;
-  };
+    return message
+  }
 
-  const getLongBreakMessage = (): string => {
+  function getLongBreakMessage(): string {
     const [message, newIndex] = getMessage(
       Object.values(settings.value.longBreakMessages),
       longBreakMessageIndex,
-    );
+    )
 
-    longBreakMessageIndex = newIndex;
+    longBreakMessageIndex = newIndex
 
-    return message;
-  };
+    return message
+  }
 
   return {
     getShortBreakMessage,
     getLongBreakMessage,
-  };
-};
+  }
+}

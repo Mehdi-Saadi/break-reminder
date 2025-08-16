@@ -1,64 +1,65 @@
-import { useNotification } from '@/main/composables/notification';
-import { check, Update } from '@tauri-apps/plugin-updater';
-import { handlePromise } from '@/main/utils/promise';
-import { useT } from '@/shared/composables/t';
-import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import type { Update } from '@tauri-apps/plugin-updater'
+import { check } from '@tauri-apps/plugin-updater'
+import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
+import { useNotification } from '@/main/composables/notification'
+import { handlePromise } from '@/main/utils/promise'
+import { useT } from '@/shared/composables/t'
 
 export const useUpdaterStore = defineStore('updater', () => {
-  const { notify } = useNotification();
-  const t = useT();
+  const { notify } = useNotification()
+  const t = useT()
 
-  const update = ref<Update | null>(null);
-  const checkForUpdateLoading = ref(false);
-  const updateAvailable = computed(() => update.value !== null);
+  const update = ref<Update | null>(null)
+  const checkForUpdateLoading = ref(false)
+  const updateAvailable = computed(() => update.value !== null)
 
-  const downloadLoading = ref(false);
+  const downloadLoading = ref(false)
 
-  const checkAndNotifyIfNewVersionAvailable = async (): Promise<void> => {
-    checkForUpdateLoading.value = true;
+  async function checkAndNotifyIfNewVersionAvailable(): Promise<void> {
+    checkForUpdateLoading.value = true
 
-    const { error, response } = await handlePromise(check());
+    const { error, response } = await handlePromise(check())
 
     if (error) {
-      await notify(error.message);
+      await notify(error.message)
     }
 
-    update.value = response;
+    update.value = response
 
     if (update.value) {
       await notify({
         title: t('newVersionAvailable'),
-        body: t('newVersionAvailableInfo')
-      });
+        body: t('newVersionAvailableInfo'),
+      })
     }
 
-    checkForUpdateLoading.value = false;
-  };
+    checkForUpdateLoading.value = false
+  }
 
-  const checkAndNotify = async (): Promise<void> => {
-    await checkAndNotifyIfNewVersionAvailable();
+  async function checkAndNotify(): Promise<void> {
+    await checkAndNotifyIfNewVersionAvailable()
 
     if (!update.value) {
-      await notify(t('youAreUsingTheLatestVersion'));
+      await notify(t('youAreUsingTheLatestVersion'))
     }
-  };
+  }
 
-  const downloadAndInstall = async (): Promise<void> => {
+  async function downloadAndInstall(): Promise<void> {
     if (!update.value) {
-      return;
+      return
     }
 
-    downloadLoading.value = true;
+    downloadLoading.value = true
 
-    const { error } = await handlePromise(update.value.downloadAndInstall());
+    const { error } = await handlePromise(update.value.downloadAndInstall())
 
     if (error) {
-      await notify(error.message);
+      await notify(error.message)
     }
 
-    downloadLoading.value = false;
-  };
+    downloadLoading.value = false
+  }
 
   return {
     updateAvailable,
@@ -68,5 +69,5 @@ export const useUpdaterStore = defineStore('updater', () => {
     checkAndNotifyIfNewVersionAvailable,
     checkAndNotify,
     downloadAndInstall,
-  };
-});
+  }
+})

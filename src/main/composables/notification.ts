@@ -1,68 +1,68 @@
-import { handlePromise } from '@/main/utils/promise';
+import type { Options } from '@tauri-apps/plugin-notification'
 import {
-  Options,
   isPermissionGranted,
   requestPermission,
   sendNotification,
-} from '@tauri-apps/plugin-notification';
+} from '@tauri-apps/plugin-notification'
+import { handlePromise } from '@/main/utils/promise'
 
-export const useNotification = () => {
-  const toast = useToast();
+export function useNotification() {
+  const toast = useToast()
 
-  const checkPermission = async (): Promise<boolean> => {
+  async function checkPermission(): Promise<boolean> {
     const {
       error: checkPermissionError,
       response: checkPermissionResp,
-    } = await handlePromise(isPermissionGranted());
+    } = await handlePromise(isPermissionGranted())
 
     if (checkPermissionError) {
-      errorToast(checkPermissionError);
-      return false;
+      errorToast(checkPermissionError)
+      return false
     }
 
     if (checkPermissionResp) {
-      return true;
+      return true
     }
 
     const {
       error: requestPermissionError,
       response: requestPermissionResp,
-    } = await handlePromise(requestPermission());
+    } = await handlePromise(requestPermission())
 
     if (requestPermissionError) {
-      errorToast(requestPermissionError);
-      return false;
+      errorToast(requestPermissionError)
+      return false
     }
 
-    return requestPermissionResp === 'granted';
-  };
+    return requestPermissionResp === 'granted'
+  }
 
-  const notify = async (options: Options | string): Promise<void> => {
-    const permissionGranted = await checkPermission();
+  async function notify(options: Options | string): Promise<void> {
+    const permissionGranted = await checkPermission()
 
     if (permissionGranted) {
-      sendNotification(options);
-      return;
+      sendNotification(options)
+      return
     }
 
-    const message: string = typeof options === 'string' ? options : options.title;
+    const message: string = typeof options === 'string' ? options : options.title
 
     toast.add({
       title: message,
       color: 'neutral',
-    });
-  };
+    })
+  }
 
-  const errorToast = (error: Error | string): void => {
-    const msg = typeof error === 'string' ? error : error?.message || 'Unexpected Error!';
+  function errorToast(error: Error | string): void {
+    const msg = typeof error === 'string' ? error : error?.message || 'Unexpected Error!'
 
     toast.add({
       title: msg,
       color: 'error',
-    });
-  };
+    })
+  }
 
   return {
     notify,
-  };
-};
+  }
+}

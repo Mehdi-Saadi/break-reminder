@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import { useUpdaterStore } from '@/main/stores/updater';
-import { useT } from '@/shared/composables/t';
-import { useClipboard } from '@vueuse/core';
-import { getVersion } from '@tauri-apps/api/app';
-import { onBeforeMount, ref } from 'vue';
-import { storeToRefs } from 'pinia';
+import { getVersion } from '@tauri-apps/api/app'
+import { useClipboard } from '@vueuse/core'
+import { storeToRefs } from 'pinia'
+import { onBeforeMount, ref } from 'vue'
+import { useUpdaterStore } from '@/main/stores/updater'
+import { useT } from '@/shared/composables/t'
 
-const t = useT();
+const t = useT()
 
-const updaterStore = useUpdaterStore();
+const updaterStore = useUpdaterStore()
 const {
   downloadLoading,
   checkForUpdateLoading,
   updateAvailable,
-} = storeToRefs(updaterStore);
+} = storeToRefs(updaterStore)
 const {
   checkAndNotify,
   downloadAndInstall,
-} = updaterStore;
+} = updaterStore
 
-const supportEmail = 'mehdi.0.saadi@gmail.com';
-const supportPage = 'https://github.com/Mehdi-Saadi/break-reminder/issues';
+const supportEmail = 'mehdi.0.saadi@gmail.com'
+const supportPage = 'https://github.com/Mehdi-Saadi/break-reminder/issues'
 
-const { copy: copyEmail, copied: emailCopied } = useClipboard({ source: supportEmail });
-const { copy: copySupportPage, copied: supportPageCopied } = useClipboard({ source: supportPage });
+const { copy: copyEmail, copied: emailCopied } = useClipboard({ source: supportEmail })
+const { copy: copySupportPage, copied: supportPageCopied } = useClipboard({ source: supportPage })
 
-const appVersion = ref<string>('-');
+const appVersion = ref<string>('-')
 
-const setVersion = async (): Promise<void> => {
-  appVersion.value = await getVersion();
-};
+async function setVersion(): Promise<void> {
+  appVersion.value = await getVersion()
+}
 
-onBeforeMount(setVersion);
+onBeforeMount(setVersion)
 </script>
 
 <template>

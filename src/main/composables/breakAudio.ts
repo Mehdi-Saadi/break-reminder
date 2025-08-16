@@ -1,38 +1,38 @@
-import preBreakAudio from '@/assets/audio/on_pre_break.wav';
-import stopBreakAudio from '@/assets/audio/on_stop_break.wav';
-import { useSettingStore } from '@/main/stores/setting';
-import { playAudio } from '@/main/utils/audio';
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
+import preBreakAudio from '@/assets/audio/on_pre_break.wav'
+import stopBreakAudio from '@/assets/audio/on_stop_break.wav'
+import { useSettingStore } from '@/main/stores/setting'
+import { playAudio } from '@/main/utils/audio'
 
-export const useBreakAudio = () => {
-  const { settings } = storeToRefs(useSettingStore());
+export function useBreakAudio() {
+  const { settings } = storeToRefs(useSettingStore())
 
-  let preBreakAudioHasBeenPlayed = false;
+  let preBreakAudioHasBeenPlayed = false
 
-  const playPreBreakAudio = async (): Promise<void> => {
+  async function playPreBreakAudio(): Promise<void> {
     if (settings.value.audibleAlert) {
-      await playAudio(preBreakAudio);
-      preBreakAudioHasBeenPlayed = true;
+      await playAudio(preBreakAudio)
+      preBreakAudioHasBeenPlayed = true
     }
-  };
+  }
 
-  const playStopBreakAudio = async (): Promise<void> => {
-    const currentPreBreakAudioHasBeenPlayed = preBreakAudioHasBeenPlayed;
+  async function playStopBreakAudio(): Promise<void> {
+    const currentPreBreakAudioHasBeenPlayed = preBreakAudioHasBeenPlayed
 
     if (
-      settings.value.audibleAlert &&
-      currentPreBreakAudioHasBeenPlayed
+      settings.value.audibleAlert
+      && currentPreBreakAudioHasBeenPlayed
     ) {
-      await playAudio(stopBreakAudio);
+      await playAudio(stopBreakAudio)
 
       if (preBreakAudioHasBeenPlayed === currentPreBreakAudioHasBeenPlayed) {
-        preBreakAudioHasBeenPlayed = false;
+        preBreakAudioHasBeenPlayed = false
       }
     }
-  };
+  }
 
   return {
     playPreBreakAudio,
     playStopBreakAudio,
-  };
-};
+  }
+}

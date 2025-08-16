@@ -1,35 +1,35 @@
-import { useNotification } from '@/main/composables/notification';
-import { useSettingStore } from '@/main/stores/setting';
-import { useT } from '@/shared/composables/t.ts';
-import { invoke } from '@tauri-apps/api/core';
-import { storeToRefs } from 'pinia';
+import { invoke } from '@tauri-apps/api/core'
+import { storeToRefs } from 'pinia'
+import { useNotification } from '@/main/composables/notification'
+import { useSettingStore } from '@/main/stores/setting'
+import { useT } from '@/shared/composables/t.ts'
 
-export const useBreakNotification = () => {
-  const { settings } = storeToRefs(useSettingStore());
-  const { notify } = useNotification();
-  const t = useT();
+export function useBreakNotification() {
+  const { settings } = storeToRefs(useSettingStore())
+  const { notify } = useNotification()
+  const t = useT()
 
-  const show = async (): Promise<void> => {
+  async function show(): Promise<void> {
     const {
       notification: showNotification,
       doNotDisturb,
       timeToPrepareForBreak,
-    } = settings.value;
+    } = settings.value
 
     if (!showNotification) {
-      return;
+      return
     }
 
-    const focusedWindowIsFullscreen = await invoke('check_focused_window_fullscreen');
+    const focusedWindowIsFullscreen = await invoke('check_focused_window_fullscreen')
 
     if (doNotDisturb && focusedWindowIsFullscreen) {
-      return;
+      return
     }
 
-    await notify(t('takeBreakInfo', timeToPrepareForBreak));
-  };
+    await notify(t('takeBreakInfo', timeToPrepareForBreak))
+  }
 
   return {
     show,
-  };
-};
+  }
+}

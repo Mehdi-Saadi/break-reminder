@@ -1,4 +1,4 @@
-import { Words } from '@/shared/i18n/types';
+import type { Words } from '@/shared/i18n/types'
 
 const fa: Words = {
   general: 'عمومی',
@@ -48,6 +48,6 @@ const fa: Words = {
   pleaseWait: 'لطفا صبر کنید..',
   takeBreakInfo: '{count} ثانیه مانده تا استراحت',
   copied: 'کپی شد',
-};
+}
 
-export default fa;
+export default fa

@@ -46,6 +46,6 @@ const en = {
   pleaseWait: 'Please wait..',
   takeBreakInfo: 'Break coming up in {count} seconds',
   copied: 'Copied',
-};
+}
 
-export default en;
+export default en

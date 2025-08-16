@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const model = defineModel<string>();
-
 const emit = defineEmits<{
-  (e: 'delete'): void;
-}>();
+  (e: 'delete'): void
+}>()
+
+const model = defineModel<string>()
 </script>
 
 <template>

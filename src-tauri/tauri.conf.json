@@ -5,7 +5,7 @@
   "identifier": "com.break-reminder",
   "build": {
     "beforeDevCommand": "bun run dev",
-    "devUrl": "http://localhost:1420",
+    "devUrl": "http://localhost:8000",
     "beforeBuildCommand": "bun run build",
     "frontendDist": "../dist"
   },

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import CheckboxItem from '@/main/components/setting/CheckboxItem.vue';
-import { useSettingStore } from '@/main/stores/setting';
-import { useT } from '@/shared/composables/t';
+import CheckboxItem from '@/main/components/setting/CheckboxItem.vue'
+import { useSettingStore } from '@/main/stores/setting'
+import { useT } from '@/shared/composables/t'
 
-const t = useT();
+const t = useT()
 
-const settingStore = useSettingStore();
+const settingStore = useSettingStore()
 </script>
 
 <template>

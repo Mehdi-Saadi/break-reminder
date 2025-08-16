@@ -1,13 +1,13 @@
-import { useEventListener } from '@vueuse/core';
+import { useEventListener } from '@vueuse/core'
 
-export const useBrowser = () => {
-  const disableContextmenuInProd = (): void => {
+export function useBrowser() {
+  function disableContextmenuInProd(): void {
     if (import.meta.env.VITE_PRODUCTION === 'true') {
-      useEventListener('contextmenu', event => event.preventDefault());
+      useEventListener('contextmenu', event => event.preventDefault())
     }
-  };
+  }
 
   return {
     disableContextmenuInProd,
-  };
-};
+  }
+}

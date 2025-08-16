@@ -1,26 +1,26 @@
 import {
+  isEnabled as checkIsEnabled,
   disable,
   enable,
-  isEnabled as checkIsEnabled,
-} from '@tauri-apps/plugin-autostart';
-import { useSettingStore } from '@/main/stores/setting';
-import { watchEffect } from 'vue';
+} from '@tauri-apps/plugin-autostart'
+import { watchEffect } from 'vue'
+import { useSettingStore } from '@/main/stores/setting'
 
-export const useAutostart = () => {
-  const settingStore = useSettingStore();
+export function useAutostart() {
+  const settingStore = useSettingStore()
 
-  const setBasedOnStore = (): void => {
+  function setBasedOnStore(): void {
     watchEffect(async (): Promise<void> => {
-      const isEnabled = await checkIsEnabled();
-      const { autostart } = settingStore.settings;
+      const isEnabled = await checkIsEnabled()
+      const { autostart } = settingStore.settings
 
       if (autostart !== isEnabled) {
-        await (autostart ? enable() : disable());
+        await (autostart ? enable() : disable())
       }
-    });
-  };
+    })
+  }
 
   return {
     setBasedOnStore,
-  };
-};
+  }
+}

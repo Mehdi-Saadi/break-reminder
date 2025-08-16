@@ -1,18 +1,19 @@
-import { useUpdaterStore } from '@/main/stores/updater';
-import { useEventListener } from '@vueuse/core';
+import { useEventListener } from '@vueuse/core'
+import { useUpdaterStore } from '@/main/stores/updater'
 
-export const useUpdater = () => {
-  const { checkAndNotifyIfNewVersionAvailable } = useUpdaterStore();
+export function useUpdater() {
+  const { checkAndNotifyIfNewVersionAvailable } = useUpdaterStore()
 
-  const checkForUpdatesOnOnline = async (): Promise<void> => {
+  async function checkForUpdatesOnOnline(): Promise<void> {
     if (navigator.onLine) {
-      await checkAndNotifyIfNewVersionAvailable();
-    } else {
-      useEventListener('online', checkAndNotifyIfNewVersionAvailable, { once: true });
+      await checkAndNotifyIfNewVersionAvailable()
     }
-  };
+    else {
+      useEventListener('online', checkAndNotifyIfNewVersionAvailable, { once: true })
+    }
+  }
 
   return {
     checkForUpdatesOnOnline,
-  };
-};
+  }
+}

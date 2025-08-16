@@ -1,9 +1,9 @@
-export const generateRandomAlphabeticId = (maxLength: number = 16): string => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  let result = '';
+export function generateRandomAlphabeticId(maxLength: number = 16): string {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  let result = ''
   for (let i = 0; i < maxLength; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters[randomIndex];
+    const randomIndex = Math.floor(Math.random() * characters.length)
+    result += characters[randomIndex]
   }
-  return result;
-};
+  return result
+}

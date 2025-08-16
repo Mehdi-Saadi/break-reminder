@@ -1,20 +1,20 @@
-import { useSettingStore } from '@/main/stores/setting';
-import { useColorMode } from '@vueuse/core';
-import { watchEffect } from 'vue';
+import { useColorMode } from '@vueuse/core'
+import { watchEffect } from 'vue'
+import { useSettingStore } from '@/main/stores/setting'
 
-export const useDarkMode = () => {
-  const settingStore = useSettingStore();
-  const mode = useColorMode();
+export function useDarkMode() {
+  const settingStore = useSettingStore()
+  const mode = useColorMode()
 
-  const setBasedOnStore = (): void => {
+  function setBasedOnStore(): void {
     watchEffect(() => {
       mode.value = settingStore.settings.darkMode
         ? 'dark'
-        : 'light';
-    });
-  };
+        : 'light'
+    })
+  }
 
   return {
     setBasedOnStore,
-  };
-};
+  }
+}

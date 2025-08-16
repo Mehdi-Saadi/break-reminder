@@ -1,10 +1,10 @@
-import { Settings } from '@/shared/types/setting';
-import { Minute, Second } from '@/shared/types/time';
-import { defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import type { Settings } from '@/shared/types/setting'
+import type { Minute, Second } from '@/shared/types/time'
+import { defineStore } from 'pinia'
+import { ref, watch } from 'vue'
 
 export const useSettingStore = defineStore('setting', () => {
-  const  STORAGE_KEY = 'settings';
+  const STORAGE_KEY = 'settings'
   const DEFAULT_SETTINGS: Readonly<Settings> = {
     workDuration: 20 as Minute,
     shortBreakDuration: 20 as Second,
@@ -36,39 +36,40 @@ export const useSettingStore = defineStore('setting', () => {
       'aa88fa9a-51a3-40a7-b8a3-35a7bdf247d0': 'Lean back at your seat and relax',
     },
     language: 'en',
-  };
+  }
 
-  const getSettings = (): Settings => {
-    const localData = localStorage.getItem(STORAGE_KEY);
+  const settings = ref<Settings>(getSettings())
+
+  function getSettings(): Settings {
+    const localData = localStorage.getItem(STORAGE_KEY)
 
     if (!localData) {
-      return { ...DEFAULT_SETTINGS };
+      return { ...DEFAULT_SETTINGS }
     }
 
     try {
-      const parsedData = JSON.parse(localData);
+      const parsedData = JSON.parse(localData)
 
       for (const key in parsedData) {
         if (!(key in DEFAULT_SETTINGS)) {
-          return { ...DEFAULT_SETTINGS };
+          return { ...DEFAULT_SETTINGS }
         }
       }
 
-      return { ...DEFAULT_SETTINGS, ...parsedData };
-    } catch {
-      return { ...DEFAULT_SETTINGS };
+      return { ...DEFAULT_SETTINGS, ...parsedData }
     }
-  };
+    catch {
+      return { ...DEFAULT_SETTINGS }
+    }
+  }
 
-  const settings = ref<Settings>(getSettings());
+  function saveSettingsToStorage(): void {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings.value))
+  }
 
-  const saveSettingsToStorage = (): void => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings.value));
-  };
-
-  watch(settings, saveSettingsToStorage, { deep: true });
+  watch(settings, saveSettingsToStorage, { deep: true })
 
   return {
     settings,
-  };
-});
+  }
+})
