@@ -6,7 +6,7 @@ import { onBeforeMount, ref } from 'vue'
 import { useUpdaterStore } from '@/main/stores/updater'
 import { useT } from '@/shared/composables/t'
 
-const t = useT()
+const { t } = useT()
 
 const updaterStore = useUpdaterStore()
 const {

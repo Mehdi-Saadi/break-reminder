@@ -7,7 +7,7 @@ import { useT } from '@/shared/composables/t.ts'
 export function useBreakNotification() {
   const { settings } = storeToRefs(useSettingStore())
   const { notify } = useNotification()
-  const t = useT()
+  const { t } = useT()
 
   async function show(): Promise<void> {
     const {

@@ -6,8 +6,10 @@ export function useT() {
 
   type Rest = Parameters<typeof t> extends [any, ...infer P] ? P : never
 
-  return (
-    key: KeyWord,
-    ...params: any[]
-  ): string => t(key, ...(params as Rest))
+  return {
+    t: (
+      key: KeyWord,
+      ...params: any[]
+    ): string => t(key, ...(params as Rest)),
+  }
 }

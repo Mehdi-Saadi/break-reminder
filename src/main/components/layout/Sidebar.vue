@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import NavButton from '@/main/components/layout/NavButton.vue'
 import { useT } from '@/shared/composables/t'
 
-const t = useT()
+const { t } = useT()
 
 const mainButtons = computed(() => [
   {

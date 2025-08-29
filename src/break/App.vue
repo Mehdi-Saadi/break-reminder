@@ -14,7 +14,7 @@ import { formatSecondsToMinutesAndSeconds } from '@/shared/utils/time'
 
 useBrowser().disableContextmenuInProd()
 
-const t = useT()
+const { t } = useT()
 
 function getBreakWindowPayloadFromUrl(): BreakWindowPayload {
   const searchParams = new URLSearchParams(location.search)

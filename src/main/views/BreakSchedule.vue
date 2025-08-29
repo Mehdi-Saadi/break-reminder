@@ -4,7 +4,7 @@ import Section from '@/main/components/setting/Section.vue'
 import { useSettingStore } from '@/main/stores/setting'
 import { useT } from '@/shared/composables/t'
 
-const t = useT()
+const { t } = useT()
 
 const settingStore = useSettingStore()
 </script>

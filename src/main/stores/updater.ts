@@ -8,7 +8,7 @@ import { useT } from '@/shared/composables/t'
 
 export const useUpdaterStore = defineStore('updater', () => {
   const { notify } = useNotification()
-  const t = useT()
+  const { t } = useT()
 
   const update = ref<Update | null>(null)
   const checkForUpdateLoading = ref(false)
