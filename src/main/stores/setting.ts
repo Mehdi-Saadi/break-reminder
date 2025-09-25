@@ -44,7 +44,7 @@ export const useSettingStore = defineStore('setting', () => {
     const localData = localStorage.getItem(STORAGE_KEY)
 
     if (!localData) {
-      return { ...DEFAULT_SETTINGS }
+      return structuredClone(DEFAULT_SETTINGS)
     }
 
     try {
@@ -52,19 +52,19 @@ export const useSettingStore = defineStore('setting', () => {
 
       for (const key in parsedData) {
         if (!(key in DEFAULT_SETTINGS)) {
-          return { ...DEFAULT_SETTINGS }
+          return structuredClone(DEFAULT_SETTINGS)
         }
       }
 
       return { ...DEFAULT_SETTINGS, ...parsedData }
     }
     catch {
-      return { ...DEFAULT_SETTINGS }
+      return structuredClone(DEFAULT_SETTINGS)
     }
   }
 
-  function saveSettingsToStorage(): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings.value))
+  function saveSettingsToStorage(newValue: Settings): void {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue))
   }
 
   watch(settings, saveSettingsToStorage, { deep: true })
