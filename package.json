@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",
+    "@iconify-json/lucide": "^1.2.82",
     "@tauri-apps/cli": "^2",
     "@types/node": "^24.1.0",
     "@vitejs/plugin-vue": "^5.2.1",
