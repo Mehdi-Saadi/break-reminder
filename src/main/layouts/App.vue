@@ -8,7 +8,6 @@ import { useTray } from '@/main/composables/tray'
 import { useUpdater } from '@/main/composables/updater'
 import { useWindow } from '@/main/composables/window'
 import { useBrowser } from '@/shared/composables/browser'
-import { useClarity } from '@/shared/composables/clarity'
 
 useDarkMode().setBasedOnStore()
 useLanguage().setBasedOnStore()
@@ -18,7 +17,6 @@ useUpdater().checkForUpdatesOnOnline()
 useWindow().hideOnClose()
 useTray().getOrCreate()
 useTimer()
-useClarity().init()
 </script>
 
 <template>

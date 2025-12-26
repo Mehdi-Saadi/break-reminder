@@ -3,8 +3,11 @@ import { createApp } from 'vue'
 import App from '@/main/App.vue'
 import router from '@/main/router'
 import store from '@/main/stores'
+import { useClarity } from '@/shared/composables/clarity'
 import i18n from '@/shared/i18n'
 import '@/assets/styles/main.css'
+
+useClarity().init()
 
 const app = createApp(App)
 
