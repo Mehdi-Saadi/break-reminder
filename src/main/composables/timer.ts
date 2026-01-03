@@ -6,6 +6,7 @@ import { onBeforeUnmount, onMounted } from 'vue'
 import { useBreakAudio } from '@/main/composables/breakAudio'
 import { useBreakNotification } from '@/main/composables/breakNotification'
 import { useFullscreenBreak } from '@/main/composables/fullscreenBreak'
+import { useTray } from '@/main/composables/tray'
 import { useSettingStore } from '@/main/stores/setting'
 import { BREAK_WINDOW_EVENT } from '@/shared/types/break'
 import { minutesToMilliseconds, secondsToMilliseconds } from '@/shared/utils/time'
@@ -15,6 +16,7 @@ export function useTimer(): void {
   const { playPreBreakAudio, playStopBreakAudio } = useBreakAudio()
   const { show: showBreakNotification } = useBreakNotification()
   const { settings } = storeToRefs(useSettingStore())
+  const { updateNextBreakTime } = useTray()
 
   let workTimeout: NodeJS.Timeout | null = null
   let prepareForBreakTimeout: NodeJS.Timeout | null = null
@@ -25,6 +27,7 @@ export function useTimer(): void {
     resetWorkTimeout()
     resetPrepareForBreakTimeout()
     await playStopBreakAudio()
+    await updateNextBreakTime()
   }
 
   function resetWorkTimeout(): void {

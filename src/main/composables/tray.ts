@@ -2,19 +2,28 @@ import { defaultWindowIcon } from '@tauri-apps/api/app'
 import { Menu, MenuItem, PredefinedMenuItem } from '@tauri-apps/api/menu'
 import { TrayIcon } from '@tauri-apps/api/tray'
 import { getCurrentWindow } from '@tauri-apps/api/window'
+import moment from 'moment'
+import { storeToRefs } from 'pinia'
+import { useSettingStore } from '@/main/stores/setting'
 
 export function useTray() {
-  const TRAY_ID = 'break-reminder-tray'
-  // const TRAY_STATUS_ITEM_ID = 'break-reminder-tray-status-item';
+  const { settings } = storeToRefs(useSettingStore())
   const currentWindow = getCurrentWindow()
 
+  const TRAY_ID = 'break-reminder-tray'
+
   async function createMenuItems(): Promise<(MenuItem | PredefinedMenuItem)[]> {
+    const nextBreakTime = moment().add(settings.value.workDuration, 'minutes').format('h:mm A')
+
     return [
-      // todo: implement next break time
-      // await MenuItem.new({
-      //   id: TRAY_STATUS_ITEM_ID,
-      //   text: 'Next break in: 13:58',
-      // }),
+      await MenuItem.new({
+        text: `Next break at: ${nextBreakTime}`,
+        enabled: false,
+      }),
+      await PredefinedMenuItem.new({
+        text: 'separator',
+        item: 'Separator',
+      }),
       await MenuItem.new({
         text: 'Settings',
         action: (): Promise<void> => currentWindow.show(),
@@ -55,7 +64,14 @@ export function useTray() {
     return create()
   }
 
+  async function updateNextBreakTime() {
+    const tray = await getOrCreate()
+
+    tray.setMenu(await createMenu())
+  }
+
   return {
     getOrCreate,
+    updateNextBreakTime,
   }
 }
