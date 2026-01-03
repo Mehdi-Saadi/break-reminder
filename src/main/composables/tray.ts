@@ -42,7 +42,6 @@ export function useTray() {
       icon: await defaultWindowIcon() || undefined,
       menu: await createMenu(),
       tooltip: 'Break Reminder',
-      showMenuOnLeftClick: false,
     })
   }
 
